@@ -19,6 +19,12 @@ public class P82_MinNumberInRotatedArray {
                 break;
             }
             mid = left + ((right - left) >> 1);
+
+            // 若序列类似：10111  11101，则即 array[left] == array[mid] == array[right]，需要顺序查找
+            if (array[left] == array[mid] && array[right] == mid) {
+                return minNumber(array, left);
+            }
+
             if (array[mid] >= array[left]) {
                 left = mid;
             } else if (array[mid] <= array[right]) {
@@ -26,6 +32,16 @@ public class P82_MinNumberInRotatedArray {
             }
         }
         return array[mid];
+    }
+
+    private int minNumber(int[] array, int left) {
+        int min = array[left];
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] < min) {
+                min = array[i];
+            }
+        }
+        return min;
     }
 
     public int minNumberInRotateArray2(int[] array) {

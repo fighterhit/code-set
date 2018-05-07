@@ -7,35 +7,38 @@ package sword.ch2;
  */
 public class P92_RobotMove {
 
+    //注意计数从 0 开始，因为是从（0, 0）开始算
+
     private int maxCnt = 0;
     int rows, cols;
 
     public int movingCount(int threshold, int rows, int cols) {
 
-        this.rows = rows;
-        this.cols = cols;
-
         if (threshold < 0 || rows < 0 || cols < 0) {
             return 0;
         }
 
+        this.rows = rows;
+        this.cols = cols;
+
         boolean[][] visited = new boolean[rows][cols];
-        movingCount(threshold, visited, 0, 0, 1);
+        movingCount(threshold, visited, 0, 0);
         return maxCnt;
 
     }
 
-    public void movingCount(int threshold, boolean[][] visited, int row, int col, int tmpCnt) {
+    public void movingCount(int threshold, boolean[][] visited, int row, int col) {
 
         if (row < 0 || col < 0 || row >= this.rows || col >= this.cols || !check(threshold, row, col) || visited[row][col]) {
             return;
         } else {
-            tmpCnt += 1;
-            maxCnt = Math.max(tmpCnt, maxCnt);
-            movingCount(threshold, visited, row - 1, col, tmpCnt);
-            movingCount(threshold, visited, row, col - 1, tmpCnt);
-            movingCount(threshold, visited, row + 1, col, tmpCnt);
-            movingCount(threshold, visited, row, col + 1, tmpCnt);
+            visited[row][col] = true;
+            System.out.println(row + " " + col);
+            maxCnt++;
+            movingCount(threshold, visited, row - 1, col);
+            movingCount(threshold, visited, row, col - 1);
+            movingCount(threshold, visited, row + 1, col);
+            movingCount(threshold, visited, row, col + 1);
         }
     }
 
