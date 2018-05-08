@@ -23,6 +23,7 @@ public class P100_NumberOf1InBinary {
             if ((n & 1) == 1) {
                 cnt++;
             }
+            // >> 是带符号右移，>>> 是无符号右移
             n >>>= 1;
         }
         return cnt;

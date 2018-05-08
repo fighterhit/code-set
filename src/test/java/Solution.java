@@ -18,6 +18,7 @@ public class Solution {
     }
 
     public static void main(String[] args) {
-        Fibonacci(4);
+//        Fibonacci(4);
+
     }
 }
