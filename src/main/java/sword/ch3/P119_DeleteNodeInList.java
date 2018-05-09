@@ -9,6 +9,7 @@ import sword.ListNode;
  */
 public class P119_DeleteNodeInList {
     public ListNode deleteNode(ListNode head, ListNode tobeDelete) {
+        //当链表只有头结点时 head.next==null，返回也是null，所以写在一块
         if (head == null || head.next == null || tobeDelete == null) {
             return null;
         }
