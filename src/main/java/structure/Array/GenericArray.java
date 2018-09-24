@@ -93,6 +93,14 @@ public class GenericArray<E> {
         return data[index];
     }
 
+    public E getFirst() throws IllegalAccessException {
+        return get(0);
+    }
+
+    public E getLast() throws IllegalAccessException {
+        return get(size - 1);
+    }
+
     public void set(int index, E e) throws IllegalAccessException {
         if (index < 0 || index >= size) {
             throw new IllegalAccessException("Get failed. Index is illegal.");
