@@ -26,6 +26,17 @@ import java.util.Queue;
  */
 
 public class M102_BinaryTreeLevelOrderTraversal {
+
+    class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        TreeNode(int x) {
+            val = x;
+        }
+    }
+
     public List<List<Integer>> levelOrder(TreeNode root) {
         if (root == null) {
             return new ArrayList<>();
@@ -54,15 +65,5 @@ public class M102_BinaryTreeLevelOrderTraversal {
         }
 
         return res;
-    }
-}
-
-class TreeNode {
-    int val;
-    TreeNode left;
-    TreeNode right;
-
-    TreeNode(int x) {
-        val = x;
     }
 }
