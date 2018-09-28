@@ -22,12 +22,29 @@ public class E203_RemoveLinkedListElements {
         }
     }
 
+    /**
+     * 递归法
+     * @param head
+     * @param val
+     * @return
+     */
     public ListNode removeElements(ListNode head, int val) {
         if (head == null) {
             return null;
         }
-        head.next = removeElements(head.next, val);
-        return head.val == val ? head.next : head;
+
+        /*head.next = removeElements(head.next, val);
+        return head.val == val ? head.next : head;*/
+
+        //上述两行代码等价于
+        //看除去头结点后剩下链表处理结果
+        ListNode res = removeElements(head.next, val);
+        //再看头结点符不符合要求，符合要求连上后面链表，不符合直接返回后面链表处理结果
+        if (head.val == val) {
+            return res;
+        } else {
+            return head;
+        }
     }
 
     public ListNode removeElements2(ListNode head, int val) {

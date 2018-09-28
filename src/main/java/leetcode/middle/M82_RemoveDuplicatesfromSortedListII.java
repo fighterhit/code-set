@@ -37,10 +37,10 @@ public class M82_RemoveDuplicatesfromSortedListII {
                 pNode = pNode.next;
             } else {
 
-                int val = (int) pNode.val;
+                int val = (Integer) pNode.val;
                 ListNode toBeDelNode = pNode;
 
-                while (toBeDelNode != null && (int) toBeDelNode.val == val) {
+                while (toBeDelNode != null && (Integer) toBeDelNode.val == val) {
                     next = toBeDelNode.next;
                     toBeDelNode = next;
                 }
