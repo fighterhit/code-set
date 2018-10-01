@@ -263,7 +263,8 @@ public class BST<E extends Comparable<E>> {
 
     // 从二分搜索树中删除元素为e的节点
     public void remove(E e) {
-        remove(root, e);
+        //***注意返回的节点为新的根节点，当删除节点为根节点时
+        root = remove(root, e);
     }
 
     // 删除掉以node为根的二分搜索树中值为e的节点, 递归算法
@@ -278,10 +279,12 @@ public class BST<E extends Comparable<E>> {
         if (e.compareTo(node.e) < 0) {
             //注意节点衔接
             node.left = remove(node.left, e);
+            return node;
         }
         if (e.compareTo(node.e) > 0) {
             //注意节点衔接
             node.right = remove(node.right, e);
+            return node;
         } else { // e == node.e
             //左子树为空，右节点顶替当前节点
             if (node.left == null) {
@@ -296,15 +299,15 @@ public class BST<E extends Comparable<E>> {
                 node.left = null;
                 size--;
                 return leftNode;
-            } else {
-                //找到右子树中的后继节点
-                Node successor = minimum(node.right);
-                //删除后继节点后的右子树
-                successor.right = removeMin(node.right);
-                successor.left = node.left;
-                node.left = node.right = null;
-                return successor;
             }
+
+            //找到右子树中的后继节点
+            Node successor = minimum(node.right);
+            //删除后继节点后的右子树
+            successor.right = removeMin(node.right);
+            successor.left = node.left;
+            node.left = node.right = null;
+            return successor;
         }
     }
 
