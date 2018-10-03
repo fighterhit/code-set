@@ -6,6 +6,8 @@ import structure.SetMap.FileOperation;
 import java.util.ArrayList;
 
 /**
+ * 链表实现的集合 Set
+ *
  * @author Fighter Created on 2018/10/2.
  */
 public class LinkedListSet<E> implements Set<E> {
