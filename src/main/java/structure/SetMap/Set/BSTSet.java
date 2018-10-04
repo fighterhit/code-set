@@ -1,6 +1,6 @@
 package structure.SetMap.Set;
 
-import structure.SetMap.BST;
+import structure.BinarySearchTree.BST;
 import structure.SetMap.FileOperation;
 
 import java.util.ArrayList;
