@@ -1,7 +1,5 @@
 package structure.Array;
 
-import java.util.function.LongFunction;
-
 public class GenericArray<E> {
     private E[] data;
     private int size;
@@ -14,6 +12,14 @@ public class GenericArray<E> {
 
     public GenericArray() {
         this(10);
+    }
+
+    public GenericArray(E[] arr) {
+        data = (E[]) new Object[arr.length];
+        for (int i = 0; i < arr.length; i++) {
+            data[i] = arr[i];
+        }
+        size = arr.length;
     }
 
     public int getSize() {
@@ -139,7 +145,7 @@ public class GenericArray<E> {
         //回收
         data[size] = null;
         // 防止震荡，当容量降到1/4时再缩容 且避免产生容量为 0 的数组
-        if (size == data.length / 4 && data.length / 2 != 0){
+        if (size == data.length / 4 && data.length / 2 != 0) {
             resize(data.length / 2);
         }
 
@@ -185,6 +191,16 @@ public class GenericArray<E> {
 
         myArray.removeFirst();
         System.out.println(myArray);
+    }
+
+    //交换索引为 i 和 j 的两元素
+    public void swap(int i, int j) {
+        if (i < 0 || i >= size || j < 0 || j >= size) {
+            throw new IllegalArgumentException("Index is illegal.");
+        }
+        E tmp = data[i];
+        data[i] = data[j];
+        data[j] = tmp;
     }
 }
 
