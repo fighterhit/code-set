@@ -80,7 +80,7 @@ public class M347_TopKFrequentElements {
                 map.put(num, 1);
             }
         }
-
+        //jdk默认是最小堆
         PriorityQueue<Integer> priorityQueue = new PriorityQueue<>((a, b) -> map.get(a) - map.get(b));
         for (Integer key : map.keySet()) {
             if (priorityQueue.size() < k) {
