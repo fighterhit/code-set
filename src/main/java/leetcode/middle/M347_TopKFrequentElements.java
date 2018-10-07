@@ -45,21 +45,21 @@ public class M347_TopKFrequentElements {
     }
 
     public List<Integer> topKFrequent(int[] nums, int k) throws IllegalAccessException {
-        TreeMap<Integer, Integer> map = new TreeMap<>();
+        TreeMap<Integer, Integer> next = new TreeMap<>();
         for (int num : nums) {
-            if (map.containsKey(num)) {
-                map.put(num, map.get(num) + 1);
+            if (next.containsKey(num)) {
+                next.put(num, next.get(num) + 1);
             } else {
-                map.put(num, 1);
+                next.put(num, 1);
             }
         }
         MyPriorityQueue<Freq> myPriorityQueue = new MyPriorityQueue<>();
-        for (Integer key : map.keySet()) {
+        for (Integer key : next.keySet()) {
             if (myPriorityQueue.getSize() < k) {
-                myPriorityQueue.enqueue(new Freq(key, map.get(key)));
-            } else if (map.get(key) > myPriorityQueue.getFront().freq) {
+                myPriorityQueue.enqueue(new Freq(key, next.get(key)));
+            } else if (next.get(key) > myPriorityQueue.getFront().freq) {
                 myPriorityQueue.dequeue();
-                myPriorityQueue.enqueue(new Freq(key, map.get(key)));
+                myPriorityQueue.enqueue(new Freq(key, next.get(key)));
             }
         }
         List<Integer> res = new LinkedList<>();
