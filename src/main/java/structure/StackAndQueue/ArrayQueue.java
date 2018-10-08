@@ -19,7 +19,7 @@ public class ArrayQueue<E> implements MyQueue<E> {
     public void enqueue(E e) {
         try {
             array.addLast(e);
-        } catch (IllegalAccessException e1) {
+        } catch (IllegalArgumentException e1) {
             e1.printStackTrace();
         }
     }
@@ -28,7 +28,7 @@ public class ArrayQueue<E> implements MyQueue<E> {
     public E dequeue() {
         try {
             return array.removeFirst();
-        } catch (IllegalAccessException e) {
+        } catch (IllegalArgumentException e) {
             e.printStackTrace();
         }
         return null;
@@ -48,7 +48,7 @@ public class ArrayQueue<E> implements MyQueue<E> {
     public E getFront() {
         try {
             return array.getFirst();
-        } catch (IllegalAccessException e) {
+        } catch (IllegalArgumentException e) {
             e.printStackTrace();
         }
         return null;
@@ -65,7 +65,7 @@ public class ArrayQueue<E> implements MyQueue<E> {
                 if (i != getSize() - 1){
                     res.append(", ");
                 }
-            } catch (IllegalAccessException e) {
+            } catch (IllegalArgumentException e) {
                 e.printStackTrace();
             }
         }

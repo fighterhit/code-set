@@ -46,21 +46,21 @@ public class MaxHeap<E extends Comparable> {
     }
 
     // 向堆中添加元素
-    public void add(E e) throws IllegalAccessException {
+    public void add(E e) throws IllegalArgumentException {
         //先添加到数组末尾，再上浮
         data.addLast(e);
         siftUp(data.getSize() - 1);
     }
 
     //上浮
-    private void siftUp(int index) throws IllegalAccessException {
+    private void siftUp(int index) throws IllegalArgumentException {
         while (index > 0 && data.get(index).compareTo(data.get(parent(index))) > 0) {
             data.swap(index, parent(index));
             index = parent(index);
         }
     }
 
-    public E findMax() throws IllegalAccessException {
+    public E findMax() throws IllegalArgumentException {
         if (data.isEmpty()) {
             throw new IllegalArgumentException("Can not findMax when heap is empty.");
         }
@@ -68,7 +68,7 @@ public class MaxHeap<E extends Comparable> {
     }
 
     //获取堆最大元素，将数组最后一个元素放到根再下沉
-    public E extractMax() throws IllegalAccessException {
+    public E extractMax() throws IllegalArgumentException {
         E ret = findMax();
         data.swap(0, data.getSize() - 1);
         data.removeLast();
@@ -77,7 +77,7 @@ public class MaxHeap<E extends Comparable> {
     }
 
     //下沉
-    private void siftDown(int index) throws IllegalAccessException {
+    private void siftDown(int index) throws IllegalArgumentException {
         //先判断有没有左孩子
         while (leftChild(index) < size()) {
             int i = leftChild(index);
@@ -94,7 +94,7 @@ public class MaxHeap<E extends Comparable> {
     }
 
     // 取出堆中的最大元素，并且替换成元素e
-    public E replace(E e) throws IllegalAccessException {
+    public E replace(E e) throws IllegalArgumentException {
         E ret = findMax();
         data.set(0, e);
         siftDown(0);
@@ -106,7 +106,7 @@ public class MaxHeap<E extends Comparable> {
         for (int i = parent(data.getSize() - 1); i >= 0; i--) {
             try {
                 siftDown(i);
-            } catch (IllegalAccessException e) {
+            } catch (IllegalArgumentException e) {
                 e.printStackTrace();
             }
         }
@@ -128,7 +128,7 @@ public class MaxHeap<E extends Comparable> {
         System.out.println("With heapify: " + time2 + " s");
     }
 
-    private static double testHeap(Integer[] testData, boolean isHeapify) throws IllegalAccessException {
+    private static double testHeap(Integer[] testData, boolean isHeapify) throws IllegalArgumentException {
 
         long startTime = System.nanoTime();
 

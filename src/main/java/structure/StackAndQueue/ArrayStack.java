@@ -19,7 +19,7 @@ public class ArrayStack<E> implements MyStack<E> {
     public void push(E e) {
         try {
             array.addLast(e);
-        } catch (IllegalAccessException e1) {
+        } catch (IllegalArgumentException e1) {
             e1.printStackTrace();
         }
     }
@@ -28,7 +28,7 @@ public class ArrayStack<E> implements MyStack<E> {
     public E pop() {
         try {
             return array.removeLast();
-        } catch (IllegalAccessException e) {
+        } catch (IllegalArgumentException e) {
             e.printStackTrace();
         }
         return null;
@@ -43,7 +43,7 @@ public class ArrayStack<E> implements MyStack<E> {
     public E peek() {
         try {
             return array.getLast();
-        } catch (IllegalAccessException e) {
+        } catch (IllegalArgumentException e) {
             e.printStackTrace();
         }
         return null;
@@ -66,7 +66,7 @@ public class ArrayStack<E> implements MyStack<E> {
         for (int i = 0; i < array.getSize(); i++) {
             try {
                 res.append(array.get(i));
-            } catch (IllegalAccessException e) {
+            } catch (IllegalArgumentException e) {
                 e.printStackTrace();
             }
             if (i != array.getSize() - 1) {

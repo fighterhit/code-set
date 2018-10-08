@@ -34,11 +34,11 @@ public class GenericArray<E> {
         return size == 0;
     }
 
-    public void addFirst(E e) throws IllegalAccessException {
+    public void addFirst(E e) throws IllegalArgumentException {
         add(0, e);
     }
 
-    public void addLast(E e) throws IllegalAccessException {
+    public void addLast(E e) throws IllegalArgumentException {
        /*
         if (size == data.length){
             throw new IllegalArgumentException("Add last faided! Array is full.");
@@ -49,11 +49,11 @@ public class GenericArray<E> {
         add(size, e);
     }
 
-    public void add(int index, E e) throws IllegalAccessException {
+    public void add(int index, E e) throws IllegalArgumentException {
 
         //不能向size之外空间插入元素
         if (index < 0 || index > size) {
-            throw new IllegalAccessException("Add failed. Require index >= 0 and index <= size");
+            throw new IllegalArgumentException("Add failed. Require index >= 0 and index <= size");
         }
 
         // 数组满了先扩容
@@ -92,24 +92,24 @@ public class GenericArray<E> {
         return res.toString();
     }
 
-    public E get(int index) throws IllegalAccessException {
+    public E get(int index) throws IllegalArgumentException {
         if (index < 0 || index >= size) {
-            throw new IllegalAccessException("Get failed. Index is illegal.");
+            throw new IllegalArgumentException("Get failed. Index is illegal.");
         }
         return data[index];
     }
 
-    public E getFirst() throws IllegalAccessException {
+    public E getFirst() throws IllegalArgumentException {
         return get(0);
     }
 
-    public E getLast() throws IllegalAccessException {
+    public E getLast() throws IllegalArgumentException {
         return get(size - 1);
     }
 
-    public void set(int index, E e) throws IllegalAccessException {
+    public void set(int index, E e) throws IllegalArgumentException {
         if (index < 0 || index >= size) {
-            throw new IllegalAccessException("Get failed. Index is illegal.");
+            throw new IllegalArgumentException("Get failed. Index is illegal.");
         }
         data[index] = e;
     }
@@ -132,9 +132,9 @@ public class GenericArray<E> {
         return -1;
     }
 
-    public E remove(int index) throws IllegalAccessException {
+    public E remove(int index) throws IllegalArgumentException {
         if (index < 0 || index >= size) {
-            throw new IllegalAccessException("Remove failed. Index is illegal.");
+            throw new IllegalArgumentException("Remove failed. Index is illegal.");
         }
         E res = data[index];
 
@@ -153,24 +153,24 @@ public class GenericArray<E> {
     }
 
     //若为空数组，则通不过 index >= size 条件
-    public E removeFirst() throws IllegalAccessException {
+    public E removeFirst() throws IllegalArgumentException {
         return remove(0);
     }
 
     //若为空数组，则通不过 index > 0 条件
-    public E removeLast() throws IllegalAccessException {
+    public E removeLast() throws IllegalArgumentException {
         return remove(size - 1);
     }
 
     //因为调用者知道删除哪个元素，因此不返回 int
-    public void removeElement(E e) throws IllegalAccessException {
+    public void removeElement(E e) throws IllegalArgumentException {
         int index = find(e);
         if (index != -1) {
             remove(index);
         }
     }
 
-    public static void main(String[] args) throws IllegalAccessException {
+    public static void main(String[] args) throws IllegalArgumentException {
         GenericArray<Integer> myArray = new GenericArray<>(20);
         for (int i = 0; i < 10; i++) {
             myArray.addLast(i);

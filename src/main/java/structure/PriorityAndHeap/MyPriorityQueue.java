@@ -13,7 +13,7 @@ public class MyPriorityQueue<E extends Comparable> implements MyQueue<E> {
     public void enqueue(E e) {
         try {
             maxHeap.add(e);
-        } catch (IllegalAccessException e1) {
+        } catch (IllegalArgumentException e1) {
             e1.printStackTrace();
         }
     }
@@ -22,7 +22,7 @@ public class MyPriorityQueue<E extends Comparable> implements MyQueue<E> {
     public E dequeue() {
         try {
             return maxHeap.extractMax();
-        } catch (IllegalAccessException e) {
+        } catch (IllegalArgumentException e) {
             e.printStackTrace();
         }
         return null;
@@ -42,7 +42,7 @@ public class MyPriorityQueue<E extends Comparable> implements MyQueue<E> {
     public E getFront() {
         try {
             return maxHeap.findMax();
-        } catch (IllegalAccessException e) {
+        } catch (IllegalArgumentException e) {
             e.printStackTrace();
         }
         return null;

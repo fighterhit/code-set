@@ -44,7 +44,7 @@ public class M347_TopKFrequentElements {
         }
     }
 
-    public List<Integer> topKFrequent(int[] nums, int k) throws IllegalAccessException {
+    public List<Integer> topKFrequent(int[] nums, int k) throws IllegalArgumentException {
         TreeMap<Integer, Integer> next = new TreeMap<>();
         for (int num : nums) {
             if (next.containsKey(num)) {
@@ -105,7 +105,7 @@ public class M347_TopKFrequentElements {
         System.out.println();
     }
 
-    public static void main(String[] args) throws IllegalAccessException {
+    public static void main(String[] args) throws IllegalArgumentException {
 
         int[] nums = {1, 1, 1, 1, 1, 1, 2, 2, 3, 3, 3, 3, 3};
         int k = 2;
