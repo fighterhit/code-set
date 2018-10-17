@@ -4,6 +4,10 @@ import java.util.TreeMap;
 
 public class HashTable<K, V> {
 
+    private static final int upperTol = 10;
+    private static final int lowerTol = 2;
+    private static final int initCapacity = 7;
+
     private TreeMap<K, V>[] hashTable;
     private int M;
     private int size;
@@ -36,7 +40,31 @@ public class HashTable<K, V> {
         } else {
             map.put(key, val);
             size++;
+
+            //扩容
+            if (size > upperTol * M) {
+                resize(2 * M);
+            }
         }
+    }
+
+    private void resize(int newCap) {
+
+        TreeMap<K, V>[] newHashTable = new TreeMap[newCap];
+        for (int i = 0; i < newCap; i++) {
+            newHashTable[i] = new TreeMap<>();
+        }
+
+        int oldM = M;
+        this.M = newCap;
+
+        for (int i = 0; i < oldM; i++) {
+            TreeMap<K, V> map = hashTable[i];
+            for (K k : map.keySet()) {
+                newHashTable[hash(k)].put(k, map.get(k));
+            }
+        }
+        this.hashTable = newHashTable;
     }
 
     public boolean contains(K key) {
@@ -48,6 +76,9 @@ public class HashTable<K, V> {
         if (contains(key)) {
             ret = hashTable[hash(key)].remove(key);
             size--;
+            if (size < lowerTol * M && M / 2 > 0) {
+                resize(M / 2);
+            }
             return ret;
         }
         return ret;
