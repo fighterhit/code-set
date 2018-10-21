@@ -52,7 +52,7 @@ public class AVLTree<K extends Comparable<K>, V> {
     private Node add(Node node, K key, V value) {
         if (node == null) {
             size++;
-            node = new Node(key, value);
+            return new Node(key, value);
         }
         if (key.compareTo(node.key) < 0) {
             node.left = add(node.left, key, value);
@@ -62,19 +62,19 @@ public class AVLTree<K extends Comparable<K>, V> {
             node.value = value;
         }
 
-        node.height = 1 + Math.max(node.left.height, node.right.height);
+        node.height = 1 + Math.max(getHeight(node.left), getHeight(node.right));
         int balanceFactor = getBalanceFactor(node);
 
         //右旋
         if (balanceFactor > 1 && getBalanceFactor(node.left) >= 0) {
-            node = rightRotate(node);
+            return rightRotate(node);
         }
 
         //左旋
         if (balanceFactor < -1 && getBalanceFactor(node.right) <= 0) {
-            node = leftRotate(node);
+            return leftRotate(node);
         }
-        // return current node
+        //当不需要旋转时， return current node
         return node;
     }
 
@@ -86,9 +86,16 @@ public class AVLTree<K extends Comparable<K>, V> {
     //    z   T3                       T1  T2 T3 T4
     //   / \
     // T1   T2
-    private Node rightRotate(Node node) {
+    private Node rightRotate(Node y) {
+        Node x = y.left;
+        Node T3 = x.right;
+        x.right = y;
+        y.left = T3;
 
-        return null;
+        y.height = 1 + Math.max(getHeight(y.left), getHeight(y.right));
+        x.height = 1 + Math.max(getHeight(x.left), getHeight(x.right));
+
+        return x;
     }
 
     // 对节点y进行向左旋转操作，返回旋转后新的根节点x
@@ -99,10 +106,15 @@ public class AVLTree<K extends Comparable<K>, V> {
     //   T2  z                     T1 T2 T3 T4
     //      / \
     //     T3 T4
-    private Node leftRotate(Node node) {
+    private Node leftRotate(Node y) {
+        Node x = y.right;
+        Node T2 = x.left;
+        y.right = T2;
+        x.left = y;
 
-
-        return null;
+        y.height = 1 + Math.max(getHeight(y.left), getHeight(y.right));
+        x.height = 1 + Math.max(getHeight(x.left), getHeight(x.right));
+        return x;
     }
 
 
@@ -165,7 +177,7 @@ public class AVLTree<K extends Comparable<K>, V> {
             throw new IllegalArgumentException("BST is empty");
         }
         //递归终止条件：遍历到左子结点为空的节点
-        if (node.left != null) {
+        if (node.left == null) {
             Node rightNode = node.right;
             node = null;
             size--;
@@ -173,7 +185,8 @@ public class AVLTree<K extends Comparable<K>, V> {
             return rightNode;
         }
 
-        return removeMin(node.left);
+        node.left = removeMin(node.left);
+        return node;
     }
 
     // 从二分搜索树中删除键为key的节点
