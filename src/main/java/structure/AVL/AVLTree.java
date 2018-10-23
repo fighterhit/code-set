@@ -4,6 +4,7 @@ import structure.SetMap.FileOperation;
 import structure.SetMap.Map.BSTMap;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class AVLTree<K extends Comparable<K>, V> {
     private class Node {
@@ -25,6 +26,44 @@ public class AVLTree<K extends Comparable<K>, V> {
     public AVLTree() {
         this.root = null;
         this.size = 0;
+    }
+
+    //判斷是否为二分搜索树，利用二分搜索树 中序遍历 结果为 升序
+    public boolean isBST() {
+        List<K> keys = new ArrayList<>();
+        inOrder(root, keys);
+        for (int i = 1; i < keys.size(); i++) {
+            if (keys.get(i - 1).compareTo(keys.get(i)) > 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private void inOrder(Node root, List<K> keys) {
+        if (root == null) {
+            return;
+        }
+        inOrder(root.left, keys);
+        keys.add(root.key);
+        inOrder(root.right, keys);
+    }
+
+    public boolean isBalanced() {
+        return isBalanced(root);
+    }
+
+    private boolean isBalanced(Node root) {
+        if (root == null) {
+            return true;
+        }
+
+        int balanceFactor = getBalanceFactor(root);
+        if (Math.abs(balanceFactor) > 1) {
+            return false;
+        } else {
+            return isBalanced(root.left) && isBalanced(root.right);
+        }
     }
 
     public int getBalanceFactor(Node node) {
@@ -75,12 +114,12 @@ public class AVLTree<K extends Comparable<K>, V> {
         if (balanceFactor < -1 && getBalanceFactor(node.right) <= 0) {
             return leftRotate(node);
         }
-
+        //LR -> LL
         if (balanceFactor > 1 && getBalanceFactor(node.left) < 0) {
             node.left = leftRotate(node.left);
             return rightRotate(node);
         }
-
+        //RL -> RR
         if (balanceFactor < -1 && getBalanceFactor(node.right) > 0) {
             node.right = rightRotate(node.right);
             return leftRotate(node);
@@ -184,13 +223,10 @@ public class AVLTree<K extends Comparable<K>, V> {
     // 删除掉以node为根的二分搜索树中的最小节点
     // 返回删除节点后新的二分搜索树的根
     private Node removeMin(Node node) {
-        if (node == null) {
-            throw new IllegalArgumentException("BST is empty");
-        }
         //递归终止条件：遍历到左子结点为空的节点
         if (node.left == null) {
             Node rightNode = node.right;
-            node = null;
+            node.right = null;
             size--;
             //将右子结点接上当前节点的父结点
             return rightNode;
@@ -214,33 +250,76 @@ public class AVLTree<K extends Comparable<K>, V> {
         if (node == null) {
             return null;
         }
+
+        Node retNode;
         if (key.compareTo(node.key) < 0) {
             node.left = remove(node.left, key);
-            return node;
+            //return node
+            retNode = node;
         } else if (key.compareTo(node.key) > 0) {
             node.right = remove(node.right, key);
-            return node;
+            retNode = node;
         } else {
-
+            //改造BST
+            // 待删除节点左子树为空的情况
             if (node.left == null) {
                 Node rightNode = node.right;
                 node.right = null;
                 size--;
-                return rightNode;
+                retNode = rightNode;
             }
-            if (node.right == null) {
+            // 待删除节点右子树为空的情况
+            else if (node.right == null) {
                 Node leftNode = node.left;
                 node.left = null;
                 size--;
-                return leftNode;
+                retNode = leftNode;
             }
-
-            Node successor = minmum(node.right);
-            successor.right = removeMin(node.right);
-            successor.left = node.left;
-            node.left = node.right = null;
-            return successor;
+            // 待删除节点左右子树均不为空的情况
+            else {
+                // 找到比待删除节点大的最小节点, 即待删除节点右子树的最小节点
+                // 用这个节点顶替待删除节点的位置
+                Node successor = minmum(node.right);
+                //注意
+//                successor.right = removeMin(node.right);
+                successor.right = remove(node.right, successor.key);
+                successor.left = node.left;
+                node.left = node.right = null;
+                retNode = successor;
+            }
         }
+
+        //注意
+        if (retNode == null) {
+            return null;
+        }
+
+        //更新 height
+        retNode.height = 1 + Math.max(getHeight(retNode.left), getHeight(retNode.right));
+        //计算平衡因子
+        int balanceFactor = getBalanceFactor(retNode);
+        //平衡维护 和 add 一样
+        //右旋
+        if (balanceFactor > 1 && getBalanceFactor(retNode.left) >= 0) {
+            return rightRotate(retNode);
+        }
+
+        //左旋
+        if (balanceFactor < -1 && getBalanceFactor(retNode.right) <= 0) {
+            return leftRotate(retNode);
+        }
+        //LR -> LL
+        if (balanceFactor > 1 && getBalanceFactor(retNode.left) < 0) {
+            retNode.left = leftRotate(retNode.left);
+            return rightRotate(retNode);
+        }
+        //RL -> RR
+        if (balanceFactor < -1 && getBalanceFactor(retNode.right) > 0) {
+            retNode.right = rightRotate(retNode.right);
+            return leftRotate(retNode);
+        }
+        //当不需要旋转时， return current node
+        return retNode;
     }
 
     public static void main(String[] args) {
