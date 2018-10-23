@@ -1,7 +1,6 @@
 package structure.AVL;
 
 import structure.SetMap.FileOperation;
-import structure.SetMap.Map.BSTMap;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -280,7 +279,7 @@ public class AVLTree<K extends Comparable<K>, V> {
                 // 找到比待删除节点大的最小节点, 即待删除节点右子树的最小节点
                 // 用这个节点顶替待删除节点的位置
                 Node successor = minmum(node.right);
-                //注意
+                //注意 removeMin()没有平衡维护，可用 remove() 代替
 //                successor.right = removeMin(node.right);
                 successor.right = remove(node.right, successor.key);
                 successor.left = node.left;
@@ -327,10 +326,10 @@ public class AVLTree<K extends Comparable<K>, V> {
         System.out.println("Pride and Prejudice");
 
         ArrayList<String> words = new ArrayList<>();
-        if (FileOperation.readFile("G:\\IdeaProjects\\code-set\\src\\main\\java\\structure\\SetMap\\pride-and-prejudice.txt", words)) {
+        if (FileOperation.readFile("/Users/fighter/IdeaProjects/code-set/src/main/java/structure/SetMap/pride-and-prejudice.txt", words)) {
             System.out.println("Total words: " + words.size());
 
-            BSTMap<String, Integer> map = new BSTMap<>();
+            AVLTree<String, Integer> map = new AVLTree<>();
             for (String word : words) {
                 if (map.contains(word)) {
                     map.set(word, map.get(word) + 1);
@@ -342,8 +341,16 @@ public class AVLTree<K extends Comparable<K>, V> {
             System.out.println("Total different words: " + map.getSize());
             System.out.println("Frequency of PRIDE: " + map.get("pride"));
             System.out.println("Frequency of PREJUDICE: " + map.get("prejudice"));
-        }
 
-        System.out.println();
+            System.out.println("is BST : " + map.isBST());
+            System.out.println("is Balanced : " + map.isBalanced());
+
+            for (String word : words) {
+                map.remove(word);
+                if (!map.isBST() || !map.isBalanced()) {
+                    throw new RuntimeException();
+                }
+            }
+        }
     }
 }
