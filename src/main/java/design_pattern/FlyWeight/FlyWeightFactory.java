@@ -8,7 +8,7 @@ public class FlyWeightFactory {
     private static Map<String, ConcreteFlyweight> map = new HashMap<>();
 
     public static ConcreteFlyweight getConcreteFlyweight(String color) {
-        if (map.get(color) == null) {
+        if (map.get(color) != null) {
             return map.get(color);
         } else {
             ConcreteFlyweight concreteFlyweight = new ConcreteFlyweight(color);
