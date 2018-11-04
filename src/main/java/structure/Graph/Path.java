@@ -18,8 +18,8 @@ public class Path {
 
     //构造函数
     public Path(Graph g, int s) {
-        assert s >= 0 && s < G.V();
         this.G = g;
+        assert s >= 0 && s < G.V();
         this.s = s;
         visited = new boolean[g.V()];
         from = new int[g.V()];
