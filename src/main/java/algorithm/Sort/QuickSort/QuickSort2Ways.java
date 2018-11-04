@@ -41,6 +41,7 @@ public class QuickSort2Ways {
         swap(arr, l, (int) (Math.random() * (r - l + 1)) + l);
 
         Comparable pivot = arr[l];
+        //todo 优化3.双路（首尾指针）快排
         //arr[l+1...i) <= v, arr(j...r] >= v
         //初始化i、j，i、j 均为待考察元素，使得小于等于 pivot 集合和 大于等于 pivot 集合都为空
         int i = l + 1, j = r;
@@ -66,7 +67,8 @@ public class QuickSort2Ways {
             i++;
             j--;
         }
-
+        //将pivot换到 <= v 最后一个位置
+        swap(arr, l, j);
         //退出循环条件是，当i指向第一个大于等于 pivot 元素，j 指向最后一个小于等于 pivot 元素
         return j;
     }

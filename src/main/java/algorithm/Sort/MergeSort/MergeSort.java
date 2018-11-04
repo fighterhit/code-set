@@ -27,7 +27,7 @@ public class MergeSort {
             int mid = l + (r - l) / 2;
             sort(arr, l, mid);
             sort(arr, mid + 1, r);
-            //优化：若已有序则不需归并，可加如下判断进行优化
+            //优化：若已有序则不需归并，可加如下判断进行优化，对近乎有序数组很有效，对一般数组有性能损失
             if (arr[mid].compareTo(arr[mid + 1]) > 0)
                 merge(arr, l, mid, r);
         }
@@ -49,7 +49,7 @@ public class MergeSort {
     }
 
     private static void merge(Comparable[] arr, int l, int mid, int r) {
-        //只拷贝处理部分，在下面数组索引注意减去l
+        //只拷贝处理部分arr[l...r]，在下面数组索引注意都要减去l
         Comparable[] tmp = Arrays.copyOfRange(arr, l, r + 1);
 
         int i = l, j = mid + 1;
@@ -63,7 +63,9 @@ public class MergeSort {
                 //注意减去偏移l
                 arr[k] = tmp[i - l];
                 i++;
-            } else if (arr[i].compareTo(arr[j]) < 0) {
+            }
+            //注意判断条件减去偏移l
+            else if (tmp[i - l].compareTo(tmp[j - l]) < 0) {
                 //注意减去偏移l
                 arr[k] = tmp[i - l];
                 i++;
