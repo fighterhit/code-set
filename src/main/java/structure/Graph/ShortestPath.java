@@ -5,6 +5,9 @@ import java.util.Queue;
 import java.util.Stack;
 import java.util.Vector;
 
+/**
+ * BFS 求最短路径
+ */
 public class ShortestPath {
     private Graph G;
     //起始点
@@ -27,7 +30,7 @@ public class ShortestPath {
             ord[i] = -1;
         }
 
-        //无向图最短路径算法，从s开始广度优先遍历整张图
+        //BFS 无向图最短路径算法，从s开始广度优先遍历整张图
         Queue<Integer> queue = new LinkedList<>();
 
         queue.add(s);
