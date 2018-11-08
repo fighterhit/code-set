@@ -8,7 +8,7 @@ import java.util.Vector;
 /**
  * BFS 求最短路径
  */
-public class ShortestPath {
+public class ShortestPathBFS {
     private Graph G;
     //起始点
     private int s;
@@ -17,7 +17,7 @@ public class ShortestPath {
     //距离源节点s的距离，一条边代表1
     private int[] ord;
 
-    public ShortestPath(Graph g, int s) {
+    public ShortestPathBFS(Graph g, int s) {
         G = g;
         assert s >= 0 && s < G.V();
         this.s = s;
@@ -102,7 +102,7 @@ public class ShortestPath {
         System.out.print("DFS : ");
         dfs.showPath(6);
 
-        ShortestPath bfs = new ShortestPath(g, 0);
+        ShortestPathBFS bfs = new ShortestPathBFS(g, 0);
         System.out.print("BFS : ");
         bfs.showPath(6);
 
@@ -119,7 +119,7 @@ public class ShortestPath {
         System.out.print("DFS : ");
         dfs2.showPath(3);
 
-        ShortestPath bfs2 = new ShortestPath(g, 0);
+        ShortestPathBFS bfs2 = new ShortestPathBFS(g, 0);
         System.out.print("BFS : ");
         bfs.showPath(3);
     }
