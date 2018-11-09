@@ -65,7 +65,7 @@ public class MergeSort {
                 i++;
             }
             //注意判断条件减去偏移l
-            else if (tmp[i - l].compareTo(tmp[j - l]) < 0) {
+            else if (tmp[i - l].compareTo(tmp[j - l]) <= 0) {
                 //注意减去偏移l
                 arr[k] = tmp[i - l];
                 i++;

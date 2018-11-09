@@ -4,7 +4,7 @@ import algorithm.Sort.InsertionSort.InsertionSort;
 import algorithm.Sort.SortTestHelper;
 
 /**
- * 若数组重复元素太多，则可能导致 <v 和 >=v 集合不平衡，使得递归树很偏斜，因此这里采用双路快排，等左边 <=v 右边 >=v 时交换
+ * 若数组重复元素太多，则可能导致 <v 和 >=v 集合不平衡，使得递归树很偏斜，因此这里采用三路快排，等左边 <=v 右边 >=v 时交换
  * <p>
  * 快排优化版本3 处理数组中有大量重复元素，在优化2的基础上三路快排，即将排序数组分为<v ,=v, >v 三部分，只对<v 和 >v 部分进行递归排序
  * 1. 随机选择 pivot，复杂度期望为 O(N*logN)，此时退化为 O(N*N)，证明见算法导论

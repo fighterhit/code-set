@@ -103,6 +103,7 @@ public class MaxHeap<E extends Comparable> {
 
     public MaxHeap(E[] arr) {
         data = new GenericArray<>(arr);
+        //heapify 过程：从第一个非叶子节点开始 Shift Down
         for (int i = parent(data.getSize() - 1); i >= 0; i--) {
             try {
                 siftDown(i);

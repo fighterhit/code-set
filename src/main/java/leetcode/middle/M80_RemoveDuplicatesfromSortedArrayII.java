@@ -10,13 +10,13 @@ package leetcode.middle;
  * It doesn't matter what you leave beyond the returned length.
  */
 public class M80_RemoveDuplicatesfromSortedArrayII {
-    //todo
     public int removeDuplicates(int[] nums) {
-        int count = 1;
-        int i = 0;
-        for (int j = 0; j < nums.length; j++) {
-
+        int i = 1;
+        for (int j = 2; j < nums.length; j++) {
+            if (nums[j] != nums[i] || nums[j] != nums[i - 1]) {
+                nums[i++] = nums[j];
+            }
         }
-        return i;
+        return i + 1;
     }
 }
