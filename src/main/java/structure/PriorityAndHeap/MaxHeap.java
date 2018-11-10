@@ -49,11 +49,11 @@ public class MaxHeap<E extends Comparable> {
     public void add(E e) throws IllegalArgumentException {
         //先添加到数组末尾，再上浮
         data.addLast(e);
-        siftUp(data.getSize() - 1);
+        shiftUp(data.getSize() - 1);
     }
 
     //上浮
-    private void siftUp(int index) throws IllegalArgumentException {
+    private void shiftUp(int index) throws IllegalArgumentException {
         while (index > 0 && data.get(index).compareTo(data.get(parent(index))) > 0) {
             data.swap(index, parent(index));
             index = parent(index);
@@ -72,12 +72,12 @@ public class MaxHeap<E extends Comparable> {
         E ret = findMax();
         data.swap(0, data.getSize() - 1);
         data.removeLast();
-        siftDown(0);
+        shiftDown(0);
         return ret;
     }
 
     //下沉
-    private void siftDown(int index) throws IllegalArgumentException {
+    private void shiftDown(int index) throws IllegalArgumentException {
         //先判断有没有左孩子
         while (leftChild(index) < size()) {
             int i = leftChild(index);
@@ -97,7 +97,7 @@ public class MaxHeap<E extends Comparable> {
     public E replace(E e) throws IllegalArgumentException {
         E ret = findMax();
         data.set(0, e);
-        siftDown(0);
+        shiftDown(0);
         return ret;
     }
 
@@ -106,7 +106,7 @@ public class MaxHeap<E extends Comparable> {
         //heapify 过程：从第一个非叶子节点开始 Shift Down
         for (int i = parent(data.getSize() - 1); i >= 0; i--) {
             try {
-                siftDown(i);
+                shiftDown(i);
             } catch (IllegalArgumentException e) {
                 e.printStackTrace();
             }
@@ -118,7 +118,7 @@ public class MaxHeap<E extends Comparable> {
 
         Random random = new Random();
         Integer[] testData = new Integer[n];
-        for(int i = 0 ; i < n ; i ++) {
+        for (int i = 0; i < n; i++) {
             testData[i] = random.nextInt(Integer.MAX_VALUE);
         }
 
@@ -134,22 +134,22 @@ public class MaxHeap<E extends Comparable> {
         long startTime = System.nanoTime();
 
         MaxHeap<Integer> maxHeap;
-        if(isHeapify) {
+        if (isHeapify) {
             maxHeap = new MaxHeap<>(testData);
-        } else{
+        } else {
             maxHeap = new MaxHeap<>();
-            for(int num: testData) {
+            for (int num : testData) {
                 maxHeap.add(num);
             }
         }
 
         int[] arr = new int[testData.length];
-        for(int i = 0 ; i < testData.length ; i ++) {
+        for (int i = 0; i < testData.length; i++) {
             arr[i] = maxHeap.extractMax();
         }
 
-        for(int i = 1 ; i < testData.length ; i ++) {
-            if(arr[i-1] < arr[i]) {
+        for (int i = 1; i < testData.length; i++) {
+            if (arr[i - 1] < arr[i]) {
                 throw new IllegalArgumentException("Error");
             }
         }
