@@ -40,10 +40,13 @@ public class IndexMaxHeap<E extends Comparable> {
     public void insert(int i, E e) {
         assert count + 1 <= capacity;
         assert i + 1 >= 0 && i + 1 <= capacity;
+        //再插入一个新元素，需要保证索引i所在位置没有元素
+        assert !contain(i);
         //先添加到数组末尾，再上浮
         i++;
         data[i] = e;
         indexes[count + 1] = i;
+        reverse[i] = count + 1;
         count++;
         shiftUp(count);
     }
@@ -53,12 +56,13 @@ public class IndexMaxHeap<E extends Comparable> {
         assert count > 0;
         E ret = data[indexes[1]];
         swapIndexes(1, count);
+        reverse[indexes[count]] = 0;
         count--;
         shiftDown(1);
         return ret;
     }
 
-    //从最大索引堆中取出对顶元素的索引
+    //从最大索引堆中取出堆顶元素的索引
     public int extractMaxIndex() {
         assert count > 0;
         //用户端索引从0开始，故要-1
@@ -75,6 +79,9 @@ public class IndexMaxHeap<E extends Comparable> {
         int t = indexes[i];
         indexes[i] = indexes[j];
         indexes[j] = t;
+
+        reverse[indexes[j]] = j;
+        reverse[indexes[i]] = i;
     }
 
     public E getMax() throws IllegalArgumentException {
@@ -101,17 +108,22 @@ public class IndexMaxHeap<E extends Comparable> {
 
     // 将最大索引堆中索引为i的元素修改为newItem
     public void change(int i, E newItem) {
+        assert contain(i);
+
         i += 1;
         data[i] = newItem;
 
         // 找到indexes[j] = i, j表示data[i]在堆中的位置
         // 之后shiftUp(j), 再shiftDown(j)
-        for (int j = 1; j <= count; j++)
+        /*for (int j = 1; j <= count; j++)
             if (indexes[j] == i) {
                 shiftUp(j);
                 shiftDown(j);
                 return;
-            }
+            }*/
+        //利用reverse数组优化
+        shiftDown(reverse[i]);
+        shiftDown(reverse[i]);
     }
 
     //下沉
