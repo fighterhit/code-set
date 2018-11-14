@@ -13,7 +13,8 @@
 - [80. Remove Duplicates from Sorted Array II](https://leetcode.com/problems/remove-duplicates-from-sorted-array-ii/description/)
 
 #### 基础算法思路的应用
-- [75. Sort Colors](https://leetcode.com/problems/sort-colors/description/)
+- 三路快排partition思路
+    - [75. Sort Colors](https://leetcode.com/problems/sort-colors/description/)
 - [88. Merge Sorted Array](https://leetcode.com/problems/merge-sorted-array/)
 - [215. Kth Largest Element in an Array](https://leetcode.com/problems/kth-largest-element-in-an-array/description/)
 - 对撞指针
