@@ -1,5 +1,7 @@
 package leetcode.easy;
 
+import java.util.*;
+
 /**
  * Given a pattern and a string str, find if str follows the same pattern.
  * Here follow means a full match, such that there is a bijection between a letter in pattern and a non-empty word in str.
@@ -24,6 +26,23 @@ package leetcode.easy;
  */
 public class E290_WordPattern {
     public boolean wordPattern(String pattern, String str) {
+        String[] strArr = str.split(" ");
+        if (strArr.length != pattern.length()) {
+            return false;
+        }
+        Map<Character, String> patternMap = new TreeMap<>();
 
+        for (int i = 0; i < pattern.length(); i++) {
+            char c = pattern.charAt(i);
+            if (patternMap.containsKey(c) && !patternMap.get(c).equals(strArr[i])) {
+                return false;
+            } else if (!patternMap.containsKey(c)) {
+                if (patternMap.containsValue(strArr[i])) {
+                    return false;
+                }
+                patternMap.put(c, strArr[i]);
+            }
+        }
+        return true;
     }
 }

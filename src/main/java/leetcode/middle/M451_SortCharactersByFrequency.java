@@ -35,6 +35,6 @@ package leetcode.middle;
  */
 public class M451_SortCharactersByFrequency {
     public String frequencySort(String s) {
-
+        return null;
     }
 }

@@ -21,6 +21,6 @@ package leetcode.easy;
  */
 public class E205_IsomorphicStrings {
     public boolean isIsomorphic(String s, String t) {
-
+        return true;
     }
 }
