@@ -30,12 +30,13 @@ public class E290_WordPattern {
         if (strArr.length != pattern.length()) {
             return false;
         }
-        Map<Character, String> patternMap = new TreeMap<>();
-
+        Map<Character, String> patternMap = new HashMap<>();
         for (int i = 0; i < pattern.length(); i++) {
             char c = pattern.charAt(i);
-            if (patternMap.containsKey(c) && !patternMap.get(c).equals(strArr[i])) {
-                return false;
+            if (patternMap.containsKey(c)) {
+                if (!patternMap.get(c).equals(strArr[i])) {
+                    return false;
+                }
             } else if (!patternMap.containsKey(c)) {
                 if (patternMap.containsValue(strArr[i])) {
                     return false;

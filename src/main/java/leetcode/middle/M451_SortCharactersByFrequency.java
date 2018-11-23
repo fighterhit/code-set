@@ -1,5 +1,7 @@
 package leetcode.middle;
 
+import java.util.*;
+
 /**
  * Given a string, sort it in decreasing order based on the frequency of characters.
  * <p>
@@ -35,6 +37,21 @@ package leetcode.middle;
  */
 public class M451_SortCharactersByFrequency {
     public String frequencySort(String s) {
-        return null;
+        Map<Character, Integer> map = new HashMap<>();
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            map.put(c, map.getOrDefault(c, 0) + 1);
+        }
+        List<Map.Entry<Character, Integer>> list = new ArrayList<>(map.entrySet());
+        Collections.sort(list, (o1, o2) -> o2.getValue().compareTo(o1.getValue()));
+        StringBuffer sb = new StringBuffer();
+        for (Map.Entry<Character, Integer> entry : list) {
+            int count = entry.getValue();
+            char c = entry.getKey();
+            for (int i = 0; i < count; i++) {
+                sb.append(c);
+            }
+        }
+        return sb.toString();
     }
 }
