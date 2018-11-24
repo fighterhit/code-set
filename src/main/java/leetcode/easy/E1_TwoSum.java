@@ -5,6 +5,7 @@ import java.util.Map;
 
 /**
  * 将所有元素放入查找表，查看target-a是否存在即可
+ * 遍历每个元素v，只将v前元素放入查找表防止全部一次性放入查找表时相同元素被覆盖
  */
 public class E1_TwoSum {
     public int[] twoSum(int[] nums, int target) {
