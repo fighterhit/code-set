@@ -12,9 +12,11 @@ package leetcode.easy;
  * <p>
  * Explanation:
  * The two boomerangs are [[1,0],[0,0],[2,0]] and [[1,0],[2,0],[0,0]]
- *
+ * <p>
  * 注意N=500，可以设计O(N*N)级别
  */
 public class E447_NumberofBoomerangs {
+    public int numberOfBoomerangs(int[][] points) {
 
+    }
 }
