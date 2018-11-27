@@ -17,6 +17,6 @@ package leetcode.easy;
  */
 public class E447_NumberofBoomerangs {
     public int numberOfBoomerangs(int[][] points) {
-
+        return 1;
     }
 }

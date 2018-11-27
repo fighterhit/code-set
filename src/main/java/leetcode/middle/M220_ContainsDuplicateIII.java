@@ -16,6 +16,6 @@ package leetcode.middle;
  */
 public class M220_ContainsDuplicateIII {
     public boolean containsNearbyAlmostDuplicate(int[] nums, int k, int t) {
-
+        return true;
     }
 }

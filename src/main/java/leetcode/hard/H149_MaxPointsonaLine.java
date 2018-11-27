@@ -32,7 +32,7 @@ public class H149_MaxPointsonaLine {
         }
     }
     public int maxPoints(Point[] points) {
-
+        return 1;
     }
 }
 
