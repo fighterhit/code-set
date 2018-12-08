@@ -24,6 +24,7 @@ public class E203_RemoveLinkedListElements {
 
     /**
      * 递归法
+     *
      * @param head
      * @param val
      * @return
@@ -47,7 +48,30 @@ public class E203_RemoveLinkedListElements {
         }
     }
 
+    //加入虚拟头结点，使删除逻辑统一
+    public ListNode removeElements3(ListNode head, int val) {
+        //虚拟头结点取值无所谓
+        ListNode dummyHead = new ListNode(0);
+        dummyHead.next = head;
+
+        ListNode curNode = dummyHead;
+        while (curNode.next != null) {
+            if (curNode.next.val == val) {
+                ListNode delNode = curNode.next;
+                curNode.next = delNode.next;
+                delNode = null;
+            } else {
+                curNode = curNode.next;
+            }
+        }
+        //返回虚拟头节点的下一个节点
+        ListNode retNode = dummyHead.next;
+        dummyHead = null;
+        return retNode;
+    }
+
     public ListNode removeElements2(ListNode head, int val) {
+        //此判断可省略
         if (head == null) {
             return null;
         }

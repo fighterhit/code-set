@@ -12,7 +12,7 @@ package leetcode.easy;
  * A linked list can be reversed either iteratively or recursively. Could you implement both?
  */
 public class E206_ReverseLinkedList {
-    public class ListNode {
+    public static class ListNode {
         int val;
         ListNode next;
 
@@ -41,4 +41,36 @@ public class E206_ReverseLinkedList {
     }
 
     //recursively
+
+    static ListNode createLinkedList(int[] arr, int n) {
+        if (n == 0) {
+            return null;
+        }
+        ListNode head = new ListNode(arr[0]);
+        ListNode curNode = head;
+        for (int i = 1; i < n; i++) {
+            curNode.next = new ListNode(arr[i]);
+            curNode = curNode.next;
+        }
+        return curNode;
+    }
+
+    static void printLinkedList(ListNode head) {
+        ListNode curNode = head;
+        while (curNode != null) {
+            System.out.print(curNode.val + " ->");
+            curNode = curNode.next;
+        }
+        System.out.println("null");
+    }
+
+    public static void main(String[] args) {
+        int[] arr = new int[]{1, 2, 3, 4, 5};
+        int n = arr.length;
+        ListNode head = createLinkedList(arr, n);
+        printLinkedList(head);
+
+        ListNode newHead = new E206_ReverseLinkedList().reverseList(head);
+        printLinkedList(newHead);
+    }
 }
