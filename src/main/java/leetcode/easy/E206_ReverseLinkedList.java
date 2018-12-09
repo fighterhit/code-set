@@ -23,9 +23,10 @@ public class E206_ReverseLinkedList {
 
     //iteratively
     public ListNode reverseList(ListNode head) {
-        if (head == null) {
+        //冗余判断，可要可不要
+       /* if (head == null) {
             return head;
-        }
+        }*/
         ListNode pre = null, cur = head, next;
         while (cur != null) {
             //当前节点不为空时，再获取当前节点后继节点
@@ -41,6 +42,19 @@ public class E206_ReverseLinkedList {
     }
 
     //recursively
+    public ListNode reverseList2(ListNode head) {
+        return reverseList2(head, null);
+    }
+
+    public ListNode reverseList2(ListNode head, ListNode pre) {
+        if (head == null) {
+            return pre;
+        }
+        ListNode next = head.next;
+        head.next = pre;
+        //继续处理剩下链表
+        return reverseList2(next, head);
+    }
 
     static ListNode createLinkedList(int[] arr, int n) {
         if (n == 0) {
@@ -52,7 +66,7 @@ public class E206_ReverseLinkedList {
             curNode.next = new ListNode(arr[i]);
             curNode = curNode.next;
         }
-        return curNode;
+        return head;
     }
 
     static void printLinkedList(ListNode head) {

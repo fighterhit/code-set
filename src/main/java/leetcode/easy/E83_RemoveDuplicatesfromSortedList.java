@@ -10,6 +10,8 @@ package leetcode.easy;
  * Example 2:
  * Input: 1->1->2->3->3
  * Output: 1->2->3
+ * <p>
+ * 参考 E26_RemoveDuplicatesfromSortedArray，原地移动元素
  */
 public class E83_RemoveDuplicatesfromSortedList {
     public class ListNode {
@@ -22,7 +24,32 @@ public class E83_RemoveDuplicatesfromSortedList {
     }
 
     public ListNode deleteDuplicates(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        ListNode i = head;
+        for (ListNode j = head; j != null; j = j.next) {
+            if (j.val != i.val) {
+                i.next = j;
+                i = i.next;
+            }
+        }
+        i.next = null;
+        return head;
+    }
 
-
+    public ListNode deleteDuplicates2(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        ListNode cur = head;
+        while (cur.next != null) {
+            if (cur.next.val == cur.val) {
+                cur.next = cur.next.next;
+            } else {
+                cur = cur.next;
+            }
+        }
+        return head;
     }
 }

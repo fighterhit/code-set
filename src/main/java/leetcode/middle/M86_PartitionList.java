@@ -19,6 +19,22 @@ public class M86_PartitionList {
     }
 
     public ListNode partition(ListNode head, int x) {
-
+        if (head == null || head.next == null) {
+            return head;
+        }
+        ListNode less = new ListNode(0),lessHead = less, greater = new ListNode(0), greaterHead = greater;
+        while (head != null) {
+            if (head.val < x) {
+                less.next = head;
+                less = less.next;
+            } else {
+                greater.next = head;
+                greater = greater.next;
+            }
+            head = head.next;
+        }
+        greater.next = null;
+        less.next = greaterHead.next;
+        return lessHead.next;
     }
 }

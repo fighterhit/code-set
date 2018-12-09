@@ -1,19 +1,33 @@
 package leetcode.middle;
 
+
 /**
- * Given an array nums of n integers where n > 1,  return an array output such that output[i] is equal to the product of all the elements of nums except nums[i].
+ * Given a singly linked list, group all odd nodes together followed by the even nodes. Please note here we are talking about the node number and not the value in the nodes.
+ * You should try to do it in place. The program should run in O(1) space complexity and O(nodes) time complexity.
  * <p>
- * Example:
- * Input:  [1,2,3,4]
- * Output: [24,12,8,6]
+ * Example 1:
+ * Input: 1->2->3->4->5->NULL
+ * Output: 1->3->5->2->4->NULL
  * <p>
- * Note: Please solve it without division and in O(n).
+ * Example 2:
+ * Input: 2->1->3->5->6->4->7->NULL
+ * Output: 2->3->6->7->1->5->4->NULL
  * <p>
- * Follow up:
- * Could you solve it with constant space complexity? (The output array does not count as extra space for the purpose of space complexity analysis.)
- *
- * @author Fighter.
+ * Note:
+ * The relative order inside both the even and odd groups should remain as it was in the input.
+ * The first node is considered odd, the second node even and so on ...
  */
 public class M328_OddEvenLinkedList {
+    public class ListNode {
+        int val;
+        ListNode next;
 
+        ListNode(int x) {
+            val = x;
+        }
+    }
+
+    public ListNode oddEvenList(ListNode head) {
+        
+    }
 }
