@@ -15,16 +15,18 @@ package leetcode.middle;
  * @author Fighter.
  */
 public class M238_ProductofArrayExceptSelf {
-    public class ListNode {
-        int val;
-        ListNode next;
-
-        ListNode(int x) {
-            val = x;
+    public int[] productExceptSelf(int[] nums) {
+        int[] res = new int[nums.length];
+        //res[i] 存储nums[i] 左侧 nums[0...i-1]相乘结果
+        for (int i = 0, tmp = 1; i < nums.length; i++) {
+            res[i] = tmp;
+            tmp = tmp * nums[i];
         }
-    }
-
-    public ListNode oddEvenList(ListNode head) {
-
+        //res[i] 存储 nums[0...i-1] 和 nums[i+1...n-1]相乘结果
+        for (int i = nums.length - 1, tmp = 1; i >= 0; i--) {
+            res[i] = res[i] * tmp;
+            tmp = tmp * nums[i];
+        }
+        return res;
     }
 }

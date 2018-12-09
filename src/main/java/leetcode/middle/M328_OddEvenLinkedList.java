@@ -28,6 +28,40 @@ public class M328_OddEvenLinkedList {
     }
 
     public ListNode oddEvenList(ListNode head) {
-        
+        if (head == null) {
+            return head;
+        }
+        ListNode cur = head, odd = new ListNode(0), oddHead = odd, even = new ListNode(0), evenHead = even;
+        int i = 1;
+        while (cur != null) {
+            if (i % 2 != 0) {
+                odd.next = cur;
+                odd = odd.next;
+            } else {
+                even.next = cur;
+                even = even.next;
+            }
+            cur = cur.next;
+            i++;
+        }
+        even.next = null;
+        odd.next = evenHead.next;
+        return oddHead.next;
+    }
+
+    public ListNode oddEvenList2(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        ListNode odd = head, even = head.next, evenHead = even;
+        //注意条件
+        while (even != null && even.next != null) {
+            odd.next = odd.next.next;
+            even.next = even.next.next;
+            odd = odd.next;
+            even = even.next;
+        }
+        odd.next = evenHead;
+        return head;
     }
 }
