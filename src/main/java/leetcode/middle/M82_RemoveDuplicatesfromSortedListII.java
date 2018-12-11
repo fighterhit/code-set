@@ -59,14 +59,27 @@ public class M82_RemoveDuplicatesfromSortedListII {
     }
 
     public ListNode deleteDuplicates2(ListNode head) {
-        ListNode dummy = new ListNode(0);
-        dummy.next = head;
-        ListNode pre = dummy;
-
-
-
-
-
-        return dummy.next;
+        if (head == null || head.next == null) {
+            return head;
+        }
+        ListNode dummyHead = new ListNode(0), pre = dummyHead, curNode = head, next = null;
+        dummyHead.next = head;
+        while (curNode != null) {
+            next = curNode.next;
+            //当前节点和后继节点值相等时，两指针一直向后移直到相邻两节点值不同
+            while (next != null && next.val == curNode.val) {
+                curNode = next;
+                next = next.next;
+            }
+            //若前驱节点和当前节点相邻，则说明当前节点不是重复节点，将前驱和当前节点后移
+            if (pre.next == curNode) {
+                pre = curNode;
+                curNode = next;
+            } else {
+                curNode = next;
+                pre.next = next;
+            }
+        }
+        return dummyHead.next;
     }
 }
