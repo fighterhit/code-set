@@ -16,5 +16,6 @@ public class M148_SortList {
 
     public ListNode sortList(ListNode head) {
 
+        return null;
     }
 }

@@ -1,5 +1,7 @@
 package leetcode.middle;
 
+import java.util.Stack;
+
 /**
  * Evaluate the value of an arithmetic expression in Reverse Polish Notation.
  * Valid operators are +, -, *, /. Each operand may be an integer or another expression.
@@ -36,7 +38,29 @@ package leetcode.middle;
  */
 public class M150_EvaluateReversePolishNotation {
     public int evalRPN(String[] tokens) {
-
-
+        Stack<Integer> stack = new Stack<>();
+        int rOper, lOper;
+        for (String token : tokens) {
+            switch (token) {
+                case "+":
+                    stack.push(stack.pop() + stack.pop());
+                    break;
+                case "-":
+                    //注意负号
+                    stack.push(-stack.pop() + stack.pop());
+                    break;
+                case "*":
+                    stack.push(stack.pop() * stack.pop());
+                    break;
+                case "/":
+                    rOper = stack.pop();
+                    lOper = stack.pop();
+                    stack.push(lOper / rOper);
+                    break;
+                default:
+                    stack.push(Integer.valueOf(token));
+            }
+        }
+        return stack.pop();
     }
 }

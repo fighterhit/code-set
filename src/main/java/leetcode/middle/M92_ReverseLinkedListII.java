@@ -1,7 +1,5 @@
 package leetcode.middle;
 
-import leetcode.easy.E206_ReverseLinkedList;
-
 /**
  * Reverse a linked list from position m to n. Do it in one-pass.
  * <p>

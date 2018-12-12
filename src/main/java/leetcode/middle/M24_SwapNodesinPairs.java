@@ -23,6 +23,44 @@ public class M24_SwapNodesinPairs {
     }
 
     public ListNode swapPairs(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        ListNode dummyHead = new ListNode(0), pre = dummyHead, curNode = head, next = curNode.next;
+        pre.next = curNode;
+        while (curNode != null && next != null) {
+            //翻转
+            pre.next = next;
+            curNode.next = next.next;
+            next.next = curNode;
+            //迭代
+            pre = curNode;
+            curNode = curNode.next;
+            if (curNode != null) {
+                next = curNode.next;
+            } else {
+                break;
+            }
+        }
+        return dummyHead.next;
+    }
 
+    public ListNode swapPairs2(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        ListNode dummyHead = new ListNode(0), pre = dummyHead, node1, node2;
+        dummyHead.next = head;
+        while (pre.next != null && pre.next.next != null) {
+            node1 = pre.next;
+            node2 = pre.next.next;
+            //翻转
+            pre.next = node2;
+            node1.next = node2.next;
+            node2.next = node1;
+            //迭代
+            pre = node1;
+        }
+        return dummyHead.next;
     }
 }

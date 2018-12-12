@@ -1,10 +1,11 @@
 package leetcode.middle;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Given a binary tree, return the preorder traversal of its nodes' values.
- *
+ * <p>
  * Example:
  * Input: [1,null,2,3]
  *    1
@@ -29,7 +30,20 @@ public class M144_BinaryTreePreorderTraversal {
         }
     }
 
+    //非递归
     public List<Integer> preorderTraversal(TreeNode root) {
 
+    }
+
+    //递归
+    List<Integer> list = new ArrayList<>();
+
+    public List<Integer> preorderTraversal2(TreeNode root) {
+        if (root != null) {
+            list.add(root.val);
+            preorderTraversal2(root.left);
+            preorderTraversal2(root.right);
+        }
+        return list;
     }
 }

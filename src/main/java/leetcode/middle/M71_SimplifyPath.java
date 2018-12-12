@@ -21,6 +21,6 @@ package leetcode.middle;
  */
 public class M71_SimplifyPath {
     public String simplifyPath(String path) {
-
+        return null;
     }
 }

@@ -26,6 +26,11 @@ public class H25_ReverseNodesinkGroup {
     }
 
     public ListNode reverseKGroup(ListNode head, int k) {
+        if (head == null || head.next == null || k < 2) {
+            return head;
+        }
+        ListNode dummyHead = new ListNode(0), curNode = head;
 
+        return null;
     }
 }

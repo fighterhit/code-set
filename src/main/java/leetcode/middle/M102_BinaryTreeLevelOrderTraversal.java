@@ -80,18 +80,38 @@ public class M102_BinaryTreeLevelOrderTraversal {
             List<Integer> integers = new ArrayList<>();
 
             for (int i = 0; i < size; i++) {
+                //注意 poll 是移除并返问队列头部的元素，如果队列为空，则返回null
                 tmp = queue.poll();
                 integers.add(tmp.val);
                 if (tmp.left != null) {
-                    queue.addLast(tmp.left);
+                    queue.add(tmp.left);
                 }
                 if (tmp.right != null) {
-                    queue.addLast(tmp.right);
+                    queue.add(tmp.right);
                 }
             }
             res.add(integers);
         }
 
         return res;
+    }
+
+    //递归版：DFS
+    public List<List<Integer>> levelOrder3(TreeNode root) {
+        List<List<Integer>> res = new ArrayList<>();
+        levelOrder33(res, root, 0);
+        return res;
+    }
+
+    public void levelOrder33(List<List<Integer>> res, TreeNode root, int height) {
+        if (root == null) {
+            return;
+        }
+        if (height == res.size()) {
+            res.add(new ArrayList<>());
+        }
+        res.get(height).add(root.val);
+        levelOrder33(res, root.left, height + 1);
+        levelOrder33(res, root.right, height + 1);
     }
 }

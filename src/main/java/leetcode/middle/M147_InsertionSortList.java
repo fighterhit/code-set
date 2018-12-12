@@ -20,5 +20,6 @@ public class M147_InsertionSortList {
 
     public ListNode insertionSortList(ListNode head) {
 
+        return null;
     }
 }

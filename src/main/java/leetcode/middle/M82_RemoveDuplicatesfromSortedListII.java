@@ -14,6 +14,8 @@ import sword.ListNode;
  * Output: 2->3
  *
  * @author Fighter Created on 2018/5/9.
+ *
+ * 参考 E83_RemoveDuplicatesfromSortedList，只保留重复元素中的一个
  */
 public class M82_RemoveDuplicatesfromSortedListII {
     public ListNode deleteDuplicates(ListNode head) {
@@ -62,9 +64,10 @@ public class M82_RemoveDuplicatesfromSortedListII {
         if (head == null || head.next == null) {
             return head;
         }
-        ListNode dummyHead = new ListNode(0), pre = dummyHead, curNode = head, next = null;
+        ListNode dummyHead = new ListNode(0), pre = dummyHead, curNode = head, next;
         dummyHead.next = head;
         while (curNode != null) {
+            //每次进入循环再计算后继节点
             next = curNode.next;
             //当前节点和后继节点值相等时，两指针一直向后移直到相邻两节点值不同
             while (next != null && next.val == curNode.val) {

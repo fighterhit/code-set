@@ -56,6 +56,18 @@ public class E206_ReverseLinkedList {
         return reverseList2(next, head);
     }
 
+    public ListNode reverseList3(ListNode head) {
+        ListNode pre = null;
+        while (head != null) {
+            ListNode next = head.next;
+            head.next = pre;
+
+            pre = head;
+            head = next;
+        }
+        return pre;
+    }
+
     static ListNode createLinkedList(int[] arr, int n) {
         if (n == 0) {
             return null;

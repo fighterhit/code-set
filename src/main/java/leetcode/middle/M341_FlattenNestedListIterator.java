@@ -47,11 +47,11 @@ class NestedIterator implements Iterator<Integer> {
 
     @Override
     public Integer next() {
-
+        return null;
     }
 
     @Override
     public boolean hasNext() {
-
+        return true;
     }
 }

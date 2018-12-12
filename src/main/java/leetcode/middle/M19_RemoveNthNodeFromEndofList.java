@@ -23,7 +23,21 @@ public class M19_RemoveNthNodeFromEndofList {
             val = x;
         }
     }
-    public ListNode removeNthFromEnd(ListNode head, int n) {
 
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        if (head == null) {
+            return head;
+        }
+        ListNode dummyHead = new ListNode(0), left = dummyHead, right = dummyHead;
+        dummyHead.next = head;
+        for (int i = 0; i < n + 1; i++) {
+            right = right.next;
+        }
+        while (right != null) {
+            left = left.next;
+            right = right.next;
+        }
+        left.next = left.next.next;
+        return dummyHead.next;
     }
 }
