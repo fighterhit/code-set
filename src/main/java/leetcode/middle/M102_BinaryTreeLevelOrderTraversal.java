@@ -103,15 +103,15 @@ public class M102_BinaryTreeLevelOrderTraversal {
         return res;
     }
 
-    public void levelOrder33(List<List<Integer>> res, TreeNode root, int height) {
+    public void levelOrder33(List<List<Integer>> res, TreeNode root, int currentLevel) {
         if (root == null) {
             return;
         }
-        if (height == res.size()) {
+        if (currentLevel == res.size()) {
             res.add(new ArrayList<>());
         }
-        res.get(height).add(root.val);
-        levelOrder33(res, root.left, height + 1);
-        levelOrder33(res, root.right, height + 1);
+        res.get(currentLevel).add(root.val);
+        levelOrder33(res, root.left, currentLevel + 1);
+        levelOrder33(res, root.right, currentLevel + 1);
     }
 }

@@ -67,15 +67,17 @@ public class E107_BinaryTreeLevelOrderTraversalII {
         return res;
     }
 
-    public void levelOrderBottom(List<List<Integer>> res, TreeNode root, int height) {
+    public void levelOrderBottom(List<List<Integer>> res, TreeNode root, int currentLevel) {
         if (root == null) {
             return;
         }
-        if (height == res.size()) {
+        //判断当前level是否创建了集合，每一层对应一个集合，注意和M102不同，这里将集合添加到头部
+        if (currentLevel == res.size()) {
             res.add(0, new ArrayList<>());
         }
-        res.get(0).add(root.val);
-        levelOrderBottom(res, root.left, height + 1);
-        levelOrderBottom(res, root.right, height + 1);
+        //从左往右递归
+        res.get(res.size() - 1 - currentLevel).add(root.val);
+        levelOrderBottom(res, root.left, currentLevel + 1);
+        levelOrderBottom(res, root.right, currentLevel + 1);
     }
 }
