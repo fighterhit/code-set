@@ -26,7 +26,6 @@ public class P39_DuplicationInArray {
                 return false;
             }
         }
-        int temp;
         for (int i = 0; i < numbers.length; i++) {
             while (i != numbers[i]) {
                 if (numbers[i] == numbers[numbers[i]]) {
