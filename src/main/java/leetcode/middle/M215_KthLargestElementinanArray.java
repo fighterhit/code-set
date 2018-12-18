@@ -34,4 +34,47 @@ public class M215_KthLargestElementinanArray {
         }
         return priorityQueue.peek();
     }
+
+    public int findKthLargest2(int[] nums, int k) {
+        int left = 0, right = nums.length - 1;
+        while (true) {
+            int pivotIndex = partition(nums, left, right);
+            if (pivotIndex == k - 1) {
+                return nums[pivotIndex];
+            } else if (pivotIndex < k - 1) {
+                left = pivotIndex + 1;
+            } else {
+                right = pivotIndex - 1;
+            }
+        }
+    }
+
+    public int partition(int[] nums, int left, int right) {
+        int pivot = nums[left];
+        int i = left + 1, j = right;
+        while (true) {
+            while (i <= j && nums[i] > pivot) {
+                i++;
+            }
+            //注意，不是 i <= j
+            while (left + 1 <= j && nums[j] < pivot) {
+                j--;
+            }
+            if (i > j) {
+                break;
+            }
+            swap(nums, i, j);
+            //交换完注意i, j迭代
+            i++;
+            j--;
+        }
+        swap(nums, left, j);
+        return j;
+    }
+
+    private void swap(int[] nums, int i, int j) {
+        int t = nums[i];
+        nums[i] = nums[j];
+        nums[j] = t;
+    }
 }

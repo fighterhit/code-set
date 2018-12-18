@@ -52,6 +52,7 @@ public class M445_AddTwoNumbersII {
                 sum += l2Stack.pop();
             }
             curNode.val = sum % 10;
+            //pre.val必须为 sum/10，因为最高位可能进位
             ListNode pre = new ListNode(sum / 10);
             pre.next = curNode;
             //迭代
