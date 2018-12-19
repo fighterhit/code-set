@@ -20,6 +20,11 @@
 - [290. Word Pattern](https://leetcode.com/problems/word-pattern/)
 - [205. Isomorphic Strings](https://leetcode.com/problems/isomorphic-strings/)
 - [451. Sort Characters By Frequency](https://leetcode.com/problems/sort-characters-by-frequency/)
+- [347. Top K Frequent Elements](https://leetcode.com/problems/top-k-frequent-elements/)
+- [192. Word Frequency](https://leetcode.com/problems/word-frequency/)
+- **[215. Kth Largest Element in an Array](https://leetcode.com/problems/kth-largest-element-in-an-array/)**
+- [659. Split Array into Consecutive Subsequences](https://leetcode.com/problems/split-array-into-consecutive-subsequences/)
+- [692. Top K Frequent Words](https://leetcode.com/problems/top-k-frequent-words/)
 - [1. Two Sum](https://leetcode.com/problems/two-sum/)
 - [15. 3Sum](https://leetcode.com/problems/3sum/)
 - [18. 4Sum](https://leetcode.com/problems/4sum/)
@@ -28,6 +33,7 @@
 - [49. Group Anagrams](https://leetcode.com/problems/group-anagrams/)
 - [447. Number of Boomerangs](https://leetcode.com/problems/number-of-boomerangs/)
 - [149. Max Points on a Line](https://leetcode.com/problems/max-points-on-a-line/)
+- **[659. Split Array into Consecutive Subsequences](https://leetcode.com/problems/split-array-into-consecutive-subsequences/)**
 - 滑动窗口 + 查找表
     - [219. Contains Duplicate II](https://leetcode.com/problems/contains-duplicate-ii/)
     - [217. Contains Duplicate](https://leetcode.com/problems/contains-duplicate/)

@@ -30,5 +30,3 @@
     - [192. Word Frequency](https://leetcode.com/problems/word-frequency/)
     - **[215. Kth Largest Element in an Array](https://leetcode.com/problems/kth-largest-element-in-an-array/)**
     - [451. Sort Characters By Frequency](https://leetcode.com/problems/sort-characters-by-frequency/)
-    - [659. Split Array into Consecutive Subsequences](https://leetcode.com/problems/split-array-into-consecutive-subsequences/)
-    - [692. Top K Frequent Words](https://leetcode.com/problems/top-k-frequent-words/)
