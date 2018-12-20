@@ -16,4 +16,16 @@
         - 图：无权图最短路径
     - [102. Binary Tree Level Order Traversal](https://leetcode.com/problems/binary-tree-level-order-traversal/)
     - [107. Binary Tree Level Order Traversal II](https://leetcode.com/problems/binary-tree-level-order-traversal-ii/)
+    - [103. Binary Tree Zigzag Level Order Traversal](https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/)
+    - [199. Binary Tree Right Side View](https://leetcode.com/problems/binary-tree-right-side-view/)
+    - BFS和图的最短路径(广度优先遍历求最短路径只适用于无权图，有权图用dijikstra)
+        - [279. Perfect Squares](https://leetcode.com/problems/perfect-squares/)
+        - [127. Word Ladder](https://leetcode.com/problems/word-ladder/)
+     - 优先队列
+        - 底层实现：堆（白板）
+        - [347. Top K Frequent Elements](https://leetcode.com/problems/top-k-frequent-elements/) ( k << n: O(nlogk); k == n: O(nlog(n - k)) )
+        - [192. Word Frequency](https://leetcode.com/problems/word-frequency/)
+        - **[215. Kth Largest Element in an Array](https://leetcode.com/problems/kth-largest-element-in-an-array/)**
+        - [451. Sort Characters By Frequency](https://leetcode.com/problems/sort-characters-by-frequency/)
+        - [23. Merge k Sorted Lists](https://leetcode.com/problems/merge-k-sorted-lists/)
 
