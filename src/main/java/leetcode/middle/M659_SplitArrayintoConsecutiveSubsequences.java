@@ -42,6 +42,8 @@ import java.util.Map;
  * 4. 如果上述过程能进行到最后，说明所有连续序列都能够找出来，则直接 return true。
  *
  * https://blog.csdn.net/Jack_CJZ/article/details/78306831
+ * https://www.jianshu.com/p/b910737af4dc
+ * http://www.cnblogs.com/grandyang/p/7525821.html
  */
 public class M659_SplitArrayintoConsecutiveSubsequences {
     public boolean isPossible(int[] nums) {

@@ -79,4 +79,24 @@ public class M94_BinaryTreeInorderTraversal {
         }
         return list;
     }
+
+    //非递归：栈，出栈顺序即中序遍历顺序，注意这个结构，M94_BinaryTreeInorderTraversal / M230_KthSmallestElementinaBST / M98_ValidateBinarySearchTree
+    //https://leetcode.com/problems/validate-binary-search-tree/discuss/32112/Learn-one-iterative-inorder-traversal-apply-it-to-multiple-tree-questions-(Java-Solution)
+    public List<Integer> inorderTraversal3(TreeNode root) {
+        List<Integer> res = new ArrayList<>();
+        if (root == null) {
+            return res;
+        }
+        Stack<TreeNode> stack = new Stack<>();
+        while (root != null || !stack.isEmpty()) {
+            while (root != null) {
+                stack.push(root);
+                root = root.left;
+            }
+            root = stack.pop();
+            res.add(root.val);
+            root = root.right;
+        }
+        return res;
+    }
 }
