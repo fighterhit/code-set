@@ -38,7 +38,7 @@ public class M143_ReorderList {
         //翻转第2个链表
         l2 = reverse(l2);
         //合并两个链表
-        while (l1 != null && l2 != null) {
+        while (l2 != null) {
             //暂存 l1 后继
             ListNode next = l1.next;
             //注意改变指针的先后顺序！

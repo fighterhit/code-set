@@ -13,7 +13,7 @@ package leetcode.easy;
  * /  \
  * 15   7
  * return its depth = 3.
- * 参考 E111_MinimumDepthofBinaryTree
+ * 参考 E111_MinimumDepthofBinaryTree, E110_BalancedBinaryTree
  */
 public class E104_MaximumDepthofBinaryTree {
     public class TreeNode {
