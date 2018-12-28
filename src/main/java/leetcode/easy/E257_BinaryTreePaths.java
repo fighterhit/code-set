@@ -1,7 +1,6 @@
 package leetcode.easy;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 public class E257_BinaryTreePaths {
@@ -15,7 +14,7 @@ public class E257_BinaryTreePaths {
         }
     }
 
-    //非递归
+    //递归
     List<String> res = new ArrayList<>();
 
     public List<String> binaryTreePaths(TreeNode root) {
@@ -59,19 +58,21 @@ public class E257_BinaryTreePaths {
 
     //递归 最快
     public List<String> binaryTreePaths3(TreeNode root) {
-        List<String> paths = new ArrayList<>();
-        searchBTP(root, "");
-        return paths;
+        if (root != null) {
+            searchBTP(root, "");
+        }
+        return res;
     }
 
+    //用 String 不用 StringBuffer 可以回溯，否则回溯时需要删除后面字符串
     private void searchBTP(TreeNode root, String cur) {
-        if (root == null) {
-            return;
-        }
         if (root.left == null && root.right == null) {
             res.add(cur + root.val);
-        } else {
+        }
+        if (root.left != null) {
             searchBTP(root.left, cur + root.val + "->");
+        }
+        if (root.right != null) {
             searchBTP(root.right, cur + root.val + "->");
         }
     }
