@@ -20,6 +20,47 @@ public class M450_DeleteNodeinaBST {
         if (root == null) {
             return null;
         }
+        TreeNode cur = root, pre = null;
+        while (cur != null && cur.val != key) {
+            pre = cur;
+            if (cur.val < key) {
+                cur = cur.left;
+            } else {
+                cur = cur.right;
+            }
+        }
+        //当前树的根节点即为待删除节点
+        if (pre == null) {
+            return deleteNodeHelper(cur);
+        }
+        if (pre.left == cur) {
+            pre.left = deleteNodeHelper(cur);
+        } else {
+            pre.right = deleteNodeHelper(cur);
+        }
+        return root;
+    }
 
+    TreeNode deleteNodeHelper(TreeNode root) {
+        if (root == null) {
+            return null;
+        }
+        if (root.left == null) {
+            return root.right;
+        }
+        if (root.right == null) {
+            return root.left;
+        }
+        TreeNode rightMin = findMin(root.right);
+        rightMin.left = root.left;
+        return rightMin.right;
+
+    }
+
+    TreeNode findMin(TreeNode root) {
+        while (root.left != null) {
+            root = root.left;
+        }
+        return root;
     }
 }
