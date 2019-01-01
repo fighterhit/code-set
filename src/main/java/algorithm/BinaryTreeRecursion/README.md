@@ -19,7 +19,7 @@
 ![BST基本操作](BST基本操作.png)
     - **[235. Lowest Common Ancestor of a Binary Search Tree](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/)**
     - **[236. Lowest Common Ancestor of a Binary Tree](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/)**
-    - [450. Delete Node in a BST](https://leetcode.com/problems/delete-node-in-a-bst/)
+    - **[450. Delete Node in a BST](https://leetcode.com/problems/delete-node-in-a-bst/)**
     - [108. Convert Sorted Array to Binary Search Tree](https://leetcode.com/problems/convert-sorted-array-to-binary-search-tree/)
     - [109. Convert Sorted List to Binary Search Tree](https://leetcode.com/problems/convert-sorted-list-to-binary-search-tree/)
     - [230. Kth Smallest Element in a BST](https://leetcode.com/problems/kth-smallest-element-in-a-bst/)

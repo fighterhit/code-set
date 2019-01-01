@@ -23,7 +23,7 @@ public class M450_DeleteNodeinaBST {
         TreeNode cur = root, pre = null;
         while (cur != null && cur.val != key) {
             pre = cur;
-            if (cur.val < key) {
+            if (cur.val > key) {
                 cur = cur.left;
             } else {
                 cur = cur.right;
@@ -51,9 +51,10 @@ public class M450_DeleteNodeinaBST {
         if (root.right == null) {
             return root.left;
         }
+        //把待删节点的左子树 挂到 右子树中最小节点的左孩子
         TreeNode rightMin = findMin(root.right);
         rightMin.left = root.left;
-        return rightMin.right;
+        return root.right;
 
     }
 
