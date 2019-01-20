@@ -7,7 +7,7 @@
 ![17树](17树.png)
 - [93. Restore IP Addresses](https://leetcode.com/problems/restore-ip-addresses/)
 - [131. Palindrome Partitioning](https://leetcode.com/problems/palindrome-partitioning/)
-- 回溯法的应用
+- 回溯法的应用： [通用方法(Subsets, Permutations, Combination Sum, Palindrome Partioning)]("https://leetcode.com/problems/permutations/discuss/18239/A-general-approach-to-backtracking-questions-in-Java-(Subsets-Permutations-Combination-Sum-Palindrome-Partioning)")
     - 排列
 - [46. Permutations](https://leetcode.com/problems/permutations/)
 ![46排列](46排列.png)
@@ -21,5 +21,19 @@
 - [78. Subsets](https://leetcode.com/problems/subsets/)
 - [90. Subsets II](https://leetcode.com/problems/subsets-ii/)
 - [401. Binary Watch](https://leetcode.com/problems/binary-watch/)
+- 回溯法的应用
+    - 二维平面上使用回溯法
+- [79. Word Search](https://leetcode.com/problems/word-search/)
+![79. Word Search](WordSearch.png)
+- floodfill 问题
+- [200. Number of Islands](https://leetcode.com/problems/number-of-islands/)
+- [130. Surrounded Regions](https://leetcode.com/problems/surrounded-regions/)
+- 回溯法是经典的人工智能的基础
+- [51. N-Queens](https://leetcode.com/problems/n-queens/) (注意剪枝)
+![nqueue](nqueue.png)
+![8皇后](8queue1.png)
+![8皇后](8queue2.png)
+![8皇后](8queue3.png)
+- []()
 - []()
 

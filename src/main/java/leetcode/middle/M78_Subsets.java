@@ -1,6 +1,6 @@
 package leetcode.middle;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -20,9 +20,32 @@ import java.util.List;
  * [1,2],
  * []
  * ]
+ * 参考 M90_SubsetsII
  */
 public class M78_Subsets {
-    public List<List<Integer>> subsets(int[] nums) {
+    List<List<Integer>> res;
 
+    public List<List<Integer>> subsets(int[] nums) {
+        res = new LinkedList<>();
+        if (nums == null || nums.length == 0) {
+            return res;
+        }
+        generateSubsets(nums, new LinkedList<>(), 0);
+        return res;
+    }
+
+    private void generateSubsets(int[] nums, LinkedList<Integer> ls, int start) {
+        System.out.print("ls: " + ls);
+        res.add(new LinkedList<>(ls));
+        System.out.println("     res: " + res);
+        for (int i = start; i < nums.length; i++) {
+            ls.add(nums[i]);
+            generateSubsets(nums, ls, i + 1);
+            ls.removeLast();
+        }
+    }
+
+    public static void main(String[] args) {
+        new M78_Subsets().subsets(new int[]{1, 2, 3});
     }
 }
