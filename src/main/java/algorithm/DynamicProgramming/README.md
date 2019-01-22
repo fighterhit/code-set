@@ -56,8 +56,12 @@ int fib(int n){
 - [337. House Robber III](https://leetcode.com/problems/house-robber-iii/)
 - [309. Best Time to Buy and Sell Stock with Cooldown](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/)
 - 0-1背包问题 (暴力解法：每个物品可放进背包也可不放，O((2^n)*n))
-- ![背包问题](01背包问题.png)
-- ![背包问题](01背包问题2.png)
+  ![背包问题](01背包问题.png)
+  - 时间复杂度：O(n * C); 空间复杂度：O(n * C)
+  ![背包问题](01背包问题2.png)
+  - 空间复杂度优化
+    - 两行：O(2 * C)=O(C)
+    - 一行：只看上面和左面
 - [122. Best Time to Buy and Sell Stock II](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/)
 - []()
 - []()

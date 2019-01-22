@@ -42,4 +42,33 @@ public class KnapsackDP {
         }
         return memo[n - 1][C];
     }
+
+    int knapsackOptimize(List<Integer> weight, List<Integer> value, int C) {
+
+        assert weight.size() == value.size();
+        int n = weight.size();
+        if (n == 0) {
+            return 0;
+        }
+
+        //n 行，0 到 C 共 C+1 列
+        int[] memo = new int[C + 1];
+        //填充
+        for (int j = 0; j < memo.length; j++) {
+            memo[j] = -1;
+        }
+
+        //初始化第1行，即只考虑第0个物品
+        for (int j = 0; j <= C; j++) {
+            memo[j] = j >= weight.get(0) ? value.get(0) : 0;
+        }
+
+        //从第2行开始填充
+        for (int i = 1; i < n; i++) {
+            for (int j = C; j >= weight.get(i); j--) {
+                memo[j] = Math.max(memo[j], memo[j - weight.get(i)] + value.get(i));
+            }
+        }
+        return memo[C];
+    }
 }
