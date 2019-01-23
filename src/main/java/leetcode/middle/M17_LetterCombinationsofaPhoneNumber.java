@@ -11,6 +11,7 @@ import java.util.List;
  * 字符串合法性
  * 空字符串
  * 多个解的顺序
+ * 和 M46_Permutations 区别
  */
 public class M17_LetterCombinationsofaPhoneNumber {
 

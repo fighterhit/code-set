@@ -55,15 +55,33 @@ int fib(int n){
 递归树中每个节点所表示要解决的问题在DP里表示定义的一个状态
 - [337. House Robber III](https://leetcode.com/problems/house-robber-iii/)
 - [309. Best Time to Buy and Sell Stock with Cooldown](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/)
+- [122. Best Time to Buy and Sell Stock II](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/)
+- [416. Partition Equal Subset Sum](https://leetcode.com/problems/partition-equal-subset-sum/)
+    ![416](416.png)
+- [322. Coin Change](https://leetcode.com/problems/coin-change/)
+- [377. Combination Sum IV](https://leetcode.com/problems/combination-sum-iv/)
+- [474. Ones and Zeroes](https://leetcode.com/problems/ones-and-zeroes/)
+- [139. Word Break](https://leetcode.com/problems/word-break/)
+- [494. Target Sum](https://leetcode.com/problems/target-sum/)
 - 0-1背包问题 (暴力解法：每个物品可放进背包也可不放，O((2^n)*n))
   ![背包问题](01背包问题.png)
   - 时间复杂度：O(n * C); 空间复杂度：O(n * C)
   ![背包问题](01背包问题2.png)
   - 空间复杂度优化
-    - 两行：O(2 * C)=O(C)
+    - 两行：第i行元素只依赖第i-1行元素，理论上只需要保持两行元素，即 O(2 * C)=O(C)
+    ![背包两行](背包两行.png)
     - 一行：只看上面和左面
-- [122. Best Time to Buy and Sell Stock II](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/)
-- []()
-- []()
-- []()
-
+    ![背包一行](背包一行.png)
+- 0-1背包问题变种
+    - 完全背包问题：每个物品可以无限使用
+    - 多重背包问题：每个物品不止一个，有 num(i) 个
+    - 多维费用背包问题：考虑物品的体积和重量（三维数组）
+    - 物品间加入更多约束：物品间可以互相排斥，也可以互相依赖
+- LIS：最长上升子序列
+- [300. Longest Increasing Subsequence](https://leetcode.com/problems/longest-increasing-subsequence/)
+    ![LIS](LIS.png)
+- LCS：最长公共子序列
+    ![LCS](LCS.png)
+    ![LCS2](LCS2.png)
+- dijkstra 单源最短路径算法也是动态规划
+![dijkstra](dijkstra.png)
