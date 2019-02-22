@@ -128,8 +128,6 @@ class Singleton6 {
     private Singleton6() {
     }
 
-    private static Singleton6 instance;
-
     public static Singleton6 getInstance() {
         return Singleton6Holder.instance;
     }

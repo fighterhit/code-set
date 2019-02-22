@@ -24,7 +24,7 @@ public class Singleton {
         if (instance == null) {
             synchronized (Singleton.class) {
                 if (instance == null) {
-                    return new Singleton();
+                    instance = new Singleton();
                 }
             }
         }

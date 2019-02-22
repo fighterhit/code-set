@@ -13,6 +13,7 @@ package sword.ch2;
  * position-3 : (0,1,2,3,2,5) // already in position
  * position-4 : (0,1,2,3,2,5) // nums[i] == nums[nums[i]], exit
  *
+ *
  * @author Fighter Created on 2018/4/18.
  */
 public class P39_DuplicationInArray {

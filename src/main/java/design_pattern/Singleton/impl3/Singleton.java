@@ -21,7 +21,7 @@ public class Singleton implements Serializable {
     //方法同步，调用效率低
     private static synchronized Singleton getInstance() {
         if (instance == null) {
-            return new Singleton();
+            instance = new Singleton();
         }
         return instance;
     }
