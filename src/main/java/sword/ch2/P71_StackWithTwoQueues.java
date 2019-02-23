@@ -173,6 +173,73 @@ public class P71_StackWithTwoQueues<T> {
             return queue1.isEmpty();
         }
     }
+
+    class MyStack3 {
+
+        private Queue<Integer> queue1;
+        private Queue<Integer> queue2;
+
+        /**
+         * Initialize your data structure here.
+         */
+        public MyStack3() {
+            queue1 = new LinkedList<>();
+            queue2 = new LinkedList<>();
+        }
+
+        /**
+         * Push element x onto stack.
+         */
+
+        public void push(int data) {
+            if (!queue2.isEmpty()) {
+                queue2.offer(data);
+            } else {
+                queue1.offer(data);
+            }
+        }
+
+        /**
+         * Removes the element on top of the stack and returns that element.
+         */
+        public int pop() {
+            if (!queue2.isEmpty()) {
+                int size = queue2.size();
+                for (int i = 0; i < size - 1; i++) {
+                    queue1.offer(queue2.poll());
+                }
+                return queue2.poll();
+            } else if (!queue1.isEmpty()) {
+                int size = queue1.size();
+                for (int i = 0; i < size - 1; i++) {
+                    queue2.offer(queue1.poll());
+                }
+                return queue1.poll();
+            } else {
+                return -1;
+            }
+        }
+
+        /**
+         * Get the top element.
+         */
+        public int top() {
+            if (queue2.size() > 0) {
+                return queue2.peek();
+            } else if (queue1.size() > 0) {
+                return queue1.peek();
+            } else {
+                return -1;
+            }
+        }
+
+        /**
+         * Returns whether the stack is empty.
+         */
+        public boolean empty() {
+            return queue1.isEmpty() && queue2.isEmpty();
+        }
+    }
 }
 
 
