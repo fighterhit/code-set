@@ -22,7 +22,7 @@ public class P82_MinNumberInRotatedArray {
 
             // 若序列类似：10111  11101，则即 array[left] == array[mid] == array[right]，需要顺序查找
             if (array[left] == array[mid] && array[right] == mid) {
-                return minNumber(array, left);
+                return minNumber(array, left, right);
             }
 
             if (array[mid] >= array[left]) {
@@ -34,9 +34,9 @@ public class P82_MinNumberInRotatedArray {
         return array[mid];
     }
 
-    private int minNumber(int[] array, int left) {
+    private int minNumber(int[] array, int left, int right) {
         int min = array[left];
-        for (int i = 0; i < array.length; i++) {
+        for (int i = left + 1; i <= right; i++) {
             if (array[i] < min) {
                 min = array[i];
             }
@@ -44,6 +44,10 @@ public class P82_MinNumberInRotatedArray {
         return min;
     }
 
+    /**
+     * 当 nums[mid] <= nums[right] 的情况下，说明解在 [left, mid] 之间，此时令 right = mid；
+     * 否则解在 [mid + 1, right] 之间，令 left = mid + 1。
+     */
     public int minNumberInRotateArray2(int[] array) {
         if (array == null || array.length == 0) {
             return 0;
@@ -52,13 +56,17 @@ public class P82_MinNumberInRotatedArray {
 
         //注意 left < right
         while (left < right) {
-            mid = left + ((right - left) >> 1);
+            mid = left + (right - left) >> 1;
+            if (array[mid] == array[left] && array[mid] == array[right]) {
+                return minNumber(array, left, right);
+            }
             if (array[mid] <= array[right]) {
                 right = mid;
             } else {
                 left = mid + 1;
             }
         }
-        return array[mid];
+//        return array[right];
+        return array[left];
     }
 }

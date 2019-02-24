@@ -2,8 +2,6 @@ package algorithm.Sort.QuickSort;
 
 import algorithm.Sort.SortTestHelper;
 
-import java.util.Arrays;
-
 /**
  * 快排初始版本
  * 数组有序情况下，数组最左端pivot最小，递归树可能退化为链表，此时复杂度为O(N*N)
@@ -20,7 +18,7 @@ public class QuickSort {
     private static void quickSort(Comparable[] arr, int l, int r) {
         if (l < r) {
             int p = partition(arr, l, r);
-            quickSort(arr, l, p);
+            quickSort(arr, l, p - 1);
             quickSort(arr, p + 1, r);
         }
     }
