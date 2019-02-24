@@ -6,10 +6,10 @@ package sword.ch2;
 public class P89_StringPathInMatrix {
 
     private int rows, cols;
-    private int[][] next =  {{0, -1}, {0, 1}, {-1, 0}, {1, 0}};
+    private int[][] next = {{0, -1}, {0, 1}, {-1, 0}, {1, 0}};
 
     public boolean hasPath(char[] matrix, int rows, int cols, char[] str) {
-        if (rows == 0 || cols == 0){
+        if (rows == 0 || cols == 0) {
             return false;
         }
         this.rows = rows;
@@ -36,7 +36,7 @@ public class P89_StringPathInMatrix {
         if (s.length() == pathLen) {
             return true;
         }
-        if (i < 0  || i >= mx.length || j < 0 || j >= mx[0].length || mx[i][j] != s.charAt(pathLen) || visited[i][j]) {
+        if (i < 0 || i >= mx.length || j < 0 || j >= mx[0].length || mx[i][j] != s.charAt(pathLen) || visited[i][j]) {
             return false;
         }
 
@@ -60,4 +60,47 @@ public class P89_StringPathInMatrix {
         return mx;
     }
 
+}
+
+
+class P89_StringPathInMatrix2 {
+
+    boolean[] visited;
+    int rows, cols;
+    int[][] next = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
+
+    public boolean hasPath(char[] matrix, int rows, int cols, char[] str) {
+        if (rows <= 0 || cols <= 0) {
+            return false;
+        }
+        visited = new boolean[rows * cols];
+        this.rows = rows;
+        this.cols = cols;
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                if (hasPathCore(matrix, str, i, j, 0)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    boolean hasPathCore(char[] matrix, char[] str, int row, int col, int index) {
+        if (index == str.length) {
+            return true;
+        }
+        if (row < 0 || row >= rows || col < 0 || col >= cols || str[index] != matrix[row * cols + col] || visited[row * cols + col]) {
+            return false;
+        }
+
+        visited[row * cols + col] = true;
+        for (int[] n : next) {
+            if (hasPathCore(matrix, str, row + n[0], col + n[1], index + 1)) {
+                return true;
+            }
+        }
+        visited[row * cols + col] = false;
+        return false;
+    }
 }
