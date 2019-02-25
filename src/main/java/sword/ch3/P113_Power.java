@@ -74,3 +74,31 @@ public class P113_Power {
         System.out.println("0^-3=" + power(0, -3) + "\t是否报错:" + invalidInput);
     }
 }
+
+class P113_Power2 {
+
+    boolean isNegative;
+
+    public double Power(double base, int exponent) {
+        if (exponent == 0) {
+            return 1;
+        }
+        if (exponent == 1) {
+            return base;
+        }
+        isNegative = false;
+        if (exponent < 0) {
+            exponent = -exponent;
+            isNegative = true;
+        }
+//        double pow = Power(base * base, exponent / 2);
+        double pow = Power(base * base, exponent >> 1);
+        if ((exponent & 0x1) == 1) {
+            pow = pow * base;
+        }
+        if (isNegative) {
+            pow = 1 / pow;
+        }
+        return pow;
+    }
+}

@@ -52,12 +52,13 @@ public class P122_deleteDuplicatedNode {
     }
 
 
-   /* public static ListNode deleteDuplication2(ListNode pHead) {
+    public static ListNode deleteDuplication2(ListNode pHead) {
         if (pHead == null || pHead.next == null) {
             return pHead;
         }
         ListNode next = pHead.next;
         if (pHead.val == next.val) {
+            //头结点是重复节点
             while (next != null && pHead.val == next.val) {
                 next = next.next;
             }
@@ -66,7 +67,7 @@ public class P122_deleteDuplicatedNode {
             pHead.next = deleteDuplication(pHead.next);
             return pHead;
         }
-    }*/
+    }
 
     public static void main(String[] args) {
         ListNode head = new ListNode(1);
