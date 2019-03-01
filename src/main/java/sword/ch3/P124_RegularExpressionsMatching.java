@@ -2,6 +2,7 @@ package sword.ch3;
 
 /**
  * 请实现一个函数用来匹配包括'.'和'*'的正则表达式。模式中的字符'.'表示任意一个字符，而'*'表示它前面的字符可以出现任意次（包含0次）。 在本题中，匹配是指字符串的所有字符匹配整个模式。例如，字符串"aaa"与模式"a.a"和"ab*ac*a"匹配，但是与"aa.a"和"ab*a"均不匹配
+ * https://leetcode.com/problems/regular-expression-matching/discuss/5651/Easy-DP-Java-Solution-with-detailed-Explanation
  *
  * @author Fighter Created on 2018/5/11.
  */
@@ -50,5 +51,41 @@ public class P124_RegularExpressionsMatching {
                 return matchCore(s, strIndex, p, patternIndex + 2);
             }
         }
+    }
+}
+
+class Solution {
+    public boolean match(char[] str, char[] pattern) {
+        if (str == null || pattern == null) {
+            return false;
+        }
+        return matchCore(str, 0, pattern, 0);
+    }
+
+    boolean matchCore(char[] str, int sIndex, char[] pattern, int pIndex) {
+        //pattern到末尾，str也到末尾
+        if (sIndex == str.length && pattern.length == pIndex) {
+            return true;
+        }
+        //pattern到末尾，str没到末尾
+        if (sIndex != str.length && pattern.length == pIndex) {
+            return false;
+        }
+        //pattern下个字符是*
+        if (pIndex + 1 < pattern.length && pattern[pIndex + 1] == '*') {
+            //字符串当前字符与模式匹配
+            if (sIndex < str.length && (str[sIndex] == pattern[pIndex] || pattern[pIndex] == '.')) {
+                // a* 匹配0个，匹配1个，先匹配1个再匹配字符串下个
+                return matchCore(str, sIndex, pattern, pIndex + 2) || matchCore(str, sIndex + 1, pattern, pIndex + 2) || matchCore(str, sIndex + 1, pattern, pIndex);
+            } else {
+                //字符串到末尾而模式串还没到 或者 当前字符不匹配，相当于匹配0个
+                return matchCore(str, sIndex, pattern, pIndex + 2);
+            }
+        }
+        //pattern下个字符不是*，但当前字符匹配
+        if (sIndex < str.length && (str[sIndex] == pattern[pIndex] || pattern[pIndex] == '.')) {
+            return matchCore(str, sIndex + 1, pattern, pIndex + 1);
+        }
+        return false;
     }
 }
