@@ -60,8 +60,68 @@ public class P92_RobotMove {
     }
 
     public static void main(String[] args) {
-        System.out.println(new P92_RobotMove().movingCount(5,10,10)); //1
+        System.out.println(new P92_RobotMove().movingCount(5, 10, 10)); //1
 //        System.out.println(movingCount(1,3,4)); //3
 //        System.out.println(movingCount(9,2,20)); //36
+    }
+}
+
+class P92_RobotMove2 {
+
+    int rows, cols, threshold, res;
+    boolean[][] visited;
+    int[][] sum;
+    int[][] next = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
+
+    public int movingCount(int threshold, int rows, int cols) {
+        if (rows <= 0 || cols <= 0) {
+            return 0;
+        }
+
+        this.rows = rows;
+        this.cols = cols;
+        this.threshold = threshold;
+
+        visited = new boolean[rows][cols];
+        sum = new int[rows][cols];
+        initSum();
+        movingCore(0, 0);
+        return res;
+    }
+
+    void movingCore(int i, int j) {
+        if (i < 0 || i >= rows || j < 0 || j >= cols || visited[i][j]) {
+            return;
+        }
+        //只要不越界都能访问，但若不满足阈值条件则不计数，相当于遍历所有格子
+        visited[i][j] = true;
+        if (sum[i][j] > threshold) {
+            return;
+        }
+        res++;
+        for (int[] n : next) {
+            movingCore(i + n[0], j + n[1]);
+        }
+    }
+
+    void initSum() {
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                sum[i][j] = getSum(i, j);
+            }
+        }
+    }
+
+    int getSum(int i, int j) {
+        int sum = 0;
+        while (i != 0) {
+            sum += i % 10;
+            i /= 10;
+        }
+        while (j != 0) {
+            sum += j % 10;
+            j /= 10;
+        }
+        return sum;
     }
 }
