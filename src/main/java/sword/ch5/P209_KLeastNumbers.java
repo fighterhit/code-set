@@ -11,17 +11,45 @@ public class P209_KLeastNumbers {
         if (input == null) {
             return null;
         }
-        if (input.length == 0 || k <= 0) {
+        //注意判断条件
+        if (k > input.length || k <= 0) {
             return new ArrayList<>();
         }
 
         int left = 0, right = input.length - 1;
-        return GetLeastNumbers_Solution(input, k, left, right);
+        int p = partition(input, left, right);
+        ArrayList<Integer> res = new ArrayList<>();
+        //必须是 k-1，因为 k 可能等于 input.length，此时若条件为 p != k，则 left = p + 1 越界
+        //用例 int[] data1 = {6, 1, 3, 5, 4, 2};
+        while (p != k - 1) {
+            if (p < k - 1) {
+                left = p + 1;
+                p = partition(input, left, right);
+            } else {
+                right = p - 1;
+                p = partition(input, left, right);
+            }
+        }
+        for (int i = 0; i < k; i++) {
+            res.add(input[i]);
+        }
+        return res;
     }
 
-    //todo
-    private ArrayList<Integer> GetLeastNumbers_Solution(int[] input, int k, int left, int right) {
-        return null;
+    int partition(int[] data, int l, int r) {
+        int pivot = data[l];
+        while (l < r) {
+            while (l < r && data[r] >= pivot) {
+                r--;
+            }
+            data[l] = data[r];
+            while (l < r && data[l] <= pivot) {
+                l++;
+            }
+            data[r] = data[l];
+        }
+        data[l] = pivot;
+        return l;
     }
 
     //最大堆：O(NlogK) + O(K)
@@ -45,5 +73,15 @@ public class P209_KLeastNumbers {
             }
         }
         return new ArrayList<>(maxHeap);
+    }
+
+    public static void main(String[] args) {
+        int[] data1 = {6, 1, 3, 5, 4, 2};
+        System.out.println(new P209_KLeastNumbers().GetLeastNumbers_Solution(data1, 6));
+        int[] data2 = {6, 1, 3, 5, 4, 2};
+        System.out.println(new P209_KLeastNumbers().GetLeastNumbers_Solution2(data1, 5));
+        int[] data3 = {6, 1, 3, 5, 4, 2};
+        System.out.println(new P209_KLeastNumbers().GetLeastNumbers_Solution2(data1, 5));
+
     }
 }

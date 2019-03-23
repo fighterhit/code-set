@@ -24,7 +24,6 @@ class QuickSort {
         int pivotPos = partition(data, left, right);
         quickSort(data, left, pivotPos - 1);
         quickSort(data, pivotPos + 1, right);
-
     }
 
     private static int partition(int[] data, int left, int right) {
