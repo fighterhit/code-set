@@ -18,6 +18,8 @@ public class P221_NumberOf1 {
         for (int i = 1; i <= n; i *= 10) {
             a = n / i;
             b = n % i;
+            // (a + 8) / 10 * i 表示 case1、case3
+            // a % 10 == 1 ? b + 1 : 0 表示 case2
             cnt += (a + 8) / 10 * i + (a % 10 == 1 ? b + 1 : 0);
         }
         return cnt;
