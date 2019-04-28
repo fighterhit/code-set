@@ -31,14 +31,38 @@ public class P269_KthNodeInBST {
         return pRoot;
     }
 
-    private TreeNode inOrder(TreeNode pRoot) {
-        if (pRoot != null) {
-            inOrder(pRoot.left);
-            if (++i == k) {
-                return pRoot;
-            }
-            inOrder(pRoot.right);
+    //递归版中序遍历
+    TreeNode ret;
+
+    TreeNode KthNode2(TreeNode pRoot, int k) {
+        if (pRoot == null || k == 0) {
+            return null;
         }
-        return null;
+        helper(pRoot, k);
+        return ret;
+    }
+
+    private void helper(TreeNode pRoot, int k) {
+        /*
+        //计数值超过 k 则直接返回
+        if (pRoot == null || i >= k) {
+            return;
+        }
+        helper(pRoot.left, k);
+        i++;
+        if (i == k) {
+            ret = pRoot;
+            return;
+        }
+        helper(pRoot.right, k);*/
+        if (pRoot != null && i != k) {
+            helper(pRoot.left, k);
+            i++;
+            if (i == k) {
+                ret = pRoot;
+                return;
+            }
+            helper(pRoot.right, k);
+        }
     }
 }
