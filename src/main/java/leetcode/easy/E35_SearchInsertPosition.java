@@ -22,6 +22,20 @@ package leetcode.easy;
  */
 public class E35_SearchInsertPosition {
     public int searchInsert(int[] nums, int target) {
+        //注意 h，因为插入元素可能超过数组范围，可能在数组末尾
+        int l = 0, h = nums.length;
+        while (l < h) {
+            int m = l + (h - l >> 1);
+            if (nums[m] >= target) {
+                h = m;
+            } else {
+                l = m + 1;
+            }
+        }
+        return l;
+    }
 
+    public static void main(String[] args) {
+        new E35_SearchInsertPosition().searchInsert(new int[]{1, 3, 5, 6}, 7);
     }
 }

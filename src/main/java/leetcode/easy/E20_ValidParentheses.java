@@ -75,4 +75,27 @@ public class E20_ValidParentheses {
         }
         return stk.isEmpty();
     }
+
+    //拓展问题：只考虑小括号匹配问题 '( )'
+    //计数法：参考 H32_LongestValidParentheses 方法4，这里只考虑从左往右扫描
+    //括号匹配充要条件：1. 左右括号数相等 2. 任意位置左括号数 >= 右括号数
+    public boolean isValid4(String s) {
+        if (s == null || s.length() == 0) {
+            return true;
+        }
+        int l = 0, r = 0;
+        //循环内满足 l >= r; 若 r > l, 则直接返回 false;
+        //循环外可能 l > r, 比如 ((()), 因此需再判断一次左右括号数是否相等
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) == '(') {
+                l++;
+            } else {
+                r++;
+            }
+            if (r > l) {
+                return false;
+            }
+        }
+        return l == r;
+    }
 }

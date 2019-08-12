@@ -15,6 +15,7 @@ package leetcode.easy;
  *
  * @author Fighter.
  * 中序遍历一棵BST得到的就是从小到大的有序数组
+ * 对比链表 M109_ConvertSortedListtoBinarySearchTree
  */
 public class E108_ConvertSortedArraytoBinarySearchTree {
     public class TreeNode {
@@ -35,6 +36,7 @@ public class E108_ConvertSortedArraytoBinarySearchTree {
     }
 
     private TreeNode sortedArrayToBST(int[] nums, int start, int end) {
+        //注意边界条件！！！
         if (start > end) {
             return null;
         }

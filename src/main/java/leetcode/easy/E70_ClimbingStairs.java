@@ -32,15 +32,26 @@ public class E70_ClimbingStairs {
 
     //递归超时
     public int climbStairs2(int n) {
-        if (n <= 0 || n == 1 || n == 2) {
-            return n;
+        if (n < 2) {
+            return 1;
         }
-        int a = 1, b = 2, res = 0;
-        for (int i = 3; i <= n; i++) {
-            res = a + b;
+        int a = 1, b = 1, c = 2;
+        for (int i = 2; i <= n; i++) {
+            c = a + b;
             a = b;
-            b = res;
+            b = c;
         }
-        return res;
+        return c;
+    }
+
+    //DP
+    public int climbStairs3(int n) {
+        int[] dp = new int[n + 1];
+        dp[0] = 1;
+        dp[1] = 1;
+        for (int i = 2; i <= n; i++) {
+            dp[i] = dp[i - 1] + dp[i - 2];
+        }
+        return dp[n];
     }
 }

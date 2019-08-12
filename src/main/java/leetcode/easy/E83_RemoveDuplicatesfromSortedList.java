@@ -11,7 +11,9 @@ package leetcode.easy;
  * Input: 1->1->2->3->3
  * Output: 1->2->3
  * <p>
- * 参考 E26_RemoveDuplicatesfromSortedArray，原地移动元素
+ * 参考
+ * E26_RemoveDuplicatesfromSortedArray 原地移动元素
+ * M82_RemoveDuplicatesfromSortedListII 不保留重复元素
  */
 public class E83_RemoveDuplicatesfromSortedList {
     public class ListNode {

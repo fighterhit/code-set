@@ -7,6 +7,8 @@ import java.util.Map;
  * 将所有元素放入查找表，查看target-a是否存在即可
  * 遍历每个元素v，只将v前元素放入查找表防止全部一次性放入查找表时相同元素被覆盖
  * 不能先初始化哈希表，否则无法排除两个相同的元素相加为 target 的情况，比如target是4，遍历到了一个2，那么另外一个2不能是之前那个2
+ * <p>
+ * 参考 E167_TwoSumIIInputarrayissorted，M15_3Sum，M16_3SumClosest，M259_3SumSmaller$，M18_4Sum，M454_4SumII
  */
 public class E1_TwoSum {
     public int[] twoSum(int[] nums, int target) {

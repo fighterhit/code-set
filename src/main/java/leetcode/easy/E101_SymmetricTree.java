@@ -5,22 +5,22 @@ import java.util.Stack;
 /**
  * Given a binary tree, check whether it is a mirror of itself (ie, symmetric around its center).
  * For example, this binary tree [1,2,2,3,4,4,3] is symmetric:
- *     1
- *    / \
- *   2   2
- *  / \ / \
+ * 1
+ * / \
+ * 2   2
+ * / \ / \
  * 3  4 4  3
  * But the following [1,2,2,null,3,null,3] is not:
- *     1
- *    / \
- *   2   2
- *    \   \
- *    3    3
+ * 1
+ * / \
+ * 2   2
+ * \   \
+ * 3    3
  * Note:
  * Bonus points if you could solve it both recursively and iteratively.
  *
  * @author Fighter.
- * 参考 E100_SameTree
+ * 参考 E100_SameTree，E572_SubtreeofAnotherTree，P159_SymmetricalBinaryTree
  */
 public class E101_SymmetricTree {
     public static class TreeNode {
@@ -62,11 +62,21 @@ public class E101_SymmetricTree {
         if (root == null) {
             return true;
         }
-        return isMirror(root.left, root.right);
+        return helper(root.left, root.right);
     }
 
-    private boolean isMirror(TreeNode p, TreeNode q) {
-        return p != null && q != null ? p.val == q.val && isMirror(p.left, q.right) && isMirror(p.right, q.left) : p == null && q == null;
+    boolean helper(TreeNode left, TreeNode right) {
+        if (left == null && right == null) {
+            return true;
+        }
+        if (left == null || right == null) {
+            return false;
+        }
+        if (left.val != right.val) {
+            return false;
+        }
+        //E100_SameTree 唯一区别的地方, E100_SameTree 是比较左子树或右子树
+        return helper(left.left, right.right) && helper(left.right, right.left);
     }
 
     //非递归
