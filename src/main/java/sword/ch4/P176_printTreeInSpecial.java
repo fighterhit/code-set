@@ -2,10 +2,11 @@ package sword.ch4;
 
 import sword.TreeNode;
 
-import java.util.ArrayList;
-import java.util.Stack;
+import java.util.*;
 
 /**
+ * 按照之字形打印二叉树
+ *
  * @author Fighter.
  */
 public class P176_printTreeInSpecial {
@@ -55,4 +56,36 @@ public class P176_printTreeInSpecial {
         }
         return res;
     }
+
+    public ArrayList<ArrayList<Integer>> Print2(TreeNode root) {
+        ArrayList<ArrayList<Integer>> res = new ArrayList<>();
+        if (root == null) {
+            return res;
+        }
+        Queue<TreeNode> q = new LinkedList<>();
+        q.add(root);
+        //标志，true时从左到右，false时将那一行结果翻转一下
+        boolean flag = false;
+        while (!q.isEmpty()) {
+            int size = q.size();
+            ArrayList<Integer> ls = new ArrayList<>();
+            for (int i = 0; i < size; i++) {
+                TreeNode t = q.poll();
+                ls.add((int) t.val);
+                if (t.left != null) {
+                    q.add(t.left);
+                }
+                if (t.right != null) {
+                    q.add(t.right);
+                }
+            }
+            if (flag) {
+                Collections.reverse(ls);
+            }
+            res.add(ls);
+            flag = !flag;
+        }
+        return res;
+    }
+
 }

@@ -5,6 +5,7 @@ import java.util.Stack;
 /**
  * 用两个栈来实现一个队列，完成队列的Push和Pop操作。 队列中的元素为int类型。
  * 一个栈来添加元素，另一个删除元素
+ *
  * @author Fighter Created on 2018/4/29.
  */
 public class P68_QueueWithTwoStacks {
@@ -17,12 +18,12 @@ public class P68_QueueWithTwoStacks {
     }
 
     public int pop() {
-        if (stack2.isEmpty()){
-          while (!stack1.isEmpty()){
-              stack2.push(stack1.pop());
-          }
+        if (stack2.isEmpty()) {
+            while (!stack1.isEmpty()) {
+                stack2.push(stack1.pop());
+            }
         }
-        return stack2.pop();
+        //注意仍需判断 stack2 是否为空
+        return stack2.isEmpty() ? Integer.MAX_VALUE : stack2.pop();
     }
-
 }

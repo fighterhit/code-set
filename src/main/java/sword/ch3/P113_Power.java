@@ -60,7 +60,7 @@ public class P113_Power {
         }
         double result = Power(base, exponent >> 1);
         result *= result;
-        // 若是偶数
+        // 若是奇数
         if ((exponent & 0x1) == 1) {
             result *= base;
         }
@@ -91,8 +91,8 @@ class P113_Power2 {
             exponent = -exponent;
             isNegative = true;
         }
-//        double pow = Power(base * base, exponent / 2);
-        double pow = Power(base * base, exponent >> 1);
+        //不能用 exponent >> 1，当 exponent == -1 时，-1 >> 1 仍是 -1
+        double pow = Power(base * base, exponent / 2);
         if ((exponent & 0x1) == 1) {
             pow = pow * base;
         }
@@ -100,5 +100,23 @@ class P113_Power2 {
             pow = 1 / pow;
         }
         return pow;
+    }
+}
+
+//最快
+class P113_Power3 {
+    public double Power(double base, int exponent) {
+        if (exponent == 0) {
+            return 1;
+        }
+        double res = Power(base, exponent / 2);
+        if ((exponent & 1) == 0) {
+            return res * res;
+        }
+        if (exponent < 0) {
+            return res * res / base;
+        } else {
+            return res * res * base;
+        }
     }
 }

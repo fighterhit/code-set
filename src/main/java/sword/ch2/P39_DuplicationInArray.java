@@ -12,9 +12,8 @@ package sword.ch2;
  * position-2 : (0,1,2,3,2,5) // already in position
  * position-3 : (0,1,2,3,2,5) // already in position
  * position-4 : (0,1,2,3,2,5) // nums[i] == nums[nums[i]], exit
- *
- *
- * @author Fighter Created on 2018/4/18.
+ * <p>
+ * 代码尽管有一个两重for循环，但每个数字最多只要交换两次就能找到属于它自己的位置，因此总的时间复杂度为 O(n)，空间复杂度为 O(1)
  */
 public class P39_DuplicationInArray {
 

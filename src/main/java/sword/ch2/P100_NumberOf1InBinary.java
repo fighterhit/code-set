@@ -12,6 +12,7 @@ public class P100_NumberOf1InBinary {
         int cnt = 0;
         while (n != 0) {
             cnt++;
+            //把一个整数减去 1，再和原整数做与运算会把该整数最右边的 1 变成 0，那么一个整数二进制表示有多少个 1 就可以进行多少次这样的操作
             n &= n - 1;
         }
         return cnt;

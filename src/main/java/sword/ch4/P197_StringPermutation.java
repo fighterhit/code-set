@@ -22,12 +22,13 @@ public class P197_StringPermutation {
     }
 
     void PermutationHelper(String str, int index, StringBuffer sb) {
+        //最后将结果集 res 内的重复元素排除
         if (index == str.length() && !res.contains(sb.toString())) {
             res.add(sb.toString());
             return;
         }
         for (int i = 0; i < str.length(); i++) {
-            if (!used[i] && !res.contains(sb.toString())) {
+            if (!used[i]) {
                 sb.append(str.charAt(i));
                 used[i] = true;
                 PermutationHelper(str, index + 1, sb);

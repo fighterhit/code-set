@@ -1,5 +1,8 @@
 package sword.ch5;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 public class P247_FirstNotRepeatingCharInStream {
 
     static class CharStatistics {
@@ -48,5 +51,24 @@ public class P247_FirstNotRepeatingCharInStream {
             charStatistics.insert(str.charAt(i));
             System.out.print(charStatistics.find());
         }
+    }
+}
+
+class Solution {
+    char[] cnt = new char[256];
+    Queue<Character> q = new LinkedList<>();
+
+    //Insert one char from stringstream
+    public void Insert(char ch) {
+        cnt[ch]++;
+        q.add(ch);
+        while (!q.isEmpty() && cnt[q.peek()] > 1) {
+            q.poll();
+        }
+    }
+
+    //return the first appearence once char in current stringstream
+    public char FirstAppearingOnce() {
+        return q.isEmpty() ? '#' : q.peek();
     }
 }

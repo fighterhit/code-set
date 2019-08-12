@@ -11,6 +11,8 @@ import sword.ListNode;
  * 二者一定能够在环上相遇，并且此时slow还没有绕环一圈，也就是说一定是在slow走完第一圈之前相遇。
  *
  * @author Fighter.
+ *
+ * 从链表起点head开始到入口点的距离a,与从slow和fast的相遇点（如图）到入口点的距离相等。
  */
 public class P139_EntryNodeInListLoop {
     public ListNode EntryNodeOfLoop(ListNode pHead) {

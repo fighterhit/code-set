@@ -116,6 +116,18 @@ public class P58_PrintListInReversedOrder {
 
     }
 
+    //简洁版递归
+    ArrayList<Integer> res = new ArrayList<>();
+    public ArrayList<Integer> printListFromTailToHead3(ListNode listNode) {
+        //遍历到最后一个元素
+        if (listNode == null){
+            return res;
+        }
+        printListFromTailToHead(listNode.next);
+        res.add((Integer) listNode.val);
+        return res;
+    }
+
     public static void main(String[] args) {
         // TODO Auto-generated method stub
         //System.out.println("012142");

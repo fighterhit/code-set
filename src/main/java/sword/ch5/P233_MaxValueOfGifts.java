@@ -1,7 +1,5 @@
 package sword.ch5;
 
-import java.util.Arrays;
-
 public class P233_MaxValueOfGifts {
     public int getMost(int[][] values) {
         if (values == null || values.length == 0 || values[0].length == 0) {

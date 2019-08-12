@@ -5,29 +5,24 @@ import java.util.PriorityQueue;
 
 /**
  * 输入n个整数，找出其中最小的K个数。例如输入4,5,1,6,2,7,3,8这8个数字，则最小的4个数字是1,2,3,4,。
+ * <p>
+ * 参考 M215_KthLargestElementinanArray
  */
 public class P209_KLeastNumbers {
     public ArrayList<Integer> GetLeastNumbers_Solution(int[] input, int k) {
-        if (input == null) {
-            return null;
-        }
-        //注意判断条件
-        if (k > input.length || k <= 0) {
-            return new ArrayList<>();
-        }
-
-        int left = 0, right = input.length - 1;
-        int p = partition(input, left, right);
         ArrayList<Integer> res = new ArrayList<>();
-        //必须是 k-1，因为 k 可能等于 input.length，此时若条件为 p != k，则 left = p + 1 越界
-        //用例 int[] data1 = {6, 1, 3, 5, 4, 2};
-        while (p != k - 1) {
+        if (input == null || k > input.length || k <= 0) {
+            return res;
+        }
+        int l = 0, r = input.length - 1, p;
+        while (true) {
+            p = partition(input, l, r);
             if (p < k - 1) {
-                left = p + 1;
-                p = partition(input, left, right);
+                l = p + 1;
+            } else if (p > k - 1) {
+                r = p - 1;
             } else {
-                right = p - 1;
-                p = partition(input, left, right);
+                break;
             }
         }
         for (int i = 0; i < k; i++) {
@@ -38,18 +33,29 @@ public class P209_KLeastNumbers {
 
     int partition(int[] data, int l, int r) {
         int pivot = data[l];
-        while (l < r) {
-            while (l < r && data[r] >= pivot) {
-                r--;
+        int i = l + 1, j = r;
+        while (true) {
+            while (i <= r && data[i] < pivot) {
+                i++;
             }
-            data[l] = data[r];
-            while (l < r && data[l] <= pivot) {
-                l++;
+            while (j >= l + 1 && data[j] > pivot) {
+                j--;
             }
-            data[r] = data[l];
+            if (i > j) {
+                break;
+            }
+            swap(data, i, j);
+            i++;
+            j--;
         }
-        data[l] = pivot;
-        return l;
+        swap(data, l, j);
+        return j;
+    }
+
+    private void swap(int[] data, int i, int j) {
+        int tmp = data[i];
+        data[i] = data[j];
+        data[j] = tmp;
     }
 
     //最大堆：O(NlogK) + O(K)

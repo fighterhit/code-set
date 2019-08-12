@@ -1,7 +1,5 @@
 package sword.ch5;
 
-import structure.SetMap.Map.Map;
-
 /**
  * @author Fighter.
  */

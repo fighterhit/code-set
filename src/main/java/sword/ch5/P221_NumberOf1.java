@@ -1,5 +1,7 @@
 package sword.ch5;
 
+import java.util.*;
+
 /**
  * https://blog.csdn.net/xudli/article/details/46798619
  * intuitive: 每10个数, 有一个个位是1, 每100个数, 有10个十位是1, 每1000个数, 有100个百位是1.  做一个循环, 每次计算单个位上1得总个数(个位,十位, 百位). 
@@ -14,13 +16,30 @@ package sword.ch5;
 public class P221_NumberOf1 {
     public int NumberOf1Between1AndN_Solution(int n) {
         int cnt = 0;
-        int a, b;
-        for (int i = 1; i <= n; i *= 10) {
+        //注意 a, b, i 为long类型，否则 leetcode 233. Number of Digit One 通不过
+        long a, b;
+        for (long i = 1; i <= n; i *= 10) {
             a = n / i;
             b = n % i;
             // (a + 8) / 10 * i 表示 case1、case3
             // a % 10 == 1 ? b + 1 : 0 表示 case2
             cnt += (a + 8) / 10 * i + (a % 10 == 1 ? b + 1 : 0);
+        }
+        return cnt;
+    }
+
+    //牛客能过，leetcode 超时
+    public int NumberOf1Between1AndN_Solution2(int n) {
+        int cnt = 0;
+        while (n != 0) {
+            String s = String.valueOf(n);
+            char[] sarr = s.toCharArray();
+            for (int i = 0; i < sarr.length; i++) {
+                if (sarr[i] == '1') {
+                    cnt++;
+                }
+            }
+            n--;
         }
         return cnt;
     }

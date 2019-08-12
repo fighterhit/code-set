@@ -5,6 +5,8 @@ package sword.ch3;
  * https://leetcode.com/problems/regular-expression-matching/discuss/5651/Easy-DP-Java-Solution-with-detailed-Explanation
  *
  * @author Fighter Created on 2018/5/11.
+ * <p>
+ * H10_RegularExpressionMatching
  */
 public class P124_RegularExpressionsMatching {
     public boolean match(char[] str, char[] pattern) {
@@ -67,8 +69,8 @@ class Solution {
         if (sIndex == str.length && pattern.length == pIndex) {
             return true;
         }
-        //pattern到末尾，str没到末尾
-        if (sIndex != str.length && pattern.length == pIndex) {
+        //str没到末尾，pattern到末尾
+        if (pattern.length == pIndex) {
             return false;
         }
         //pattern下个字符是*
@@ -82,6 +84,7 @@ class Solution {
                 return matchCore(str, sIndex, pattern, pIndex + 2);
             }
         }
+        //判断顺序不能颠倒
         //pattern下个字符不是*，但当前字符匹配
         if (sIndex < str.length && (str[sIndex] == pattern[pIndex] || pattern[pIndex] == '.')) {
             return matchCore(str, sIndex + 1, pattern, pIndex + 1);

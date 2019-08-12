@@ -1,6 +1,7 @@
 package sword.ch5;
 
 import java.util.Arrays;
+import java.util.HashMap;
 
 public class P236_LongestSubstringWithoutDup {
     public int longestSubStringWithoutDuplication(String str) {

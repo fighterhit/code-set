@@ -6,35 +6,32 @@ import java.util.ArrayList;
 import java.util.Stack;
 
 /**
+ * 回溯问题
+ *
  * @author Fighter.
  */
 public class P182_FindPath {
 
     ArrayList<ArrayList<Integer>> res = new ArrayList<>();
-//    ArrayList<Integer> path = new ArrayList<>();
-    Stack<Integer> path = new Stack<>();
 
     public ArrayList<ArrayList<Integer>> FindPath(TreeNode root, int target) {
-        if (root == null) {
-            return res;
-        }
-        helper(root, target);
+        helper(root, target, new ArrayList<>());
         return res;
     }
 
-    private void helper(TreeNode root, int target) {
+    private void helper(TreeNode root, int target, ArrayList<Integer> path) {
         if (root == null) {
             return;
         }
-        if (root.left == null && root.right == null && (Integer) root.val == target) {
-            ArrayList<Integer> ls = new ArrayList<>(path);
-            ls.add((Integer) root.val);
-            res.add(ls);
-            return;
+        path.add((int) root.val);
+        target -= (int) root.val;
+        if (root.left == null && root.right == null && target == 0) {
+            res.add(new ArrayList<>(path));
+        } else {
+            //递归遍历左右子树
+            helper(root.left, target, path);
+            helper(root.right, target, path);
         }
-        path.push((Integer) root.val);
-        helper(root.left, target - (Integer) root.val);
-        helper(root.right, target - (Integer) root.val);
-        path.pop();
+        path.remove(path.size() - 1);
     }
 }

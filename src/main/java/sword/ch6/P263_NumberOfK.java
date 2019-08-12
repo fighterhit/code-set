@@ -2,6 +2,29 @@ package sword.ch6;
 
 public class P263_NumberOfK {
 
+    public int GetNumberOfK2(int[] array, int k) {
+        int l = binarySearch(array, k);
+        int r = binarySearch(array, k + 1) - 1;
+        if (l == array.length || array[l] != k) {
+            return 0;
+        }
+        return r - l + 1;
+    }
+
+    int binarySearch(int[] nums, int key) {
+        //注意 h 初始值！！！
+        int l = 0, h = nums.length;
+        while (l < h) {
+            int m = l + (h - l >> 1);
+            if (nums[m] >= key) {
+                h = m;
+            } else {
+                l = m + 1;
+            }
+        }
+        return l;
+    }
+
     int getFirstKIndex(int[] arr, int l, int r, int k) {
         if (l > r) {
             return -1;

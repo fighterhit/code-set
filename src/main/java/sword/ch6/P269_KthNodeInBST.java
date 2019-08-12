@@ -14,6 +14,7 @@ public class P269_KthNodeInBST {
             return null;
         }
         this.k = k;
+        //注意不用将 root 先访入栈中，否则会重复放入；在树的层序遍历时是将根节点先放入队列中
         stack = new Stack<>();
         while (!stack.isEmpty() || pRoot != null) {
             if (pRoot != null) {

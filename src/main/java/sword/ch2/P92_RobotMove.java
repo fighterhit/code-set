@@ -125,3 +125,46 @@ class P92_RobotMove2 {
         return sum;
     }
 }
+
+class P92_RobotMove3 {
+    int[][] dir = new int[][]{{0, 1}, {0, -1}, {-1, 0}, {1, 0}};
+    boolean[][] v;
+    int row, col;
+    int cnt = 0;
+    int th;
+
+    public int movingCount(int threshold, int rows, int cols) {
+        v = new boolean[rows][cols];
+        row = rows;
+        col = cols;
+        th = threshold;
+
+        helper(0, 0);
+        return cnt;
+    }
+
+    void helper(int r, int c) {
+        //越界、已访问 或 大于阈值的直接返回
+        if (r < 0 || r >= row || c < 0 || c >= col || v[r][c] || getSum(r, c) > th) {
+            return;
+        }
+        v[r][c] = true;
+        cnt++;
+        for (int[] d : dir) {
+            helper(r + d[0], c + d[1]);
+        }
+    }
+
+    int getSum(int r, int c) {
+        int sum = 0;
+        while (r > 0) {
+            sum += r % 10;
+            r /= 10;
+        }
+        while (c > 0) {
+            sum += c % 10;
+            c /= 10;
+        }
+        return sum;
+    }
+}
