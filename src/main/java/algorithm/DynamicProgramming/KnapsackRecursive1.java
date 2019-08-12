@@ -23,7 +23,7 @@ public class KnapsackRecursive1 {
         }
         //装第index个物品
         int res = bestValue(w, v, index - 1, C);
-        res = Math.max(res, v.get(index) + bestValue(w, v, index - 1, C - v.get(index)));
+        res = Math.max(res, v.get(index) + bestValue(w, v, index - 1, C - w.get(index)));
         return res;
     }
 }
