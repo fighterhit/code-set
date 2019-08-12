@@ -68,17 +68,17 @@ public class BinaryTreeTraverse {
      */
     public List<Integer> preorderTraversal(TreeNode<Integer> root) {
         ArrayList<Integer> result = new ArrayList<>();
-        Stack<TreeNode<Integer>> stack = new Stack<>();
-
-        if (root != null) {
-            stack.push(root);
+        if (root == null) {
+            return result;
         }
-
+        Stack<TreeNode<Integer>> stack = new Stack<>();
+        //注意，只有前序遍历初始时将root压入栈中
+        stack.push(root);
         while (!stack.isEmpty()) {
 
             TreeNode<Integer> node = stack.pop();
             result.add(node.val);
-
+            //先压栈右孩子 再压栈 左孩子，保证左子树先遍历
             //先进后遍历
             if (node.right != null) {
                 stack.push(node.right);
@@ -128,7 +128,7 @@ public class BinaryTreeTraverse {
      * @param root
      * @return 遍历结果的列表
      */
-    public List<Integer> postorderTraversal(TreeNode<Integer> root) {
+    public static List<Integer> postorderTraversal(TreeNode<Integer> root) {
 
         ArrayList<Integer> result = new ArrayList<>();
         Stack<TreeNode<Integer>> stack = new Stack<>();
@@ -139,21 +139,22 @@ public class BinaryTreeTraverse {
 
         while (!stack.isEmpty() || node != null) {
             // 往左下走
-            while (node != null) {
+            if (node != null) {
                 stack.push(node);
                 node = node.left;
-            }
-            if (!stack.isEmpty()) {
+            } else {
                 // 一个根节点被访问的前提是：无右子树或右子树已被访问过
-                TreeNode<Integer> temp = stack.peek().right;
-                if (temp == null || temp == preNode) {
+                TreeNode<Integer> rNode = stack.peek().right;
+                if (rNode == null || rNode == preNode) {
                     node = stack.pop();
                     // 记录刚被访问过的节点
                     result.add(node.val);
+                    //注意标记上次被访问过
                     preNode = node;
+                    //表示这颗树被访问过
                     node = null;
                 } else {
-                    node = temp;
+                    node = rNode;
                 }
             }
         }
@@ -161,9 +162,62 @@ public class BinaryTreeTraverse {
         return result;
     }
 
+    //前序遍历为 root -> left -> right，后序遍历为 left -> right -> root。
+    // 可以修改前序遍历成为 root -> right -> left，那么这个顺序就和后序遍历正好相反。
+    public List<Integer> postorderTraversal2(TreeNode root) {
+        List<Integer> res = new ArrayList<>();
+        if (root == null) {
+            return res;
+        }
+        Stack<TreeNode> stack = new Stack<>();
+        stack.push(root);
+        while (!stack.isEmpty()) {
+            TreeNode node = stack.pop();
+            res.add((Integer) node.val);
+            if (node.left != null) {
+                stack.push(node.left);
+            }
+            if (node.right != null) {
+                stack.push(node.right);
+            }
+        }
+        Collections.reverse(res);
+        return res;
+    }
+
+
+    public static List<Integer> postorderTraversal3(TreeNode<Integer> root) {
+        ArrayList<Integer> result = new ArrayList<>();
+        if (root == null) {
+            return result;
+        }
+        Stack<TreeNode<Integer>> stack = new Stack<>();
+        TreeNode<Integer> node = root;
+        stack.push(node);
+        //记录上个访问的节点
+        TreeNode<Integer> preNode = null;
+        while (!stack.isEmpty()) {
+            node = stack.peek();
+            if ((node.left == null && node.right == null) ||
+                    (preNode != null && (preNode == node.left || preNode == node.right))) {
+                result.add(node.val);
+                stack.pop();
+                preNode = node;
+            } else {
+                if (node.right != null) {
+                    stack.push(node.right);
+                }
+                if (node.left != null) {
+                    stack.push(node.left);
+                }
+            }
+        }
+        return result;
+    }
+
     /**
      * 层序遍历
-     * 使用栈，时间复杂度 O(n)，空间复杂度 O(n)
+     * 使用队列，时间复杂度 O(n)，空间复杂度 O(n)
      *
      * @param
      * @return 遍历结果的列表
@@ -240,6 +294,8 @@ public class BinaryTreeTraverse {
         //后续遍历
         postOrder(root);
         System.out.println();
+        System.out.println(postorderTraversal3(root));
+        ;
 
     }
 }
