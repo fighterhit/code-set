@@ -29,8 +29,45 @@ public class H25_ReverseNodesinkGroup {
         if (head == null || head.next == null || k < 2) {
             return head;
         }
-        ListNode dummyHead = new ListNode(0), curNode = head;
+        ListNode dummyHead = new ListNode(0), pre = dummyHead, tail = pre, cur = dummyHead;
+        dummyHead.next = head;
+        int i = 0;
+        while (true) {
+            //cur 每次遍历到每组的第 k 个节点
+            for (i = 0; i < k && cur != null; i++) {
+                cur = cur.next;
+            }
+            //若节点数不够 k 个或 cur 为null
+            if (i != k || cur == null) {
+                break;
+            }
+            //保存下一段链表头节点
+            tail = cur.next;
+            cur.next = null;
+            //翻转
+            pre.next = reverse(head);
+            //head 记录原始头节点，翻转后修改 next 指向下一段链表头节点
+            head.next = tail;
 
-        return null;
+            pre = head;
+            head = tail;
+            cur = pre;
+        }
+        return dummyHead.next;
+    }
+
+    ListNode reverse(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        ListNode pre = null, cur = head, next = null;
+        while (cur != null) {
+            next = cur.next;
+
+            cur.next = pre;
+            pre = cur;
+            cur = next;
+        }
+        return pre;
     }
 }

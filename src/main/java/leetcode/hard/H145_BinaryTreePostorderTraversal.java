@@ -69,10 +69,37 @@ public class H145_BinaryTreePostorderTraversal {
         return res;
     }
 
+    //非递归：注意设置前一个访问节点  参考 BinaryTreeTraverse.java
+    public List<Integer> postorderTraversal2(TreeNode root) {
+        List<Integer> res = new ArrayList<>();
+        if (root == null) {
+            return res;
+        }
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode preNode = null;
+
+        while (!stack.isEmpty() || root != null) {
+            if (root != null) {
+                stack.push(root);
+                root = root.left;
+            } else {
+                TreeNode t = stack.peek();
+                if (t.right == null || preNode == t.right) {
+                    t = stack.pop();
+                    res.add(t.val);
+                    preNode = t;
+                } else {
+                    root = t.right;
+                }
+            }
+        }
+        return res;
+    }
+
     //递归
     List<Integer> list = new ArrayList<>();
 
-    public List<Integer> postorderTraversal2(TreeNode root) {
+    public List<Integer> postorderTraversal3(TreeNode root) {
         if (root != null) {
             postorderTraversal2(root.left);
             postorderTraversal2(root.right);
