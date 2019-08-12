@@ -108,6 +108,7 @@ public class M102_BinaryTreeLevelOrderTraversal {
         if (root == null) {
             return;
         }
+        //同层第一个元素添加新空的列表后不会再添加新列表
         if (currentLevel == res.size()) {
             res.add(new ArrayList<>());
         }

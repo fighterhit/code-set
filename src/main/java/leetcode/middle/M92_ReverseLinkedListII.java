@@ -30,7 +30,7 @@ public class M92_ReverseLinkedListII {
         dummyHead.next = head;
         ListNode curNode = dummyHead, preNode = null, tailNode = null, mNode = null, nNode = null;
         int i = 0;
-        for (; curNode != null && i <= n; i++) {
+        for (; i <= n; i++) {
             if (i == m - 1) {
                 preNode = curNode;
                 curNode = curNode.next;

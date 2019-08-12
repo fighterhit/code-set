@@ -1,5 +1,6 @@
 package leetcode.middle;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -42,6 +43,28 @@ public class M78_Subsets {
             ls.add(nums[i]);
             generateSubsets(nums, ls, i + 1);
             ls.removeLast();
+        }
+    }
+
+    public List<List<Integer>> subsets2(int[] nums) {
+        List<List<Integer>> res = new ArrayList<>();
+        List<Integer> tmp = new ArrayList<>();
+        //子集长度
+        for (int i = 0; i <= nums.length; i++) {
+            helper(res, tmp, nums, 0, i);
+        }
+        return res;
+    }
+
+    private void helper(List<List<Integer>> res, List<Integer> tmp, int[] nums, int start, int subSetLen) {
+        if (tmp.size() == subSetLen) {
+            res.add(new ArrayList<>(tmp));
+            return;
+        }
+        for (int i = start; i < nums.length; i++) {
+            tmp.add(nums[i]);
+            helper(res, tmp, nums, i + 1, subSetLen);
+            tmp.remove(tmp.size() - 1);
         }
     }
 

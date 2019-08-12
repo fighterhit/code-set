@@ -14,9 +14,34 @@ public class M80_RemoveDuplicatesfromSortedArrayII {
         int i = 1;
         for (int j = 2; j < nums.length; j++) {
             if (nums[j] != nums[i] || nums[j] != nums[i - 1]) {
-                nums[i++] = nums[j];
+                nums[++i] = nums[j];
             }
         }
         return i + 1;
     }
+
+    /**
+     * 用一个变量count来记录还允许有几次重复，count初始化为1.
+     * 如果出现过一次重复，则count递减1，那么下次再出现重复，快指针直接前进一步，如果这时候不是重复的，则count恢复1，由于整个数组是有序的，所以一旦出现不重复的数，则一定比这个数大，此数之后不会再有重复项
+     * https://www.cnblogs.com/grandyang/p/4329295.html
+     */
+    public int removeDuplicates2(int[] nums) {
+        int pre = 0, cur = 1, count = 1;
+        for (; cur < nums.length; ) {
+            if (nums[pre] == nums[cur] && count == 0) {
+                cur++;
+            } else {
+                if (nums[pre] == nums[cur]) {
+                    count--;
+                } else {
+                    count = 1;
+                }
+                pre++;
+                nums[pre] = nums[cur];
+                cur++;
+            }
+        }
+        return pre + 1;
+    }
+
 }

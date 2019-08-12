@@ -20,7 +20,8 @@ import java.util.List;
  * [1,2],
  * []
  * ]
- * 参考 M78_Subsets，
+ * 参考 M78_Subsets，对比重复元素求排列 M47_PermutationsII
+ * https://leetcode.com/problems/subsets/discuss/27281/A-general-approach-to-backtracking-questions-in-Java-(Subsets-Permutations-Combination-Sum-Palindrome-Partitioning)
  */
 public class M90_SubsetsII {
     List<List<Integer>> res;
@@ -46,6 +47,27 @@ public class M90_SubsetsII {
             ls.add(nums[i]);
             generateSubsets(nums, ls, i + 1);
             ls.removeLast();
+        }
+    }
+
+    public List<List<Integer>> subsetsWithDup2(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return res;
+        }
+        Arrays.sort(nums);
+        helper(nums, new ArrayList<>(), 0);
+        return res;
+    }
+
+    void helper(int[] nums, List<Integer> ls, int start) {
+        res.add(new ArrayList<>(ls));
+        for (int i = start; i < nums.length; i++) {
+            if (i > start && nums[i] == nums[i - 1]) {
+                continue;
+            }
+            ls.add(nums[i]);
+            helper(nums, ls, i + 1);
+            ls.remove(ls.size() - 1);
         }
     }
 }

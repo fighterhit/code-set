@@ -21,6 +21,11 @@ import java.util.List;
  * 与 M17_LetterCombinationsofaPhoneNumber 区别
  * 回溯法通用方法(Subsets, Permutations, Combination Sum, Palindrome Partioning)：
  * https://leetcode.com/problems/permutations/discuss/18239/A-general-approach-to-backtracking-questions-in-Java-(Subsets-Permutations-Combination-Sum-Palindrome-Partioning)
+ * <p>
+ * 排列问题每个元素只能选中一次，和组合问题区别
+ * 输入数组无重复元素，故无需排序，每个元素只能被选中1次，且需 for 循环遍历每个元素（每次从 0 开始，和组合问题区别），故需要 visied 数组记录遍历过的元素
+ * <p>
+ * 参考元素重复 M47_PermutationsII
  */
 public class M46_Permutations {
     List<List<Integer>> res;
@@ -29,10 +34,10 @@ public class M46_Permutations {
 
     public List<List<Integer>> permute(int[] nums) {
         res = new ArrayList<>();
-        used = new boolean[nums.length];
         if (nums == null || nums.length == 0) {
             return res;
         }
+        used = new boolean[nums.length];
         generatePermutation(nums, 0, new LinkedList<>());
         return res;
     }
@@ -70,6 +75,31 @@ public class M46_Permutations {
                 //回溯返回后要清理
                 ls.removeLast();
             }
+        }
+    }
+
+    public List<List<Integer>> permute2(int[] nums) {
+        List<Integer> tmp = new ArrayList<>();
+        List<List<Integer>> res = new ArrayList<>();
+        boolean[] v = new boolean[nums.length];
+        helper(res, tmp, nums, v);
+        return res;
+    }
+
+    private void helper(List<List<Integer>> res, List<Integer> tmp, int[] nums, boolean[] v) {
+        if (tmp.size() == nums.length) {
+            res.add(new ArrayList<>(tmp));
+            return;
+        }
+        for (int i = 0; i < nums.length; i++) {
+            if (v[i]) {
+                continue;
+            }
+            v[i] = true;
+            tmp.add(nums[i]);
+            helper(res, tmp, nums, v);
+            v[i] = false;
+            tmp.remove(tmp.size() - 1);
         }
     }
 }

@@ -6,6 +6,7 @@ package leetcode.middle;
  *
  * Example:
  * Given the sorted linked list: [-10,-3,0,5,9],
+ * 注意，这里中序遍历的结果可能生成多个BST，对比 M449_SerializeandDeserializeBST
  * One possible answer is: [0,-3,9,-10,null,5], which represents the following height balanced BST:
  *
  *       0
@@ -13,6 +14,7 @@ package leetcode.middle;
  *    -3   9
  *    /   /
  *  -10  5
+ *  对比数组 E108_ConvertSortedArraytoBinarySearchTree
  */
 public class M109_ConvertSortedListtoBinarySearchTree {
     public class TreeNode {
@@ -43,11 +45,12 @@ public class M109_ConvertSortedListtoBinarySearchTree {
     }
 
     private TreeNode sortedListToBST(ListNode head, ListNode tail) {
-        if (head == null || head == tail) {
+        //注意边界条件！！！
+        if (head == tail) {
             return null;
         }
         ListNode fast = head, slow = head;
-        //注意这里是与tail作比较不是null，单链表找中点是与null比较
+        //注意这里是与 tail 作比较不是 null，和 null 一样 tail 是取不到的，单链表找中点是与null比较
         while (fast.next != tail && fast.next.next != tail) {
             fast = fast.next.next;
             slow = slow.next;
@@ -56,5 +59,35 @@ public class M109_ConvertSortedListtoBinarySearchTree {
         root.left = sortedListToBST(head, slow);
         root.right = sortedListToBST(slow.next, tail);
         return root;
+    }
+
+    static ListNode createLinkedList(int[] arr, int n) {
+        if (n == 0) {
+            return null;
+        }
+        ListNode head = new ListNode(arr[0]);
+        ListNode curNode = head;
+        for (int i = 1; i < n; i++) {
+            curNode.next = new ListNode(arr[i]);
+            curNode = curNode.next;
+        }
+        return head;
+    }
+
+    static void printLinkedList(ListNode head) {
+        ListNode curNode = head;
+        while (curNode != null) {
+            System.out.print(curNode.val + " ->");
+            curNode = curNode.next;
+        }
+        System.out.println("null");
+    }
+
+    public static void main(String[] args) {
+        int[] arr = new int[]{-10,-3,0,5,9};
+        int n = arr.length;
+        ListNode head = createLinkedList(arr, n);
+        printLinkedList(head);
+        new M109_ConvertSortedListtoBinarySearchTree().sortedListToBST(head);
     }
 }

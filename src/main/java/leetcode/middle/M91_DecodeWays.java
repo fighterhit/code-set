@@ -9,6 +9,7 @@ package leetcode.middle;
 public class M91_DecodeWays {
     //时间O(n) 空间O(n)
     public int numDecodings(String s) {
+        //注意边界条件，在开始先把首字符为 0 的排除，如 '01' 编码数一定为 0
         if (s.isEmpty() || s.charAt(0) == '0') {
             return 0;
         }
@@ -59,6 +60,12 @@ public class M91_DecodeWays {
             w2 = w1;
             w1 = w;
         }
+        //注意返回的是 w1 不是 w，如 '1'
         return w1;
+    }
+
+    public static void main(String[] args) {
+        StringBuilder s = new StringBuilder("155");
+        System.out.println(s.substring(s.length()));
     }
 }

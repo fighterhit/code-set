@@ -12,6 +12,20 @@ package leetcode.middle;
 public class M11_ContainerWithMostWater {
 
     public int maxArea(int[] height) {
+        int res = 0;
+        for (int i = 0, j = height.length - 1; i < j; ) {
+            res = Math.max(res, Math.min(height[i], height[j]) * (j - i));
+            //当i, j由初始情况变化时，j-i 必定会减少，现在要使 s 增大，则要使min(height[i], height[j])变大，显然其值由较小值决定，因此应该移动较小值来试探下一个可能的s较大值。
+            if (height[i] > height[j]) {
+                j--;
+            } else {
+                i++;
+            }
+        }
+        return res;
+    }
+
+    public int maxArea2(int[] height) {
         int maxArea = 0;
         for (int i = 0; i < height.length; i++) {
             for (int j = i + 1; j < height.length; j++) {

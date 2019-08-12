@@ -13,34 +13,72 @@ import java.util.Arrays;
  * <p>
  * Input: num1 = "123", num2 = "456"
  * Output: "56088"
- *
- * @author Fighter Created on 2018/6/29.
+ * <p>
+ * 参考 BigNumberMultiply
+ * FFT: https://leetcode-cn.com/problems/multiply-strings/solution/fftde-nlognjie-fa-by-qqktr/
  */
 public class M43_MultiplyStrings {
     public String multiply(String num1, String num2) {
+        int n1 = num1.length(), n2 = num2.length();
+        int[] arr1 = new int[n1];
+        int[] arr2 = new int[n2];
+        int[] res = new int[n1 + n2];
 
-        return null;
+        for (int i = 0; i < n1; i++) {
+            arr1[i] = num1.charAt(i) - '0';
+        }
+
+        for (int i = 0; i < n2; i++) {
+            arr2[i] = num2.charAt(i) - '0';
+        }
+
+        for (int i = 0; i < n1; i++) {
+            for (int j = 0; j < n2; j++) {
+                res[i + j + 1] += arr1[i] * arr2[j];
+            }
+        }
+
+        for (int i = n1 + n2 - 1; i > 0; i--) {
+            if (res[i] >= 10) {
+                res[i - 1] += res[i] / 10;
+                res[i] = res[i] % 10;
+            }
+        }
+
+        //删除前导0，注意判断条件
+        StringBuilder sb = new StringBuilder();
+        for (int n : res) {
+            if (sb.length() != 0 || n != 0) {
+                sb.append(n);
+            }
+        }
+        return sb.length() == 0 ? "0" : sb.toString();
     }
 
-    // 第1个数大，第2个数小
-    public static int[] oneBigOneSmall(int[] num1, int num2) {
-        for (int i = 0; i < num1.length; i++) {
-            num1[i] *= num2;
+    public String multiply2(String num1, String num2) {
+        StringBuilder sb = new StringBuilder();
+        int n1 = num1.length(), n2 = num2.length();
+        int[] res = new int[n1 + n2];
+        for (int i = n1 - 1; i >= 0; i--) {
+            for (int j = n2 - 1; j >= 0; j--) {
+                res[i + j + 1] += (num1.charAt(i) - '0') * (num2.charAt(j) - '0');
+
+                res[i + j] += res[i + j + 1] / 10;
+                res[i + j + 1] %= 10;
+            }
         }
-        for (int i = num1.length - 1; i > 0; i--) {
-            num1[i - 1] += num1[i] / 10;
-            num1[i] = num1[i] % 10;
+
+        for (int p : res) {
+            //删除前导0，注意判断条件
+//            if (!(sb.length() == 0 && p == 0)) {
+            if (sb.length() != 0 || p != 0) {
+                sb.append(p);
+            }
         }
-        System.out.println(Arrays.toString(num1));
-        return null;
+        return sb.length() == 0 ? "0" : sb.toString();
     }
 
     public static void main(String[] args) {
-        int[] arr = new int[5];
-        arr[arr.length - 1] = 2;
-        arr[arr.length - 2] = 3;
-        arr[arr.length - 3] = 7;
-        System.out.println(Arrays.toString(arr));
-        oneBigOneSmall(arr, 16);
+        new M43_MultiplyStrings().multiply2("5", "0");
     }
 }

@@ -74,6 +74,33 @@ public class M2_AddTwoNumbers {
         return resHead.next;
     }
 
+    //统一成一种情况：两个链表中只要有一个不为空行，由于链表可能为空，所以我们在取当前结点值的时候，先判断一下，若为空则取0，否则取结点值。然后把两个结点值相加，同时还要加上进位carry
+    //https://www.cnblogs.com/grandyang/p/4129891.html
+    public ListNode addTwoNumbers2(ListNode l1, ListNode l2) {
+        ListNode dummyHead = new ListNode(-1), cur = dummyHead;
+        int sum = 0, carry = 0, d1, d2;
+        while (l1 != null || l2 != null) {
+            // d1、d2代表两个加数
+            d1 = l1 == null ? 0 : l1.val;
+            d2 = l2 == null ? 0 : l2.val;
+            sum = d1 + d2 + carry;
+            carry = sum / 10;
+            cur.next = new ListNode(sum % 10);
+            cur = cur.next;
+            if (l1 != null) {
+                l1 = l1.next;
+            }
+            if (l2 != null) {
+                l2 = l2.next;
+            }
+        }
+        //最高位的进位问题要最后特殊处理一下，若carry为1，则再建一个值为1的结点
+        if (carry != 0) {
+            cur.next = new ListNode(1);
+        }
+        return dummyHead.next;
+    }
+
     public static void main(String[] args) {
         int[] arr = new int[]{1};
         int[] arr2 = new int[]{9, 9};

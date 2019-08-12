@@ -70,4 +70,41 @@ public class M79_WordSearch {
         return x >= 0 && x < xLen && y >= 0 && y < yLen;
     }
 
+
+    boolean[][] v;
+    //    int[][] dirs = new int[][]{{0, 1}, {0, -1}, {-1, 0}, {1, 0}};
+    int m, n;
+
+    public boolean exist2(char[][] board, String word) {
+        m = board.length;
+        n = board[0].length;
+        v = new boolean[m][n];
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (helper(board, i, j, 0, word)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    boolean helper(char[][] board, int r, int c, int index, String w) {
+        if (index == w.length()) {
+            return true;
+        }
+        //注意判断当前字符是否被访问过，是否和 w 字符串 index 位上字符相等
+        if (r < 0 || r >= m || c < 0 || c >= n || v[r][c] || board[r][c] != w.charAt(index)) {
+            return false;
+        }
+
+        v[r][c] = true;
+        for (int[] dir : dirs) {
+            if (helper(board, dir[0] + r, c + dir[1], index + 1, w)) {
+                return true;
+            }
+        }
+        v[r][c] = false;
+        return false;
+    }
 }

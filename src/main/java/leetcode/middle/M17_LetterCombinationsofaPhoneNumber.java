@@ -37,4 +37,32 @@ public class M17_LetterCombinationsofaPhoneNumber {
             findCombinations(digits, index + 1, s + letter.charAt(i));
         }
     }
+
+    StringBuilder sb = new StringBuilder();
+
+    public List<String> letterCombinations2(String digits) {
+        if (digits == null || digits.length() == 0) {
+            return res;
+        }
+        helper(digits);
+        return res;
+    }
+
+    private void helper(String digits) {
+        if (sb.length() == digits.length()) {
+            res.add(sb.toString());
+            return;
+        }
+        //遍历到当前哪个数字
+        int mapIndex = digits.charAt(sb.length()) - '0';
+        String map = letterMaps[mapIndex];
+        for (char c : map.toCharArray()) {
+            sb.append(c);
+            helper(digits);
+            //在当前StringBuilder上删除
+            sb.deleteCharAt(sb.length() - 1);
+            //截取后返回新的字符串，原字符串不变
+            //sb.substring()
+        }
+    }
 }

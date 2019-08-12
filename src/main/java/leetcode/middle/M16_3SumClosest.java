@@ -15,20 +15,25 @@ public class M16_3SumClosest {
         int sum = Integer.MAX_VALUE, threshhold = Integer.MAX_VALUE;
         Arrays.sort(nums);
         for (int i = 0; i < nums.length; i++) {
+            //与下面等价
+            if (i > 0 && nums[i] == nums[i - 1]) {
+                continue;
+            }
             //因为是返回和，而不是返回之前的具体组合，因此这里可以去掉if判断，因为即使组合重复也可以得到相同的返回结果
+            //但这样速度更快
 //            if (i == 0 || nums[i] != nums[i - 1]) {
-                int l = i + 1, r = nums.length - 1;
-                while (l < r) {
-                    if (Math.abs(nums[i] + nums[l] + nums[r] - target) < threshhold) {
-                        sum = nums[i] + nums[l] + nums[r];
-                        threshhold = Math.abs(sum - target);
-                    }
-                    if (nums[i] + nums[l] + nums[r] > target) {
-                        r--;
-                    } else {
-                        l++;
-                    }
+            int l = i + 1, r = nums.length - 1;
+            while (l < r) {
+                if (Math.abs(nums[i] + nums[l] + nums[r] - target) < threshhold) {
+                    sum = nums[i] + nums[l] + nums[r];
+                    threshhold = Math.abs(sum - target);
                 }
+                if (nums[i] + nums[l] + nums[r] > target) {
+                    r--;
+                } else {
+                    l++;
+                }
+            }
 //            }
         }
         return sum;

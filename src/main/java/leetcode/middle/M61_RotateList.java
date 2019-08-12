@@ -35,7 +35,7 @@ public class M61_RotateList {
         if (head == null || head.next == null || k < 1) {
             return head;
         }
-        ListNode dummyHead = new ListNode(0), tmpHead = head;
+        ListNode dummyHead = new ListNode(0);
         dummyHead.next = head;
         int len = getLen(head);
         int tmp = len - k % len;

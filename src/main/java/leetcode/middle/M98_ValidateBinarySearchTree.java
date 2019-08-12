@@ -53,7 +53,7 @@ public class M98_ValidateBinarySearchTree {
             return true;
         }
 
-        //with long
+        //with long，存在用例 [-2147483648,null,2147483647]
 //        return isValidBST(root, Long.MIN_VALUE, Long.MAX_VALUE);
         //without long
         return isValidBST2(root, null, null);
@@ -110,7 +110,11 @@ public class M98_ValidateBinarySearchTree {
         }
     }
 
-    //非递归：栈，出栈顺序即中序遍历顺序，注意这个结构，M94_BinaryTreeInorderTraversal / M230_KthSmallestElementinaBST / M98_ValidateBinarySearchTree
+
+    /**
+     * 非递归：栈，出栈顺序即中序遍历顺序，注意这个结构，M94_BinaryTreeInorderTraversal / M230_KthSmallestElementinaBST / M98_ValidateBinarySearchTree
+     * 二叉树中序遍历 BinaryTreeTraverse.java ，只是比原方法多保存一个上一次访问的节点
+     */
     boolean isValidBST3(TreeNode root) {
         if (root == null) {
             return true;
@@ -118,16 +122,17 @@ public class M98_ValidateBinarySearchTree {
         Stack<TreeNode> stack = new Stack<>();
         TreeNode pre = null;
         while (root != null || !stack.isEmpty()) {
-            while (root != null) {
+            if (root != null) {
                 stack.push(root);
                 root = root.left;
+            } else {
+                root = stack.pop();
+                if (pre != null && pre.val >= root.val) {
+                    return false;
+                }
+                pre = root;
+                root = root.right;
             }
-            root = stack.pop();
-            if (pre != null && pre.val >= root.val) {
-                return false;
-            }
-            pre = root;
-            root = root.right;
         }
         return true;
     }
