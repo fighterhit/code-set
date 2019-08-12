@@ -1,4 +1,4 @@
-package new_coder_problem_set;
+package NewCoderProblemSet.Intern;
 
 import java.util.Arrays;
 import java.util.HashMap;
