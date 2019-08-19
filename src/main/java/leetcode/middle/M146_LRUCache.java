@@ -1,7 +1,6 @@
 package leetcode.middle;
 
 import java.util.HashMap;
-import java.util.Hashtable;
 
 /**
  * LRU 是 Least Recently Used 的简写，就是最近最少使用的意思。
@@ -31,17 +30,12 @@ class LRUCache {
     private HashMap<Integer, DLinkedNode> cache = new HashMap<>();
     private int count;
     private int capacity;
-    private DLinkedNode head, tail;
+    private DLinkedNode head = new DLinkedNode();
+    private DLinkedNode tail = new DLinkedNode();
 
-    public LRUCache(int capacity) {
+    public LRUCache(int cap) {
         count = 0;
-        this.capacity = capacity;
-
-        head = new DLinkedNode();
-        head.pre = null;
-        tail = new DLinkedNode();
-        tail.post = null;
-
+        capacity = cap;
         head.post = tail;
         tail.pre = head;
     }
@@ -58,8 +52,8 @@ class LRUCache {
 
             //判断是否超过容量
             if (count > capacity) {
-                DLinkedNode tail = this.popTail();
-                this.cache.remove(tail.key);
+                DLinkedNode tail = popTail();
+                cache.remove(tail.key);
                 count--;
             }
         } else {
@@ -74,17 +68,18 @@ class LRUCache {
         if (node == null) {
             return -1;
         }
-        this.move2Head(node);
+        move2Head(node);
         return node.val;
     }
 
 
     //挪到虚拟头节点后
     private void move2Head(DLinkedNode node) {
-        this.removeNode(node);
-        this.addNode(node);
+        removeNode(node);
+        addNode(node);
     }
 
+    //添加节点，直接添加到虚拟头节点后面
     private void addNode(DLinkedNode node) {
         node.post = head.post;
         node.pre = head;
@@ -92,13 +87,14 @@ class LRUCache {
         head.post = node;
     }
 
-    //删除最后一个元素节点
+    //删除并返回最后一个节点
     private DLinkedNode popTail() {
         DLinkedNode res = tail.pre;
         removeNode(res);
         return res;
     }
 
+    //删除链表中的节点，将前驱节点post指针指向孙子节点，孙子节点前驱指针指向前驱节点的前驱节点
     private void removeNode(DLinkedNode node) {
         DLinkedNode pre = node.pre;
         DLinkedNode post = node.post;

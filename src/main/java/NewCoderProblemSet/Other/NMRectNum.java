@@ -1,5 +1,7 @@
 package NewCoderProblemSet.Other;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 /**
@@ -39,6 +41,25 @@ public class NMRectNum {
     //组合问题
     int rectNum2(int row, int column) {
         return (row + 1) * row / 2 * (column + 1) * column / 2;
+    }
+
+    /**
+     * 百度面试题：给定 m * n 的网格，算出不同面积矩形个数
+     * 枚举不同面积矩阵个数来发现规律
+     * 1 * 1 矩形：m * n 个
+     * 1 * 2 矩形：m * (n - 1) 个
+     * 2 * 1 矩形：(m - 1) * n 个
+     * ...
+     * i * j 矩形：(m - i + 1) * (n - j + 1) 个
+     */
+    static int rectNum3(int m, int n) {
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int i = 1; i <= m; i++) {
+            for (int j = 1; j <= n; j++) {
+                map.put(i * j, map.getOrDefault(i * j, 0) + (m - i + 1) * (n - j + 1));
+            }
+        }
+        return map.values().stream().mapToInt(Integer::intValue).sum();
     }
 
     public static void main(String[] args) {
