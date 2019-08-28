@@ -34,4 +34,45 @@ public class P161_PrintMatrix {
         }
         return ret;
     }
+
+    public static ArrayList<Integer> printMatrix2(int[][] matrix) {
+        int m = matrix.length, n = matrix[0].length;
+        helper(matrix, 0, 0, m, n);
+        return null;
+    }
+
+    static void helper(int[][] matrix, int startX, int startY, int endX, int endY) {
+        if (startX >= endX || startY >= endY) {
+            return;
+        }
+        for (int i = startY; i < endY; i++) {
+            System.out.println(matrix[startX][i]);
+        }
+        if (startX == endX - 1) {
+            return;
+        }
+        for (int i = startX + 1; i < endX; i++) {
+            System.out.println(matrix[i][endY - 1]);
+        }
+        for (int i = endY - 2; i >= startY; i--) {
+            System.out.println(matrix[endX - 1][i]);
+        }
+        if (startY == endY - 1) {
+            return;
+        }
+        for (int i = endX - 2; i > startX; i--) {
+            System.out.println(matrix[i][startY]);
+        }
+        helper(matrix, startX + 1, startY + 1, endX - 1, endY - 1);
+    }
+
+    public static void main(String[] args) {
+        int[][] m = new int[][]{
+                {1, 2, 3, 4},
+                {5, 6, 7, 8},
+                {9, 10, 11, 12},
+                {13, 14, 15, 16}
+        };
+        printMatrix2(m);
+    }
 }
