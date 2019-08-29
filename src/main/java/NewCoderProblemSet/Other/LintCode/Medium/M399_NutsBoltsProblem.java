@@ -45,7 +45,7 @@ public class M399_NutsBoltsProblem {
         }
         //用 nuts[l] 对 bolts 排序
         int pivot = partition(bolts, nuts[l], compare, l, r);
-        //用 bolt[] 对 nuts 排序
+        //用 bolt[pivot] 对 nuts 排序
         partition(nuts, bolts[pivot], compare, l, r);
         quickSort(nuts, bolts, compare, l, pivot - 1);
         quickSort(nuts, bolts, compare, pivot + 1, r);
@@ -61,10 +61,10 @@ public class M399_NutsBoltsProblem {
         }
         int i = l + 1, j = r;
         while (true) {
-            while (i <= r && compare.cmp(strs[i], pivot) == -1 || compare.cmp(pivot, strs[i]) == 1) {
+            while (i <= r && (compare.cmp(strs[i], pivot) == -1 || compare.cmp(pivot, strs[i]) == 1)) {
                 i++;
             }
-            while (j >= l + 1 && compare.cmp(strs[j], pivot) == 1 || compare.cmp(pivot, strs[j]) == -1) {
+            while (j >= l + 1 && (compare.cmp(strs[j], pivot) == 1 || compare.cmp(pivot, strs[j]) == -1)) {
                 j--;
             }
             if (i > j) {
