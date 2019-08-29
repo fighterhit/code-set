@@ -49,6 +49,7 @@ public class M769_MaxChunksToMakeSorted {
                     return cnt + 1;
             }
             cnt++;
+            //最后 j 超过 cur，即相当于下一块的起始位置，因此这里直接赋给 i 即可
             i = j;
         }
         return cnt;

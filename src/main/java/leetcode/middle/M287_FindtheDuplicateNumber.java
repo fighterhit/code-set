@@ -76,12 +76,13 @@ public class M287_FindtheDuplicateNumber {
     //注意：本题范围是[1, n]，P39_DuplicationInArray 是[0, n-1]
     //题目要求不能修改原数组且空间复杂度为O(1)，但该方法修改了原数组
     public int findDuplicate3(int[] nums) {
-        for (int i = 0; i < nums.length; i++) {
-            while (i != nums[i]) {
-                if (nums[i] == nums[nums[i]]) {
+        int n = nums.length;
+        for (int i = 0; i < n; i++) {
+            while (nums[i] != i + 1) {
+                if (nums[i] == nums[nums[i] - 1]) {
                     return nums[i];
                 }
-                swap(nums, i, nums[i]);
+                swap(nums, i, nums[i] - 1);
             }
         }
         return -1;

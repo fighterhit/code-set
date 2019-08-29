@@ -34,7 +34,7 @@ package leetcode.easy;
  * 如果矩阵太大以至于只能一次将部分行加载到内存中，该怎么办？
  */
 public class E766_ToeplitzMatrix {
-    //解法1：
+    //解法1：遍历每个元素判断和右下角元素是否相等，不相等直接返回 false
     public boolean isToeplitzMatrix(int[][] matrix) {
         int m = matrix.length, n = matrix[0].length;
         for (int i = 0; i < m - 1; i++) {

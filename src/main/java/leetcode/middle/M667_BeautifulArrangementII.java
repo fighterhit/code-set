@@ -51,7 +51,7 @@ public class M667_BeautifulArrangementII {
         int[] res = new int[n];
         int l = 1, r = n;
         int i = 0;
-        //注意，先填充前 k 个元素
+        //注意，需要 k 个差，先填充前 k 个元素，保证有 k-1 个大于 1 的差
         for (; i < k; i++) {
             if (i % 2 == 0) {
                 res[i] = l++;
@@ -59,6 +59,8 @@ public class M667_BeautifulArrangementII {
                 res[i] = r--;
             }
         }
+        //后面"顺序"填充即可，即保证后面元素都是顺序的，差都为 1
+        // i % 2 == 0，意味着"该填充"左边元素了，即res末尾元素是从右面拿过来填充的，此时为了保证后面差都为 1，因此也要从后面拿元素过来填充
         if (i % 2 == 0) {
             for (int j = r; j >= l; j--) {
                 res[i++] = j;
