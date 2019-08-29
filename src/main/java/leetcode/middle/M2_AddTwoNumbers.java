@@ -9,7 +9,7 @@ package leetcode.middle;
  * Output: 7 -> 0 -> 8
  * Explanation: 342 + 465 = 807.
  *
- * @author Fighter.
+ * 参考 M445_AddTwoNumbersII
  */
 public class M2_AddTwoNumbers {
     public static class ListNode {

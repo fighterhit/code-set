@@ -62,4 +62,31 @@ public class M445_AddTwoNumbersII {
         //注意略去前导0
         return curNode.val == 0 ? curNode.next : curNode;
     }
+
+    public ListNode addTwoNumbers2(ListNode l1, ListNode l2) {
+        ListNode dummyHead = new ListNode(-1);
+        Stack<Integer> s1 = buildStack(l1);
+        Stack<Integer> s2 = buildStack(l2);
+        int x = 0, y = 0, sum = 0, carry = 0;
+        while (!s1.isEmpty() || !s2.isEmpty() || carry != 0) {
+            x = s1.isEmpty() ? 0 : s1.pop();
+            y = s2.isEmpty() ? 0 : s2.pop();
+            sum = x + y + carry;
+            carry = sum / 10;
+            //注意：链表头插法
+            ListNode node = new ListNode(sum % 10);
+            node.next = dummyHead.next;
+            dummyHead.next = node;
+        }
+        return dummyHead.next;
+    }
+
+    private Stack<Integer> buildStack(ListNode l1) {
+        Stack<Integer> stack = new Stack<>();
+        while (l1 != null) {
+            stack.push(l1.val);
+            l1 = l1.next;
+        }
+        return stack;
+    }
 }
