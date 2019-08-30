@@ -8,7 +8,7 @@ package leetcode.middle;
  * Input: (2 -> 4 -> 3) + (5 -> 6 -> 4)
  * Output: 7 -> 0 -> 8
  * Explanation: 342 + 465 = 807.
- *
+ * <p>
  * 参考 M445_AddTwoNumbersII
  */
 public class M2_AddTwoNumbers {
@@ -79,7 +79,8 @@ public class M2_AddTwoNumbers {
     public ListNode addTwoNumbers2(ListNode l1, ListNode l2) {
         ListNode dummyHead = new ListNode(-1), cur = dummyHead;
         int sum = 0, carry = 0, d1, d2;
-        while (l1 != null || l2 != null) {
+        //最高位的进位问题要最后特殊处理一下，若carry为1，则再建一个值为1的结点
+        while (l1 != null || l2 != null || carry != 0) {
             // d1、d2代表两个加数
             d1 = l1 == null ? 0 : l1.val;
             d2 = l2 == null ? 0 : l2.val;
@@ -93,10 +94,6 @@ public class M2_AddTwoNumbers {
             if (l2 != null) {
                 l2 = l2.next;
             }
-        }
-        //最高位的进位问题要最后特殊处理一下，若carry为1，则再建一个值为1的结点
-        if (carry != 0) {
-            cur.next = new ListNode(1);
         }
         return dummyHead.next;
     }

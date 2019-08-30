@@ -44,6 +44,7 @@ public class M328_OddEvenLinkedList {
             cur = cur.next;
             i++;
         }
+        //注意：最后 even.next 要置 null，如 1->2->3->null，不置 null 的话 2 仍指向 3
         even.next = null;
         odd.next = evenHead.next;
         return oddHead.next;
