@@ -13,7 +13,7 @@ import java.util.Stack;
  * Input: (7 -> 2 -> 4 -> 3) + (5 -> 6 -> 4)
  * Output: 7 -> 8 -> 0 -> 7
  *
- * @author Fighter.
+ * @author Fighter. 参考 M2_AddTwoNumbers
  */
 public class M445_AddTwoNumbersII {
     public class ListNode {

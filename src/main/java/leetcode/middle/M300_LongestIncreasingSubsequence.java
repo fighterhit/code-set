@@ -81,6 +81,7 @@ public class M300_LongestIncreasingSubsequence {
     /**
      * 先建立一个空的 dp 数组，然后开始遍历原数组，对于每一个遍历到的数字，用二分查找法在 dp 数组找第一个不小于它的数字
      * 如果这个数字不存在，那么直接在 dp 数组后面加上遍历到的数字；如果存在，则将这个数字更新为当前遍历到的数字，最后返回 dp 数组的长度即可。
+     * 注意：ret 的值可能不是一个真实的 LIS，比如若输入数组 nums 为 {4, 2， 4， 5， 3， 7}，那么算完后的 ret 为 {2， 3， 5， 7}，可以发现它不是一个原数组的 LIS，只是长度相等而已，千万要注意这点。
      * https://www.cnblogs.com/grandyang/p/4938187.html
      */
     public static int lengthOfLIS3(int[] nums) {

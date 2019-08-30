@@ -54,4 +54,13 @@ public class E83_RemoveDuplicatesfromSortedList {
         }
         return head;
     }
+
+    //递归版
+    public ListNode deleteDuplicates3(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        head.next = deleteDuplicates3(head.next);
+        return head.val == head.next.val ? head.next : head;
+    }
 }
