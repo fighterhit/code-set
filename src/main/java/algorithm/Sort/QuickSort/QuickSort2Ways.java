@@ -3,6 +3,9 @@ package algorithm.Sort.QuickSort;
 import algorithm.Sort.InsertionSort.InsertionSort;
 import algorithm.Sort.SortTestHelper;
 
+import java.util.Arrays;
+import java.util.Stack;
+
 /**
  * 若数组重复元素太多，则可能导致 <v 和 >=v 集合不平衡，使得递归树很偏斜，因此这里采用双路快排，等左边 <=v 右边 >=v 时交换
  * <p>
@@ -17,7 +20,7 @@ public class QuickSort2Ways {
     }
 
     public static void sort(Comparable[] arr) {
-        quickSort(arr, 0, arr.length - 1);
+        quickSort2(arr, 0, arr.length - 1);
     }
 
     private static void quickSort(Comparable[] arr, int l, int r) {
@@ -77,6 +80,33 @@ public class QuickSort2Ways {
         Comparable tmp = arr[i];
         arr[i] = arr[j];
         arr[j] = tmp;
+    }
+
+    /**
+     * 快排非递归版本:
+     * 非递归实现的要点是利用栈保存 partition 操作的子区间，即左边界坐标和右边界坐标。
+     * partition操作跟递归实现一样，不需要任何更改。
+     * https://blog.csdn.net/x_i_y_u_e/article/details/51191641
+     * https://www.cnblogs.com/ljy2013/p/4003412.html
+     */
+    private static void quickSort2(Comparable[] arr, int l, int r) {
+        Stack<Integer> stack = new Stack<>();
+        //初始化先放进数组左边界坐标、有边界坐标
+        stack.push(l);
+        stack.push(r);
+        while (stack.size() > 0) {
+            r = stack.pop();
+            l = stack.pop();
+            if (l < r) {
+                int pivot = partition(arr, l, r);
+                //放入左半部分边界坐标
+                stack.push(l);
+                stack.push(pivot - 1);
+                //放入右半部分边界坐标
+                stack.push(pivot + 1);
+                stack.push(r);
+            }
+        }
     }
 
     public static void main(String[] args) {
