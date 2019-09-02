@@ -1,10 +1,11 @@
 package algorithm;
 
-/**
- * 最大公约数（欧几里德算法证明）
- * https://blog.csdn.net/afei__/article/details/80216247
- */
-public class GCD {
+
+public class GcdAndLcm {
+    /**
+     * 最大公约数（欧几里德算法证明）
+     * https://blog.csdn.net/afei__/article/details/80216247
+     */
     //递归版本
     private static int gcd(int a, int b) {
         if (a < 0 || b < 0) {
@@ -24,5 +25,12 @@ public class GCD {
             b = tmp;
         }
         return b;
+    }
+
+    /**
+     * 最小公倍数：是两数乘积除以最大公约数
+     */
+    private static int lcm(int a, int b) {
+        return a * b / gcd(a, b);
     }
 }

@@ -1,6 +1,6 @@
 package leetcode.middle;
 
-import java.util.PriorityQueue;
+import java.util.*;
 
 /**
  * Find the kth largest element in an unsorted array. Note that it is the kth largest element in the sorted order, not the kth distinct element.
@@ -15,10 +15,17 @@ import java.util.PriorityQueue;
  * <p>
  * Note:
  * You may assume k is always valid, 1 ≤ k ≤ array's length.
- *
- * @author Fighter.
+ * <p>
+ * 用于求解 TopK Elements 问题，也就是 K 个最小元素的问题。可以维护一个大小为 K 的最小堆，最小堆中的元素就是最小元素。最小堆需要使用大顶堆来实现，大顶堆表示堆顶元素是堆中最大元素。这是因为我们要得到 k 个最小的元素，因此当遍历到一个新的元素时，需要知道这个新元素是否比堆中最大的元素更小，更小的话就把堆中最大元素去除，并将新元素添加到堆中。所以我们需要很容易得到最大元素并移除最大元素，大顶堆就能很好满足这个要求。
+ * 堆也可以用于求解 Kth Element 问题，得到了大小为 k 的最小堆之后，因为使用了大顶堆来实现，因此堆顶元素就是第 k 大的元素。
+ * 快速选择也可以求解 TopK Elements 问题，因为找到 Kth Element 之后，再遍历一次数组，所有小于等于 Kth Element 的元素都是 TopK Elements。
+ * 可以看到，快速选择和堆排序都可以求解 Kth Element 和 TopK Elements 问题。
  */
 public class M215_KthLargestElementinanArray {
+    /**
+     * 求 TopK 小 用最大堆，求 TopK 大 用最小堆
+     * 堆 ：时间复杂度 O(NlogK)，空间复杂度 O(K)。
+     */
     public int findKthLargest(int[] nums, int k) {
         //默认最小堆
         PriorityQueue<Integer> priorityQueue = new PriorityQueue<>();
@@ -35,6 +42,9 @@ public class M215_KthLargestElementinanArray {
         return priorityQueue.peek();
     }
 
+    /**
+     * 快速选择 ：时间复杂度 O(N)，空间复杂度 O(1)
+     */
     public int findKthLargest2(int[] nums, int k) {
         int left = 0, right = nums.length - 1;
         while (true) {

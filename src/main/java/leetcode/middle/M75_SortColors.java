@@ -12,7 +12,39 @@ package leetcode.middle;
  * 3路快排思路[l..lt] [lt+1...gt-1] [gt...r]
  */
 public class M75_SortColors {
+    /**
+     * 参考 QuickSort3Ways 三路快排
+     * arr[l+1...lt]<v, arr[lt+1...i)==v, arr[gt...r]>v
+     */
     public void sortColors(int[] nums) {
+        if (nums == null || nums.length < 2) {
+            return;
+        }
+        //注意初始化，三路快排中 lt 初始为 l，因为填充元素是从 l + 1 开始，最后会将一开始的 pivot 交换到合适位置。
+        //这里将 lt 初始化为 -1，因为 pivot 已知为1，填充元素是从 0 开始
+        int lt = -1, gt = nums.length, i = 0;
+        while (i < gt) {
+            if (nums[i] == 0) {
+                swap(nums, lt + 1, i);
+                i++;
+                lt++;
+            } else if (nums[i] == 2) {
+                swap(nums, gt - 1, i);
+                gt--;
+            } else {
+                i++;
+            }
+        }
+        //因为只有3种元素，以 1 位pivot，左侧全为 0 右侧全为 2，因此最后无须递归
+    }
+
+    void swap(int[] nums, int i, int j) {
+        int t = nums[i];
+        nums[i] = nums[j];
+        nums[j] = t;
+    }
+
+    public void sortColors2(int[] nums) {
         int lt = -1, gt = nums.length;
         for (int i = 0; i < gt; i++) {
             if (nums[i] == 0) {
