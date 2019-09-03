@@ -2,7 +2,6 @@ package leetcode.middle;
 
 import sword.TreeNode;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -61,6 +60,50 @@ public class M95_UniqueBinarySearchTreesII {
             }
         }
         return res;
+    }
+
+
+    /**
+     * 使用记忆数组来优化，保存计算过的中间结果，从而避免重复计算。
+     * 注意这道题的标签有一个是动态规划 Dynamic Programming，其实带记忆数组的递归形式就是 DP 的一种，memo[i][j] 表示在区间 [i, j] 范围内可以生成的所有 BST 的根结点，
+     * 所以 memo 必须是一个三维数组，这样在递归函数中，我们就可以去 memo 中查找当前的区间是否已经计算过了，是的话，直接返回 memo 中的数组，否则就按之前的方法去计算，最后计算好了之后要更新 memo 数组，
+     */
+    List<TreeNode>[][] memo;
+
+    public List<TreeNode> generateTrees2(int n) {
+        if (n < 1) {
+            return new LinkedList<>();
+        }
+        memo = new LinkedList[n][n];
+        return helper2(1, n);
+    }
+
+    private List<TreeNode> helper2(int l, int h) {
+        List<TreeNode> res = new LinkedList<>();
+        //返回条件！！！
+        if (l > h) {
+            res.add(null);
+            return res;
+        }
+        if (memo[l - 1][h - 1] != null) {
+            return memo[l - 1][h - 1];
+        }
+        //i 为根节点
+        for (int i = l; i <= h; i++) {
+            //left 保存左子树所有情况
+            List<TreeNode> left = helper2(l, i - 1);
+            //right 保存右子树所有情况
+            List<TreeNode> right = helper2(i + 1, h);
+            for (TreeNode leftNode : left) {
+                for (TreeNode rightNode : right) {
+                    TreeNode root = new TreeNode(i);
+                    root.left = leftNode;
+                    root.right = rightNode;
+                    res.add(root);
+                }
+            }
+        }
+        return memo[l - 1][h - 1] = res;
     }
 
     public static void main(String[] args) {

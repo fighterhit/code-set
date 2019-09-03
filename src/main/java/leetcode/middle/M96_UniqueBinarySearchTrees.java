@@ -1,10 +1,10 @@
 package leetcode.middle;
 
 /**
- * Given n, how many structurally unique BST's (binary search trees) that store values 1 ... n?
+ * 给定一个整数 n，求以 1 ... n 为节点组成的二叉搜索树有多少种？
  * <p>
  * 这道题实际上是 Catalan Number 卡塔兰数的一个例子
- * 把n = 0 时赋为1，因为空树也算一种二叉搜索树，那么n = 1时的情况可以看做是其左子树个数乘以右子树的个数，左右字数都是空树，所以1乘1还是1。那么n = 2时，由于1和2都可以为跟，分别算出来，再把它们加起来即可。n = 2的情况可由下面式子算出：
+ * 把n = 0 时赋为1，因为空树也算一种二叉搜索树，那么n = 1时的情况可以看做是其左子树个数乘以右子树的个数，左右字数都是空树，所以1乘1还是1。那么n = 2时，由于1和2都可以为树根，分别算出来，再把它们加起来即可。n = 2的情况可由下面式子算出：
  * dp[2] =  dp[0] * dp[1]　　　(1为根的情况)
  * 　　　　+ dp[1] * dp[0]　　  (2为根的情况)
  * <p>
@@ -49,10 +49,5 @@ public class M96_UniqueBinarySearchTrees {
             res = i * res / (i - n);
         }
         return (int) (res / (n + 1));
-    }
-
-
-    public static void main(String[] args) {
-
     }
 }
