@@ -51,6 +51,7 @@ public class M90_SubsetsII {
     }
 
     public List<List<Integer>> subsetsWithDup2(int[] nums) {
+        res = new ArrayList<>();
         if (nums == null || nums.length == 0) {
             return res;
         }
@@ -68,6 +69,27 @@ public class M90_SubsetsII {
             ls.add(nums[i]);
             helper(nums, ls, i + 1);
             ls.remove(ls.size() - 1);
+        }
+    }
+
+    //https://leetcode.com/problems/subsets/discuss/27281/A-general-approach-to-backtracking-questions-in-Java-(Subsets-Permutations-Combination-Sum-Palindrome-Partitioning)
+    public List<List<Integer>> subsetsWithDup3(int[] nums) {
+        List<List<Integer>> list = new ArrayList<>();
+        Arrays.sort(nums);
+        backtrack(list, new ArrayList<>(), nums, 0);
+        return list;
+    }
+
+    private void backtrack(List<List<Integer>> list, List<Integer> tempList, int[] nums, int start) {
+        list.add(new ArrayList<>(tempList));
+        //注意：求子集循环从 start 开始，每次递归 i + 1，排列每次从 0 开始
+        for (int i = start; i < nums.length; i++) {
+            if (i > start && nums[i] == nums[i - 1]) {
+                continue; // skip duplicates
+            }
+            tempList.add(nums[i]);
+            backtrack(list, tempList, nums, i + 1);
+            tempList.remove(tempList.size() - 1);
         }
     }
 }

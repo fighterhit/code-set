@@ -102,4 +102,30 @@ public class M46_Permutations {
             tmp.remove(tmp.size() - 1);
         }
     }
+
+    //求元素不重的数组的全排列，不需 visited 标记数组，此时可直接用 contains() 方法
+    //https://leetcode.com/problems/subsets/discuss/27281/A-general-approach-to-backtracking-questions-in-Java-(Subsets-Permutations-Combination-Sum-Palindrome-Partitioning)
+    public List<List<Integer>> permute3(int[] nums) {
+        List<List<Integer>> list = new ArrayList<>();
+        // Arrays.sort(nums); // not necessary
+        backtrack(list, new ArrayList<>(), nums);
+        return list;
+    }
+
+    private void backtrack(List<List<Integer>> list, List<Integer> tempList, int[] nums) {
+        if (tempList.size() == nums.length) {
+            list.add(new ArrayList<>(tempList));
+            return;
+        }
+        //注意：求全排列每次从 0 开始，求子集每次从 start 开始
+        for (int i = 0; i < nums.length; i++) {
+            //注意：因为元素不重，这里可直接用 contains() 判断是否存在，不需用 visited 数组
+            if (tempList.contains(nums[i])) {
+                continue; // element already exists, skip
+            }
+            tempList.add(nums[i]);
+            backtrack(list, tempList, nums);
+            tempList.remove(tempList.size() - 1);
+        }
+    }
 }

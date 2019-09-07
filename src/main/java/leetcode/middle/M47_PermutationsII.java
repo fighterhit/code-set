@@ -83,4 +83,34 @@ public class M47_PermutationsII {
             }
         }
     }
+
+    //求元素可能重复的数组的全排列，需 visited 标记数组
+    //https://leetcode.com/problems/subsets/discuss/27281/A-general-approach-to-backtracking-questions-in-Java-(Subsets-Permutations-Combination-Sum-Palindrome-Partitioning)
+    public List<List<Integer>> permuteUnique3(int[] nums) {
+        List<List<Integer>> list = new ArrayList<>();
+        Arrays.sort(nums);
+        backtrack(list, new ArrayList<>(), nums, new boolean[nums.length]);
+        return list;
+    }
+
+    private void backtrack(List<List<Integer>> list, List<Integer> tempList, int[] nums, boolean[] used) {
+        if (tempList.size() == nums.length) {
+            list.add(new ArrayList<>(tempList));
+            return;
+        }
+        //注意：求全排列每次从 0 开始，求子集每次从 start 开始
+        for (int i = 0; i < nums.length; i++) {
+            //两种情况跳过：
+            //1. used[i] 为 true，即 i 位置元素已访问过，则跳过
+            //2. 当前位置大于 0 并与前一位置元素相等，且前一位元素未访问即 used[i - 1] 为 false，则跳过
+            if (used[i] || i > 0 && nums[i] == nums[i - 1] && !used[i - 1]) {
+                continue;
+            }
+            used[i] = true;
+            tempList.add(nums[i]);
+            backtrack(list, tempList, nums, used);
+            used[i] = false;
+            tempList.remove(tempList.size() - 1);
+        }
+    }
 }

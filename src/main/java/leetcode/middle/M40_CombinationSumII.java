@@ -67,6 +67,34 @@ public class M40_CombinationSumII {
         }
     }
 
+    //元素可能重复求和为定值的组合，结果也要不重，每个元素仅可使用一次
+    public List<List<Integer>> combinationSum3(int[] nums, int target) {
+        List<List<Integer>> list = new ArrayList<>();
+        Arrays.sort(nums);
+        backtrack(list, new ArrayList<>(), nums, target, 0);
+        return list;
+
+    }
+
+    private void backtrack(List<List<Integer>> list, List<Integer> tempList, int[] nums, int remain, int start) {
+        //因为已排序，这里可剪枝
+        if (remain < 0) {
+            return;
+        }
+        if (remain == 0) {
+            list.add(new ArrayList<>(tempList));
+        }
+        //注意：求和为指定值的组合从 start 开始，每次递归仍start 为 i + 1 因为元素仅能使用一次，排列每次从 0 开始
+        for (int i = start; i < nums.length; i++) {
+            if (i > start && nums[i] == nums[i - 1]) {
+                continue; // skip duplicates
+            }
+            tempList.add(nums[i]);
+            backtrack(list, tempList, nums, remain - nums[i], i + 1);
+            tempList.remove(tempList.size() - 1);
+        }
+    }
+
     public static void main(String[] args) {
         new M40_CombinationSumII().combinationSum2(new int[]{10, 1, 2, 7, 6, 1, 5}, 8);
     }

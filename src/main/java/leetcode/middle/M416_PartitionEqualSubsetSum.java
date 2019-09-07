@@ -19,6 +19,7 @@ import java.util.Arrays;
  * Explanation: The array cannot be partitioned into equal sum subsets.
  * 参考 M698_PartitiontoKEqualSumSubsets，M698_PartitiontoKEqualSumSubsets 回溯法在该题超时
  * 背包问题
+ * 参考 M698_PartitiontoKEqualSumSubsets，找出是否有可能把这个数组分成 k 个非空子集，其总和都相等
  */
 public class M416_PartitionEqualSubsetSum {
 
@@ -96,6 +97,9 @@ public class M416_PartitionEqualSubsetSum {
      * <p>
      * 注意：第二个for循环一定要从target遍历到nums[i]，而不能反过来！因为如果我们从nums[i]遍历到target的话，假如nums[i]=1的话，那么[1, target]中所有的dp值都是true，因为dp[0]是true，dp[1]会或上dp[0]，为true，dp[2]会或上dp[1]，为true，依此类推，完全使我们的dp数组失效了，
      * https://www.cnblogs.com/grandyang/p/5951422.html
+     * <p>
+     * 参考 M518_CoinChange2 给定不同面额的硬币和一个总金额。写出函数来计算可以凑成总金额的硬币组合数。假设每一种面额的硬币有无限个。
+     * 参考 M377_CombinationSumIV 给定一个由正整数组成且不存在重复数字的数组，找出和为给定目标正整数的组合的个数
      */
     public boolean canPartition3(int[] nums) {
         int n = nums.length, sum = 0;
@@ -109,6 +113,7 @@ public class M416_PartitionEqualSubsetSum {
         boolean[] dp = new boolean[target + 1];
         dp[0] = true;
         for (int num : nums) {
+            //注意从 target 开始
             for (int i = target; i >= num; i--) {
                 dp[i] = dp[i] || dp[i - num];
             }

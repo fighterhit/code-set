@@ -74,4 +74,29 @@ public class M39_CombinationSum {
             }
         }
     }
+
+    //元素不重求和为定值的组合，结果也要不重，每个元素可多次使用
+    //https://leetcode.com/problems/subsets/discuss/27281/A-general-approach-to-backtracking-questions-in-Java-(Subsets-Permutations-Combination-Sum-Palindrome-Partitioning)
+    public List<List<Integer>> combinationSum2(int[] nums, int target) {
+        List<List<Integer>> list = new ArrayList<>();
+        Arrays.sort(nums);
+        backtrack(list, new ArrayList<>(), nums, target, 0);
+        return list;
+    }
+
+    private void backtrack(List<List<Integer>> list, List<Integer> tempList, int[] nums, int remain, int start) {
+        //因为已排序，这里可剪枝
+        if (remain < 0) {
+            return;
+        }
+        if (remain == 0) {
+            list.add(new ArrayList<>(tempList));
+        }
+        //注意：求和为指定值的组合从 start 开始，每次递归仍为 i 因为元素可多次使用，排列每次从 0 开始
+        for (int i = start; i < nums.length; i++) {
+            tempList.add(nums[i]);
+            backtrack(list, tempList, nums, remain - nums[i], i); // not i + 1 because we can reuse same elements
+            tempList.remove(tempList.size() - 1);
+        }
+    }
 }

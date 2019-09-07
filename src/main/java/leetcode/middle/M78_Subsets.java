@@ -1,6 +1,7 @@
 package leetcode.middle;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -65,6 +66,24 @@ public class M78_Subsets {
             tmp.add(nums[i]);
             helper(res, tmp, nums, i + 1, subSetLen);
             tmp.remove(tmp.size() - 1);
+        }
+    }
+
+    //https://leetcode.com/problems/subsets/discuss/27281/A-general-approach-to-backtracking-questions-in-Java-(Subsets-Permutations-Combination-Sum-Palindrome-Partitioning)
+    public List<List<Integer>> subsets3(int[] nums) {
+        List<List<Integer>> list = new ArrayList<>();
+        Arrays.sort(nums);
+        backtrack(list, new ArrayList<>(), nums, 0);
+        return list;
+    }
+
+    private void backtrack(List<List<Integer>> list, List<Integer> tempList, int[] nums, int start) {
+        list.add(new ArrayList<>(tempList));
+        //注意：求子集循环从 start 开始，每次递归 i + 1，排列每次从 0 开始
+        for (int i = start; i < nums.length; i++) {
+            tempList.add(nums[i]);
+            backtrack(list, tempList, nums, i + 1);
+            tempList.remove(tempList.size() - 1);
         }
     }
 
