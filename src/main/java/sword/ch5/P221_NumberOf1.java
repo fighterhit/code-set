@@ -1,7 +1,5 @@
 package sword.ch5;
 
-import java.util.*;
-
 /**
  * https://blog.csdn.net/xudli/article/details/46798619
  * intuitive: 每10个数, 有一个个位是1, 每100个数, 有10个十位是1, 每1000个数, 有100个百位是1.  做一个循环, 每次计算单个位上1得总个数(个位,十位, 百位). 
@@ -42,5 +40,17 @@ public class P221_NumberOf1 {
             n--;
         }
         return cnt;
+    }
+
+    public int NumberOf1Between1AndN_Solution3(int n) {
+        int ones = 0;
+        for (long i = 1; i <= n; i *= 10) {
+            long a = n / i, b = n % i;
+            ones += (a + 8) / 10 * i;
+            if (a % 10 == 1) {
+                ones += b + 1;
+            }
+        }
+        return ones;
     }
 }
