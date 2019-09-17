@@ -76,7 +76,7 @@ public class BubbleSort {
 
         int low = 0;
 //        for (int i = low; i < n - 1; i++) {
-            while (true) {
+        while (true) {
             flag = false;
             pos = 0;
             //正向扫描找最大值
@@ -103,6 +103,29 @@ public class BubbleSort {
             if (!flag) {
                 break;
             }
+        }
+    }
+
+    //思路同上，未优化版
+    public static void sort4(Comparable[] arr) {
+        int n = arr.length;
+        int low = 0, high = n - 1;
+        int tmp, j;
+        while (low < high) {
+            //正向冒泡,找到最大者
+            for (int i = low; i < high; i++) {
+                if (arr[i].compareTo(arr[i + 1]) > 0) {
+                    swap(arr, i, i + 1);
+                }
+            }
+            high--;
+            //反向冒泡,找到最小者
+            for (int i = high; i > low; i--) {
+                if (arr[i].compareTo(arr[i - 1]) < 0) {
+                    swap(arr, i, i - 1);
+                }
+            }
+            low--;
         }
     }
 

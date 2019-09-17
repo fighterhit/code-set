@@ -250,6 +250,28 @@ public class BinaryTreeTraverse {
         return result;
     }
 
+    //根据输入整形数组（完全二叉树）如[1,2,3,5,null,null,7]，创建二叉树
+    //递归创建
+    public TreeNode createTree(Integer[] vals, int index) {
+        TreeNode root = new TreeNode(vals[index]);
+        root.left = createTree(vals, 2 * index + 1);
+        root.right = createTree(vals, 2 * index + 2);
+        return root;
+    }
+
+    //非递归创建
+    public TreeNode createTree2(TreeNode[] node) {
+        for (int i = 0; i < node.length; i++) {
+            if (2 * i + 1 < node.length) {
+                node[i].left = node[2 * i + 1];
+            }
+            if (2 * i + 2 < node.length) {
+                node[i] = node[2 * i + 2];
+            }
+        }
+        return node[0];
+    }
+
     public static void main(String[] args) {
 
         // 构造二叉树

@@ -76,8 +76,8 @@ public class E13_RomantoInteger {
         int v = 0, res = 0;
         for (int i = 0; i < s.length(); i++) {
             v = map.get(s.charAt(i));
-            //如果当前数字是最后一个数字，或者之后的数字比它小的话，则加上当前数字
-            if (i == s.length() - 1 || map.get(s.charAt(i)) > map.get(s.charAt(i + 1))) {
+            //如果当前数字是最后一个数字，或当前数字大于等于后一数字，则加上当前数字
+            if (i == s.length() - 1 || map.get(s.charAt(i)) >= map.get(s.charAt(i + 1))) {
                 res += v;
             } else {
                 res -= v;
