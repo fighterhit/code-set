@@ -43,6 +43,12 @@ public class M377_CombinationSumIV {
         dp[0] = 1;
         //先排序，用作循环 i < num 判断
         Arrays.sort(nums);
+        /**
+         * 对比 M518_CoinChange2，内外循环恰好相反；原因参考图 https://leetcode-cn.com/problems/coin-change-2/solution/dong-tai-gui-hua-wan-quan-bei-bao-wen-ti-by-liweiw/
+         * 这道题在每次选择每个数都可以选，这就造成如[1,1...1,1,40,50] 90 : 50+40 和 40+50 前后选择不同，算作不同的情况；
+         * 另一种解释：对于每个 target，用所有硬币参与计算，如当遍历到 40 时， dp[90]=40+dp[50]，dp[50]前面已经用所有硬币算出结果了；
+         * 而 M518_CoinChange2 将硬币循环放在外层，如当选遍历到 40 时， dp[90]=40+dp[50]，这里的 dp[50] 只是部分值，是只用了前面的循环过的硬币计算得到的
+         */
         for (int i = 1; i <= target; i++) {
             for (int num : nums) {
                 if (i >= num) {
