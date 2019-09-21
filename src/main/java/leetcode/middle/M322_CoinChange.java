@@ -12,6 +12,9 @@ package leetcode.middle;
  * 输出: -1
  * 说明:
  * 你可以认为每种硬币的数量是无限的。
+ * <p>
+ * <p>
+ * 本题是求凑成总金额所需的最少的硬币个数，参考 M518_CoinChange2 求所有组合的数量且不能重复
  */
 public class M322_CoinChange {
     /**
@@ -42,7 +45,7 @@ public class M322_CoinChange {
                 }
             }
             //注意：
-            //若所有面额都大于当前值 i 或所有 i - money 都为 Integer.MAX_VALUE ，则dp[i] = Integer.MAX_VALUE
+            //若所有面额都大于当前值 i 或所有 dp[i - money] 都为 Integer.MAX_VALUE ，则dp[i] = Integer.MAX_VALUE
             dp[i] = cost;
         }
         return dp[amount] == Integer.MAX_VALUE ? -1 : dp[amount];

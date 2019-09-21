@@ -28,6 +28,7 @@ package leetcode.middle;
  * 结果符合 32 位符号整数
  * <p>
  * 参考 M377_CombinationSumIV，注意和 M377_CombinationSumIV 内外循环不同，因为本题
+ * 参考 M322_CoinChange，求凑成总金额所需的最少的硬币个数
  */
 public class M518_CoinChange2 {
     public int change(int amount, int[] coins) {
@@ -37,7 +38,12 @@ public class M518_CoinChange2 {
         }*/
         int[] dp = new int[amount + 1];
         dp[0] = 1;
-        //内外循环顺序不能颠倒，注意和 M377_CombinationSumIV 区别
+        /**
+         * 对比 M377_CombinationSumIV，内外循环恰好相反；原因参考图 https://leetcode-cn.com/problems/coin-change-2/solution/dong-tai-gui-hua-wan-quan-bei-bao-wen-ti-by-liweiw/
+         * M377_CombinationSumIV 在每次计算某个target时，每个数（硬币）都可以选，这就造成如[1,1...1,1,40,50] 90 : 50+40 和 40+50 前后选择不同，算作不同的情况；
+         * 另一种解释：对于每个 target，用所有硬币参与计算，如当遍历到 40 时， dp[90] = 40 + dp[50]，dp[50] 前面已经用所有硬币算出结果了，是完整的 dp[50]，包含前后选择顺序不同而得到不同的结果；
+         * 而本题将硬币循环放在外层，如当选遍历到 40 时， dp[90] = 40 + dp[50]，这里的 dp[50] 只是部分值，是只用了前面的循环过的硬币计算得到的
+         */
         for (int coin : coins) {
             for (int i = coin; i <= amount; i++) {
                 dp[i] += dp[i - coin];
