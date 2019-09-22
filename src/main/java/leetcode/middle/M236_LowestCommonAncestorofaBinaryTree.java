@@ -21,6 +21,7 @@ package leetcode.middle;
  *
  * @author Fighter.
  * LCA
+ * 二叉搜索树LCA E235_LowestCommonAncestorofaBinarySearchTree
  */
 public class M236_LowestCommonAncestorofaBinaryTree {
     public class TreeNode {

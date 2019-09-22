@@ -19,6 +19,7 @@ package leetcode.easy;
  * p and q are different and both values will exist in the BST.
  *
  * @author Fighter.
+ * 任意二叉树LCA M236_LowestCommonAncestorofaBinaryTree
  */
 public class E235_LowestCommonAncestorofaBinarySearchTree {
     public class TreeNode {

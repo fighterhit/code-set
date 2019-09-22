@@ -15,6 +15,7 @@ public class HeapSort {
     public static void sort(Comparable[] arr) {
         int n = arr.length;
         //Heapify 索引从 0 开始时最后一个非叶子节点索引为：(n-1)-1 / 2
+        //左右孩子统一用 (孩子索引-1)/2 表示父节点，不能用 (孩子索引-2)/2 表示这样只能用于右孩子算父节点而不能代表左孩子
         for (int i = (n - 1 - 1) / 2; i >= 0; i--) {
             shiftDown(arr, n, i);
         }
