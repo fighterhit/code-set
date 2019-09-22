@@ -54,7 +54,7 @@ public class M5_LongestPalindromicSubstring {
         return l + 1;
     }
 
-    //O(n^2)
+    //O(n^2)：填表也是O(n*n)
     public String longestPalindrome2(String s) {
         if (s == null || s.isEmpty()) {
             return s;

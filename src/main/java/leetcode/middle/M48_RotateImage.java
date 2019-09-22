@@ -38,6 +38,7 @@ import java.util.Arrays;
  * [16, 7,10,11]
  * ]
  * https://www.cnblogs.com/grandyang/p/4389572.html
+ * 方阵转置
  */
 public class M48_RotateImage {
     public void rotate(int[][] matrix) {
