@@ -6,25 +6,18 @@ import java.util.List;
 /**
  * @author Fighter.
  */
-public class Subject {
-    private List<Observer> list = new ArrayList<>();
 
-    public void registerObserver(Observer obs) {
-        list.add(obs);
-    }
+public interface Subject {
+    List<Observer> list = new ArrayList<>();
 
-    public void removeObserver(Observer obs) {
-        list.remove(obs);
-    }
+    void registerObserver(Observer obs);
 
-    public void notifyAllObserver() {
-        for (Observer observer : list) {
-            observer.update(this);
-        }
-    }
+    void removeObserver(Observer obs);
+
+    void notifyAllObserver();
 }
 
-class ConcreteSubject extends Subject {
+class ConcreteSubject implements Subject {
     private int subjectState;
 
     public int getSubjectState() {
@@ -34,5 +27,22 @@ class ConcreteSubject extends Subject {
     public void setSubjectState(int subjectState) {
         this.subjectState = subjectState;
         notifyAllObserver();
+    }
+
+    @Override
+    public void registerObserver(Observer obs) {
+        list.add(obs);
+    }
+
+    @Override
+    public void removeObserver(Observer obs) {
+        list.remove(obs);
+    }
+
+    @Override
+    public void notifyAllObserver() {
+        for (Observer o : list) {
+            o.update(this);
+        }
     }
 }

@@ -20,7 +20,7 @@ public class Singleton {
     private Singleton() {
     }
 
-    private Singleton getInstance() {
+    public static Singleton getInstance() {
         if (instance == null) {
             synchronized (Singleton.class) {
                 if (instance == null) {
