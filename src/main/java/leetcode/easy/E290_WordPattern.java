@@ -37,7 +37,7 @@ public class E290_WordPattern {
                 if (!patternMap.get(c).equals(strArr[i])) {
                     return false;
                 }
-            } else if (!patternMap.containsKey(c)) {
+            } else {
                 if (patternMap.containsValue(strArr[i])) {
                     return false;
                 }
