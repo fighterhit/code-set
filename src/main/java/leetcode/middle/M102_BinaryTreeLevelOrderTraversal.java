@@ -1,5 +1,7 @@
 package leetcode.middle;
 
+import com.sun.tools.javac.code.Lint;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -24,6 +26,9 @@ import java.util.List;
  * ]
  */
 
+/**
+ * 二叉树层序遍历——递归和非递归版本
+ */
 public class M102_BinaryTreeLevelOrderTraversal {
 
     class TreeNode {
@@ -96,7 +101,7 @@ public class M102_BinaryTreeLevelOrderTraversal {
         return res;
     }
 
-    //递归版：DFS
+    //二叉树层序遍历——递归版：DFS
     //参考 E107_BinaryTreeLevelOrderTraversalII
     public List<List<Integer>> levelOrder3(TreeNode root) {
         List<List<Integer>> res = new ArrayList<>();
@@ -115,5 +120,68 @@ public class M102_BinaryTreeLevelOrderTraversal {
         res.get(currentLevel).add(root.val);
         levelOrder33(res, root.left, currentLevel + 1);
         levelOrder33(res, root.right, currentLevel + 1);
+    }
+
+    public int getDepth(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        int l = getDepth(root.left);
+        int r = getDepth(root.right);
+        return Math.max(l, r) + 1;
+    }
+
+    public List<List<Integer>> levelOrder4(TreeNode root) {
+        List<List<Integer>> res = new ArrayList<>();
+        int depth = getDepth(root);
+        for (int i = 1; i <= depth; i++) {
+            levelOrder44(root, i);
+        }
+        return res;
+    }
+
+    //二叉树层序遍历——递归版：DFS
+    public void levelOrder44(TreeNode root, int level) {
+        if (root == null) {
+            return;
+        }
+        if (level == 1) {
+            res.add(root.val);
+            return;
+        }
+        levelOrder44(root.left, level - 1);
+        levelOrder44(root.right, level - 1);
+    }
+
+    //参考
+    static boolean flag = true;
+    static List<Integer> res = new ArrayList<>();
+
+    //层序遍历递归
+    public static List<Integer> levelorder2(TreeNode root) {
+        if (root == null) {
+            return res;
+        }
+        int level = 1;
+        while (flag) {
+            flag = false;
+            levelorder2helper(root, level);
+            level++;
+        }
+        return res;
+    }
+
+    public static void levelorder2helper(TreeNode root, int level) {
+        if (root == null)
+            return;
+        if (level == 1) {
+            res.add(root.val);
+            if (root.left != null || root.right != null) {
+                flag = true;
+            }
+            return;
+        }
+        levelorder2helper(root.left, level - 1);
+        levelorder2helper(root.right, level - 1);
     }
 }

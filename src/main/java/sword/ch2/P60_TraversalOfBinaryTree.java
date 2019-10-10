@@ -135,6 +135,70 @@ public class P60_TraversalOfBinaryTree {
         return list;
     }
 
+    static boolean flag = true;
+    static List<Integer> res = new ArrayList<>();
+
+    //层序遍历递归
+    public static List<Integer> levelorder2(TreeNode<Integer> root) {
+        if (root == null) {
+            return res;
+        }
+        int level = 1;
+        //每次从 root 开始 DFS，相当于按每种深度都从根节点遍历一次
+        while (flag) {
+            flag = false;
+            levelorder2helper(root, level);
+            level++;
+        }
+        return res;
+    }
+
+    public static void levelorder2helper(TreeNode<Integer> root, int level) {
+        if (root == null)
+            return;
+        if (level == 1) {
+            res.add(root.val);
+            if (root.left != null || root.right != null) {
+                flag = true;
+            }
+            return;
+        }
+        //往下一层 level - 1
+        levelorder2helper(root.left, level - 1);
+        levelorder2helper(root.right, level - 1);
+    }
+
+    //层序遍历递归：思想同 levelOrder2，对每一层从根节点深度遍历，没往下一层，level - 1，当减到 1，输出
+    public static List<Integer> levelOrder3(TreeNode root) {
+        int depth = getDepth(root);
+        for (int i = 1; i <= depth; i++) {
+            levelOrder33(root, i);
+        }
+        return res;
+    }
+
+    //二叉树层序遍历——递归版：DFS
+    public static void levelOrder33(TreeNode<Integer> root, int level) {
+        if (root == null) {
+            return;
+        }
+        if (level == 1) {
+            res.add(root.val);
+            return;
+        }
+        levelOrder33(root.left, level - 1);
+        levelOrder33(root.right, level - 1);
+    }
+
+    public static int getDepth(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        int l = getDepth(root.left);
+        int r = getDepth(root.right);
+        return Math.max(l, r) + 1;
+    }
+
     public static void main(String[] args) {
         //            1
         //              \
