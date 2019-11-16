@@ -12,6 +12,7 @@ package leetcode.middle;
  * 给出时间复杂度为O(n*sizeof(integer))的解答非常容易。但你可以在线性时间O(n)内用一趟扫描做到吗？
  * 要求算法的空间复杂度为O(n)。
  * 你能进一步完善解法吗？要求在C++或任何其他语言中不使用任何内置函数（如 C++ 中的 __builtin_popcount）来执行此操作。
+ * 参考 P100_NumberOf1InBinary
  */
 public class M338_CountingBits {
     /**

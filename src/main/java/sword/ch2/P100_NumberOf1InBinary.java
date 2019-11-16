@@ -5,6 +5,7 @@ package sword.ch2;
  * >> 带符号右移； >>> 无符号右移
  *
  * @author Fighter Created on 2018/5/1.
+ * 参考 M338_CountingBits
  */
 public class P100_NumberOf1InBinary {
 
